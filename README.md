@@ -1,16 +1,21 @@
-# EasyDuels
-An easy duel plugin allowing players to fight in an arena. Fully customizable and lightweight.
+# EasyDuels!
 
-## What is EasyDuels?
+![EasyDuels](https://i.goopics.net/2ERxJ.png)
 
-EasyDuels is a Minecraft plugin allowing players on your server to duel. This plugin is easy to use and 100% configurable. The plugin supports x.xx.x version.
+## Welcome!
+EasyDuels is a plugin for **spigot servers** (1.12 - 1.16.2), offering a **new 1v1 system** for your server. It has many features allowing you to **customize everything.** It only allows you to have a **single arena** on your server. Here are some features:
+
+* A single arena for your players to fight in 1v1.
+* Supports your language (fully customizable messages).
+* Supports 1.12 to 1.16.2.
+* A lot of configurable settings.
+* Fully customizable timer & countdown (never seen before)!
+
+If you need support, check the wiki. Most questions you may have should be answered here.
+For any issue or suggestion click [here](https://github.com/Enzias/EasyDuels/issues).
 
 ## Links
-
 * [Download]() (Spigot) Soon!
 * [Download]() (Direct) Soon!
-* [Wiki]() Soon!
+* [Wiki](https://github.com/Enzias/EasyDuels/wiki)
 * [Report an Issue](https://github.com/Enzias/EasyDuels/issues)
-
-## Installation
-**Soon!**
