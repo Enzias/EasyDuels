@@ -23,15 +23,16 @@ public class TeleportEvent implements Listener {
 
     @EventHandler
     public void onTeleport(PlayerTeleportEvent event){
-        if (arena.isStatut(ArenaStatuts.PLAYING) || arena.isStatut(ArenaStatuts.LOBBY)) {
+        if (arena.isStatut(ArenaStatuts.PLAYING) || arena.isStatut(ArenaStatuts.LOBBY))
+            if(event.getCause() != PlayerTeleportEvent.TeleportCause.PLUGIN) {
 
-            Player player = event.getPlayer();
+                Player player = event.getPlayer();
 
-            if (player.getLocation().getWorld().getName().equalsIgnoreCase(arenaFile.getWorldName())
-                    && arena.getPlayers().contains(player)) {
-                event.setCancelled(true);
+                if (player.getLocation().getWorld().getName().equalsIgnoreCase(arenaFile.getWorldName())
+                        && arena.getPlayers().contains(player)) {
+                    event.setCancelled(true);
+                }
             }
-        }
     }
 
 }
