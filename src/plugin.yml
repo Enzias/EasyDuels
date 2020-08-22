@@ -1,0 +1,31 @@
+name: EasyDuels
+version: 1.0.0
+description: Simple 1V1 plugin.
+author: Enzias
+main: fr.enzias.easyduels.EasyDuels
+commands:
+  easyduels:
+    description: Main command
+    permission: easyduels.duel
+    usage: /<command>
+    aliases:
+      - ed
+      - duels
+      - duel
+permissions:
+  easyduels.*:
+    description: Gives access to all Easyduels commands.
+    default: op
+    children:
+      easyduels.admin: true
+      easyduels.duel: true
+      easyduels.help: true
+  easyduels.admin:
+    description: Gives access to admin command.
+    default: false
+  easyduels.duel:
+    description: Allows you to make duels.
+    default: true
+  easyduels.help:
+    description: Gives access to help command.
+    default: true
