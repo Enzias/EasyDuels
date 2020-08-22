@@ -52,11 +52,10 @@ public class EasyDuelsCommand implements CommandExecutor {
                 }
                 else
                     sender.sendMessage(messageFile.getNoPermission(), player);
-                return true;
             }
 
 
-            if(Bukkit.getPlayer(args[0]) != null) {
+            else if(Bukkit.getPlayer(args[0]) != null) {
                 if(!args[0].equalsIgnoreCase(player.getName())) {
                     // /easyduels player
                     if (!request.hasRequest(player)) {
@@ -71,17 +70,15 @@ public class EasyDuelsCommand implements CommandExecutor {
                     } else {
                         sender.sendMessage(messageFile.getAlreadyARequest(), player);
                     }
-                    return true;
                 } else
                     sender.sendMessage(messageFile.getDuelYourself(), player);
             } else {
                 sender.sendMessage(messageFile.getOfflinePlayer().replaceAll("%player%", args[0]), player);
-                return true;
             }
-
+            return true;
         }
 
-        if(args.length == 2) {
+        else if(args.length == 2) {
             if (args[0].equalsIgnoreCase("admin")) {
                 if (player.hasPermission("easyduels.admin")) {
 
@@ -112,7 +109,7 @@ public class EasyDuelsCommand implements CommandExecutor {
                     return true;
                 }
             }
-            if(args[0].equalsIgnoreCase("accept")) {
+            else if(args[0].equalsIgnoreCase("accept")) {
 
                 if(Bukkit.getPlayer(args[1]) != null) {
 
