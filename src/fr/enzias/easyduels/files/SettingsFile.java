@@ -240,7 +240,7 @@ public class SettingsFile {
     public String getEndSoundToWinner(){
         if (plugin.getConfig().contains("settings.timer.end.actions.sound-to-winner")
                 && !plugin.getConfig().getString("settings.timer.end.actions.sound-to-winner.sound-id").equalsIgnoreCase("")) {
-            return plugin.getConfig().getString("settings.timer.fight.actions.sound-to-winner.sound-id");
+            return plugin.getConfig().getString("settings.timer.end.actions.sound-to-winner.sound-id");
         } return null;
     }
 
@@ -259,7 +259,7 @@ public class SettingsFile {
     public String getEndSoundToLoser(){
         if (plugin.getConfig().contains("settings.timer.end.actions.sound-to-loser")
                 && !plugin.getConfig().getString("settings.timer.end.actions.sound-to-loser.sound-id").equalsIgnoreCase("")) {
-            return plugin.getConfig().getString("settings.timer.fight.actions.sound-to-loser.sound-id");
+            return plugin.getConfig().getString("settings.timer.end.actions.sound-to-loser.sound-id");
         } return null;
     }
 
