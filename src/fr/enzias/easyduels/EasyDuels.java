@@ -39,20 +39,20 @@ public class EasyDuels extends JavaPlugin {
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
-        
+
         setup();
         registerEvents();
         getCommand("easyduels").setExecutor(new EasyDuelsCommand(this));
-        
+
         Bukkit.getServer().getLogger().info("[EasyDuels] Plugin successfully enabled.");
     }
 
     @Override
     public void onDisable() {
-        stopDuel();
+        saveConfig();
         Bukkit.getServer().getLogger().info("[EasyDuels] Plugin successfully disabled.");
     }
-    
+
     private void setup(){
 
         arenaFile = new ArenaFile(this);
@@ -61,7 +61,7 @@ public class EasyDuels extends JavaPlugin {
         arena = new Arena(this, arenaFile.getFirstLocation(), arenaFile.getSecondLocation(),
                 settingsFile.getLobbyTime(), settingsFile.getFightTime(), settingsFile.getEndTime());
         request = new RequestManager(this);
-        
+
     }
 
     private boolean setupSender(){
@@ -112,39 +112,6 @@ public class EasyDuels extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new DamageEvent(this), this);
         getServer().getPluginManager().registerEvents(new PotionHitEvent(this), this);
         getServer().getPluginManager().registerEvents(new SnowBallHitEvent(this), this);
-    }
-    
-    public void stopDuel(){
-        if(!arena.isStatut(ArenaStatuts.IDLE)){
-
-            Bukkit.getServer().getLogger().info("[EasyDuels] Stopping ongoing duels");
-            arena.setStatut(ArenaStatuts.RELOADING);
-
-            if(settingsFile.getSyncTimer()){
-                if(arena.getFirstPlayer().isOnline()
-                        && arena.getPlayers().contains(arena.getFirstPlayer())) {
-                    arena.teleportToLastLocation(arena.getFirstPlayer());
-                }
-                if(arena.getSecondPlayer().isOnline()
-                        && arena.getPlayers().contains(arena.getFirstPlayer())) {
-                    arena.teleportToLastLocation(arena.getSecondPlayer());
-                }
-            }
-            else {
-                Bukkit.getScheduler().runTask(this, () -> {
-                    if(arena.getFirstPlayer().isOnline()
-                            && arena.getPlayers().contains(arena.getFirstPlayer())) {
-                        arena.teleportToLastLocation(arena.getFirstPlayer());
-                    }
-                    if(arena.getSecondPlayer().isOnline()
-                            && arena.getPlayers().contains(arena.getFirstPlayer())) {
-                        arena.teleportToLastLocation(arena.getSecondPlayer());
-                    }
-                });
-            }
-            arena.resetArena();
-            arena.setStatut(ArenaStatuts.IDLE);
-        }
     }
 
     public Arena getArena(){
