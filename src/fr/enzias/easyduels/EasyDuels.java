@@ -31,8 +31,7 @@ public class EasyDuels extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        if(getDataFolder() == null)
-            getConfig().options().copyDefaults(true);
+        saveDefaultConfig();
         saveConfig();
         if(!setupSender()) {
             getLogger().warning("[EasyDuels] Failed to load EasyDuels! Unsupported version.");
@@ -49,6 +48,7 @@ public class EasyDuels extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        saveDefaultConfig();
         saveConfig();
         Bukkit.getServer().getLogger().info("[EasyDuels] Plugin successfully disabled.");
     }
