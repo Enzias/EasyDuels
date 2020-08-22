@@ -31,7 +31,8 @@ public class EasyDuels extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        getConfig().options().copyDefaults(true);
+        if(getDataFolder() == null)
+            getConfig().options().copyDefaults(true);
         saveConfig();
         if(!setupSender()) {
             getLogger().warning("[EasyDuels] Failed to load EasyDuels! Unsupported version.");
