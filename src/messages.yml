@@ -1,0 +1,48 @@
+messages:
+  player:
+    no-permission: '&f[&6&lEasy&c&lDuels&f] &cYou don''t have permission to do that!'
+    help-message:
+      - '&6-&c-&6-&c-&6-&c-&6-&c-&6- &6&lEasy&c&lDuels &6-&c-&6-&c-&6-&c-&6-&c-&6-'
+      - ''
+      - '&6⬥ &c/&6easyduels &chelp &6- &6Send you this message.'
+      - '&6⬥ &c/&6easyduels &6<&cplayer&6> &6- &6Send a duel request to the player.'
+      - '&6⬥ &c/&6easyduels &caccept &6<&cplayer&6> &6- &6Accept a duel request from a player.'
+      - '&6⬥ &c/&6easyduels &cdeny &6<&cplayer&6> &6- &6Deny a duel request from a player.'
+      - ''
+      - '&6-&c-&6-&c-&6-&c-&6-&c-&6- &6&lEasy&c&lDuels &6-&c-&6-&c-&6-&c-&6-&c-&6-'
+    offline-player: '&f[&6&lEasy&c&lDuels&f] &cThe player &6%player% &cis not online or doesn''t exist!'
+    duel-yourself: '&f[&6&lEasy&c&lDuels&f] &cYou can''t duel yourself!'
+    no-duel-request: '&f[&6&lEasy&c&lDuels&f] &cThe player &6%player% &cdid not send you a duel request!'
+    already-a-request: '&f[&6&lEasy&c&lDuels&f] &cYou already have sent a duel request!'
+    request-accept-1: '&f[&6&lEasy&c&lDuels&f] &aThe player &2%player% &ahas accepted your duel request.'
+    request-accept-2: '&f[&6&lEasy&c&lDuels&f] &aYou have accepted the duel request of &2%player%&a.'
+    request-deny-1: '&f[&6&lEasy&c&lDuels&f] &cThe player &6%player% &chas refused your duel request!'
+    request-deny-2: '&f[&6&lEasy&c&lDuels&f] &aYou refused the duel request of &2%player%&a.'
+    arena-not-empty: '&f[&6&lEasy&c&lDuels&f] &cThe arena is not available at the moment!'
+    request-sent: '&f[&6&lEasy&c&lDuels&f] &aYou sent a request to &2%player%&a.'
+    duel-request:
+      message: '&f[&6&lEasy&c&lDuels&f] &aYou received a duel request from &2%player%&a.'
+      accept:
+        button: '&f[&aAccept&f]'
+        hover: '&aClick to accept the request !'
+      deny:
+        button: '&f[&cDeny&f]'
+        hover: '&cClick to deny the request !'
+    expired-request: '&f[&6&lEasy&c&lDuels&f] &6Your duel request has expired!'
+    no-command: '&f[&6&lEasy&c&lDuels&f] &cYou can''t use this command in duel!'
+    no-winner: '&f[&6&lEasy&c&lDuels&f] &6No one won the duel!'
+    duel-win: '&f[&6&lEasy&c&lDuels&f] &aYou won the duel!'
+    duel-lost: '&f[&6&lEasy&c&lDuels&f] &cYou lost the duel!'
+  admin:
+    help-message:
+      - '&6-&c-&6-&c-&6-&c-&6-&c-&6- &6&lEasy&c&lDuels &6-&c-&6-&c-&6-&c-&6-&c-&6-'
+      - ''
+      - '&6⬥ &c/&6easyduels &cadmin help &6- &6Send you this message.'
+      - '&6⬥ &c/&6easyduels &cadmin spawn1 &6- &6Set the first spawn to your location.'
+      - '&6⬥ &c/&6easyduels &cadmin spawn2 &6- &6Set the second spawn to your location.'
+      - '&6⬥ &c/&6easyduels &cadmin reload &6- &6Reload the plugin.'
+      - ''
+      - '&6-&c-&6-&c-&6-&c-&6-&c-&6- &6&lEasy&c&lDuels &6-&c-&6-&c-&6-&c-&6-&c-&6-'
+    set-spawn-1: '&f[&6&lEasy&c&lDuels&f] &aThe first spawn has been set to your location.'
+    set-spawn-2: '&f[&6&lEasy&c&lDuels&f] &aThe second spawn has been set to your location.'
+    reloaded: '&f[&6&lEasy&c&lDuels&f] &aSuccessfully reloaded.'

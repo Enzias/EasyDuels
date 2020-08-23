@@ -1,0 +1,176 @@
+settings:
+  check-for-updates: true
+  blocked-commands:
+    all: false
+    blacklisted-commands:
+      - 'spawn'
+      - 'tp'
+    whitelisted-commands:
+      - 'tell'
+      - 'ban'
+  timer:
+    sync-timer: true
+    request:
+      expiration: 30
+    lobby:
+      duration: 10
+      prevent-move: true
+      actions:
+        '10':
+          message-to-players: '&6The game starts in 10 seconds!'
+          title-to-players:
+            - '&aThe Duel is starting!'
+            - '&6Be ready!'
+          sound-to-players:
+            sound-id: 'BLOCK_ANVIL_LAND'
+            volume: 1
+            pitch: 1
+          actionbar-to-players: '&cStarting in &610 &cseconds'
+          broadcast: '&aA duel is starting between %player1% and %player2%!'
+        '9':
+          actionbar-to-players: '&cStarting in &69 &cseconds'
+        '8':
+          actionbar-to-players: '&cStarting in &68 &cseconds'
+        '7':
+          actionbar-to-players: '&cStarting in &67 &cseconds'
+        '6':
+          actionbar-to-players: '&cStarting in &66 &cseconds'
+        '5':
+          actionbar-to-players: '&cStarting in &65 &cseconds'
+        '4':
+          actionbar-to-players: '&cStarting in &64 &cseconds'
+        '3':
+          actionbar-to-players: '&cStarting in &63 &cseconds'
+          title-to-players:
+            - '&aStarting in'
+            - '&c3'
+          sound-to-players:
+            sound-id: 'BLOCK_NOTE_HARP'
+            volume: 1
+            pitch: 0
+        '2':
+          actionbar-to-players: '&cStarting in &62 &cseconds'
+          title-to-players:
+            - '&aStarting in'
+            - '&62'
+          sound-to-players:
+            sound-id: 'BLOCK_NOTE_HARP'
+            volume: 1
+            pitch: 0
+        '1':
+          actionbar-to-players: '&cStarting in &61 &cseconds'
+          title-to-players:
+            - '&aStarting in'
+            - '&c1'
+          sound-to-players:
+            sound-id: 'BLOCK_NOTE_HARP'
+            volume: 1
+            pitch: 0
+        '0':
+          title-to-players:
+            - '&cFight'
+            - '&6Good luck!'
+          sound-to-players:
+            sound-id: 'BLOCK_NOTE_HARP'
+            volume: 1
+            pitch: 1
+    fight:
+      duration: 300
+      gamemode: SURVIVAL
+      actions:
+        all:
+          actionbar-to-players: '&cTime remaining : &6%timer%'
+        '60':
+          message-to-players: '&f[&6&lEasy&c&lDuels&f] &660 seconds remaining!'
+          title-to-players:
+            - '&660 seconds'
+            - '&6Remaining'
+          sound-to-players:
+            sound-id: 'BLOCK_NOTE_BELL'
+            volume: 1
+            pitch: 1
+        '30':
+          message-to-players: '&f[&6&lEasy&c&lDuels&f] &630 seconds remaining!'
+          title-to-players:
+            - '&630 seconds'
+            - '&6Remaining'
+          sound-to-players:
+            sound-id: 'BLOCK_NOTE_BELL'
+            volume: 1
+            pitch: 1
+        '15':
+          message-to-players: '&f[&6&lEasy&c&lDuels&f] &615 seconds remaining!'
+          title-to-players:
+            - '&615 seconds'
+            - '&6Remaining'
+          sound-to-players:
+            sound-id: 'BLOCK_NOTE_BELL'
+            volume: 1
+            pitch: 1
+        '10':
+          message-to-players: '&f[&6&lEasy&c&lDuels&f] &610 seconds remaining!'
+          title-to-players:
+            - '&610 seconds'
+            - '&6Remaining'
+          sound-to-players:
+            sound-id: 'BLOCK_NOTE_BELL'
+            volume: 1
+            pitch: 1
+        '3':
+          message-to-players: '&f[&6&lEasy&c&lDuels&f] &63 seconds remaining!'
+          title-to-players:
+            - '&63 seconds'
+            - '&6Remaining'
+          sound-to-players:
+            sound-id: 'BLOCK_NOTE_BELL'
+            volume: 1
+            pitch: 1
+        '2':
+          message-to-players: '&f[&6&lEasy&c&lDuels&f] &62 seconds remaining!'
+          title-to-players:
+            - '&62 seconds'
+            - '&6Remaining'
+          sound-to-players:
+            sound-id: 'BLOCK_NOTE_BELL'
+            volume: 1
+            pitch: 1
+        '1':
+          message-to-players: '&f[&6&lEasy&c&lDuels&f] &61 seconds remaining!'
+          title-to-players:
+            - '&61 second'
+            - '&6Remaining'
+          sound-to-players:
+            sound-id: 'BLOCK_NOTE_BELL'
+            volume: 1
+            pitch: 1
+    end:
+      duration: 10
+      gamemode: SURVIVAL
+      actions:
+        results-message: true
+        fake-explosion: true
+        firework: true
+        title-to-winner:
+          - '&aWinner'
+          - '&6You won the duel!'
+        title-to-loser:
+          - '&cLoser'
+          - '&6You lost the duel!'
+        title-no-winner:
+          - '&cDraw!'
+          - '&6There is no winner!'
+        sound-to-winner:
+          sound-id: 'ENTITY_PLAYER_LEVELUP'
+          volume: 1
+          pitch: 1
+        sound-to-loser:
+          sound-id: 'ENTITY_WITHER_DEATH'
+          volume: 1
+          pitch: 1
+        sound-no-winner:
+          sound-id: 'BLOCK_END_PORTAL_SPAWN'
+          volume: 1
+          pitch: 1
+        actionbar-to-winner: '&aYou won the duel!'
+        actionbar-to-loser: '&cYou lost the duel!'
+        actionbar-no-winner: '&6There is no winner!'
