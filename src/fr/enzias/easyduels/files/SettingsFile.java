@@ -12,6 +12,13 @@ public class SettingsFile {
         this.plugin = plugin;
     }
 
+    public boolean getCheckForUpdates(){
+        if(plugin.getConfig().contains("settings.check-for-updates"))
+            return plugin.getConfig().getBoolean("settings.check-for-updates");
+        else
+            return true;
+    }
+
     //Blocked Commands
 
     public boolean getAllCommands(){
