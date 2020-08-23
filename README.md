@@ -1,6 +1,6 @@
 # EasyDuels! [![Spiget Version](https://img.shields.io/spiget/version/83031?color=%2303a5fc&label=Latest%20version%20of%20EasyDuels&style=flat-square)](https://www.spigotmc.org/resources/%E2%9A%94%EF%B8%8Feasyduels%E2%9A%94%EF%B8%8F-a-complete-1v1-system-1-12-x-1-16-x.83031/)
 
-[![EasyDuels](https://i.goopics.net/2ERxJ.png)](https://www.spigotmc.org/resources/%E2%9A%94%EF%B8%8Feasyduels%E2%9A%94%EF%B8%8F-a-complete-1v1-system-1-12-x-1-16-x.83031/)
+[![](https://i.goopics.net/2ERxJ.png)](https://www.spigotmc.org/resources/%E2%9A%94%EF%B8%8Feasyduels%E2%9A%94%EF%B8%8F-a-complete-1v1-system-1-12-x-1-16-x.83031/)
 
 ## Welcome!
 EasyDuels is a plugin for **spigot servers** (1.12 - 1.16.2), offering a **new 1v1 system** for your server. It has many features allowing you to **customize everything.** It only allows you to have a **single arena** on your server. Here are some features:
