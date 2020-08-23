@@ -1,7 +1,6 @@
 package fr.enzias.easyduels;
 
 import fr.enzias.easyduels.arena.Arena;
-import fr.enzias.easyduels.arena.ArenaStatuts;
 import fr.enzias.easyduels.commands.EasyDuelsCommand;
 import fr.enzias.easyduels.files.ArenaFile;
 import fr.enzias.easyduels.files.MessageFile;
@@ -14,6 +13,7 @@ import fr.enzias.easyduels.listeners.damager.SnowBallHitEvent;
 import fr.enzias.easyduels.managers.RequestManager;
 import fr.enzias.easyduels.managers.SenderManager;
 import fr.enzias.easyduels.managers.versions.*;
+import fr.enzias.easyduels.utils.UpdateChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -26,6 +26,7 @@ public class EasyDuels extends JavaPlugin {
     MessageFile messageFile;
     SettingsFile settingsFile;
     SenderManager manager;
+    public boolean upToDate;
 
 
     @Override
@@ -40,6 +41,7 @@ public class EasyDuels extends JavaPlugin {
         }
 
         setup();
+        checkForUpdates(settingsFile.getCheckForUpdates());
         registerEvents();
         getCommand("easyduels").setExecutor(new EasyDuelsCommand(this));
 
@@ -112,6 +114,21 @@ public class EasyDuels extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new DamageEvent(this), this);
         getServer().getPluginManager().registerEvents(new PotionHitEvent(this), this);
         getServer().getPluginManager().registerEvents(new SnowBallHitEvent(this), this);
+    }
+
+    public void checkForUpdates(boolean check){
+        if(check){
+            new UpdateChecker(this, 83031).getVersion(version -> {
+                if(this.getDescription().getVersion().equalsIgnoreCase(version)) {
+                    Bukkit.getLogger().info("[EasyDuels] Plugin is up to date.");
+                    upToDate = true;
+                }else{
+                    Bukkit.getLogger().warning("[EasyDuels] Plugin is outdated!");
+                    Bukkit.getLogger().warning("[EasyDuels] Latest version: " + version);
+                    upToDate = false;
+                }
+            });
+        }
     }
 
     public Arena getArena(){
