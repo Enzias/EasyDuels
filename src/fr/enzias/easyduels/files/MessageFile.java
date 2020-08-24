@@ -1,122 +1,161 @@
 package fr.enzias.easyduels.files;
 
 import fr.enzias.easyduels.EasyDuels;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class MessageFile {
 
     private final EasyDuels plugin;
+    private File messageFile;
+    private FileConfiguration messageConfig;
     public MessageFile(EasyDuels plugin) {
         this.plugin = plugin;
+    }
+
+    public void setup(){
+        messageFile = new File(plugin.getDataFolder(), "messages.yml");
+
+        if(!messageFile.exists()) {
+            plugin.saveResource("messages.yml", false);
+        }
+
+        messageConfig = new YamlConfiguration();
+        try {
+            messageConfig.load(messageFile);
+        }catch (IOException | InvalidConfigurationException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void save(){
+        try{
+            messageConfig.save(messageFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void reload(){
+        save();
+        messageConfig = YamlConfiguration.loadConfiguration(messageFile);
+    }
+
+    public FileConfiguration getConfig(){
+        return messageConfig;
     }
 
     //Messages
 
     public String getNoPermission(){
-        return plugin.getConfig().getString("messages.player.no-permission");
+        return getConfig().getString("messages.player.no-permission");
     }
 
     public List<String> getHelpMessages(){
-        return plugin.getConfig().getStringList("messages.player.help-message");
+        return getConfig().getStringList("messages.player.help-message");
     }
 
     public String getOfflinePlayer(){
-        return plugin.getConfig().getString("messages.player.offline-player");
+        return getConfig().getString("messages.player.offline-player");
     }
 
     public String getDuelYourself(){
-        return plugin.getConfig().getString("messages.player.duel-yourself");
+        return getConfig().getString("messages.player.duel-yourself");
     }
 
     public String getNoRequest(){
-        return plugin.getConfig().getString("messages.player.no-duel-request");
+        return getConfig().getString("messages.player.no-duel-request");
     }
 
     public String getAlreadyARequest(){
-        return plugin.getConfig().getString("messages.player.already-a-request");
+        return getConfig().getString("messages.player.already-a-request");
     }
 
     public String getRequestAccept(){
-        return plugin.getConfig().getString("messages.player.request-accept-1");
+        return getConfig().getString("messages.player.request-accept-1");
     }
 
     public String getYouRequestAccept(){
-        return plugin.getConfig().getString("messages.player.request-accept-2");
+        return getConfig().getString("messages.player.request-accept-2");
     }
 
     public String getRequestDeny(){
-        return plugin.getConfig().getString("messages.player.request-deny-1");
+        return getConfig().getString("messages.player.request-deny-1");
     }
 
     public String getYouRequestDeny(){
-        return plugin.getConfig().getString("messages.player.request-deny-2");
+        return getConfig().getString("messages.player.request-deny-2");
     }
 
     public String getArenaNotEmpty(){
-        return plugin.getConfig().getString("messages.player.arena-not-empty");
+        return getConfig().getString("messages.player.arena-not-empty");
     }
 
     public String getRequestSent(){
-        return plugin.getConfig().getString("messages.player.request-sent");
+        return getConfig().getString("messages.player.request-sent");
     }
 
     public String getDuelRequest(){
-        return plugin.getConfig().getString("messages.player.duel-request.message");
+        return getConfig().getString("messages.player.duel-request.message");
     }
 
     public String getAcceptButton(){
-        return plugin.getConfig().getString("messages.player.duel-request.accept.button");
+        return getConfig().getString("messages.player.duel-request.accept.button");
     }
 
     public String getAcceptHover(){
-        return plugin.getConfig().getString("messages.player.duel-request.accept.hover");
+        return getConfig().getString("messages.player.duel-request.accept.hover");
     }
 
     public String getDenyButton(){
-        return plugin.getConfig().getString("messages.player.duel-request.deny.button");
+        return getConfig().getString("messages.player.duel-request.deny.button");
     }
 
     public String getDenyHover(){
-        return plugin.getConfig().getString("messages.player.duel-request.deny.hover");
+        return getConfig().getString("messages.player.duel-request.deny.hover");
     }
 
     public String getExpiredRequest(){
-        return plugin.getConfig().getString("messages.player.expired-request");
+        return getConfig().getString("messages.player.expired-request");
     }
 
     public String getNoCommand(){
-        return plugin.getConfig().getString("messages.player.no-command");
+        return getConfig().getString("messages.player.no-command");
     }
 
     public String getNoWinner(){
-        return plugin.getConfig().getString("messages.player.no-winner");
+        return getConfig().getString("messages.player.no-winner");
     }
 
     public String getWinner(){
-        return plugin.getConfig().getString("messages.player.duel-win");
+        return getConfig().getString("messages.player.duel-win");
     }
 
     public String getLoser(){
-        return plugin.getConfig().getString("messages.player.duel-lost");
+        return getConfig().getString("messages.player.duel-lost");
     }
 
     //Admin
 
     public List<String> getAdminHelpMessages(){
-        return plugin.getConfig().getStringList("messages.admin.help-message");
+        return getConfig().getStringList("messages.admin.help-message");
     }
 
     public String getSetFirstSpawn(){
-        return plugin.getConfig().getString("messages.admin.set-spawn-1");
+        return getConfig().getString("messages.admin.set-spawn-1");
     }
 
     public String getSetSecondSpawn(){
-        return plugin.getConfig().getString("messages.admin.set-spawn-2");
+        return getConfig().getString("messages.admin.set-spawn-2");
     }
 
     public String getReloaded(){
-        return plugin.getConfig().getString("messages.admin.reloaded");
+        return getConfig().getString("messages.admin.reloaded");
     }
 
 }
