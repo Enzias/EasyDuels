@@ -5,18 +5,56 @@ import fr.enzias.easyduels.utils.Syntax;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.WorldCreator;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.io.File;
+import java.io.IOException;
 
 public class ArenaFile {
 
     private final EasyDuels plugin;
+    private File arenaFile;
+    private FileConfiguration arenaConfig;
     Syntax syntax = new Syntax();
+
     public ArenaFile(EasyDuels plugin) {
         this.plugin = plugin;
     }
 
-    public void saveConfig(){
-        plugin.saveConfig();
+    public void setup(){
+        arenaFile = new File(plugin.getDataFolder(), "arena.yml");
+
+        if(!arenaFile.exists()) {
+            plugin.saveResource("arena.yml", false);
+        }
+
+        arenaConfig = new YamlConfiguration();
+        try {
+            arenaConfig.load(arenaFile);
+        }catch (IOException | InvalidConfigurationException e){
+            e.printStackTrace();
+        }
     }
+
+    public void save(){
+        try{
+            arenaConfig.save(arenaFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void reload(){
+        save();
+        arenaConfig = YamlConfiguration.loadConfiguration(arenaFile);
+    }
+
+    public FileConfiguration getConfig(){
+        return arenaConfig;
+    }
+
 
     //Arena Settings --> Getters
     public Location getFirstLocation(){
@@ -25,19 +63,19 @@ public class ArenaFile {
     }
 
     public String getWorldName(){
-        return plugin.getConfig().getString("arena.world");
+        return getConfig().getString("arena.world");
     }
 
     public String getCoordinates1(){
-        return plugin.getConfig().getString("arena.spawnpoints.spawn1.xyz");
+        return getConfig().getString("arena.spawnpoints.spawn1.xyz");
     }
 
     public float getYaw1(){
-        return plugin.getConfig().getInt("arena.spawnpoints.spawn1.yaw");
+        return getConfig().getInt("arena.spawnpoints.spawn1.yaw");
     }
 
     public float getPitch1(){
-        return plugin.getConfig().getInt("arena.spawnpoints.spawn1.pitch");
+        return getConfig().getInt("arena.spawnpoints.spawn1.pitch");
     }
 
     public Location getSecondLocation(){
@@ -46,15 +84,15 @@ public class ArenaFile {
     }
 
     public String getCoordinates2(){
-        return plugin.getConfig().getString("arena.spawnpoints.spawn2.xyz");
+        return getConfig().getString("arena.spawnpoints.spawn2.xyz");
     }
 
     public float getYaw2(){
-        return plugin.getConfig().getInt("arena.spawnpoints.spawn2.yaw");
+        return getConfig().getInt("arena.spawnpoints.spawn2.yaw");
     }
 
     public float getPitch2(){
-        return plugin.getConfig().getInt("arena.spawnpoints.spawn2.pitch");
+        return getConfig().getInt("arena.spawnpoints.spawn2.pitch");
     }
 
     //Arena Settings --> Setters
@@ -78,31 +116,31 @@ public class ArenaFile {
     }
 
     public void setWorldName(String worldName){
-        plugin.getConfig().set("arena.world", worldName);
+        getConfig().set("arena.world", worldName);
     }
 
     public void setLocation1(String location1){
-        plugin.getConfig().set("arena.spawnpoints.spawn1.xyz", location1);
+        getConfig().set("arena.spawnpoints.spawn1.xyz", location1);
     }
 
     public void setYaw1(Float yaw1){
-        plugin.getConfig().set("arena.spawnpoints.spawn1.yaw", yaw1);
+        getConfig().set("arena.spawnpoints.spawn1.yaw", yaw1);
     }
 
     public void setPitch1(Float pitch1){
-        plugin.getConfig().set("arena.spawnpoints.spawn1.pitch", pitch1);
+        getConfig().set("arena.spawnpoints.spawn1.pitch", pitch1);
     }
 
     public void setLocation2(String location2){
-        plugin.getConfig().set("arena.spawnpoints.spawn2.xyz", location2);
+        getConfig().set("arena.spawnpoints.spawn2.xyz", location2);
     }
 
     public void setYaw2(Float yaw2){
-        plugin.getConfig().set("arena.spawnpoints.spawn2.yaw", yaw2);
+        getConfig().set("arena.spawnpoints.spawn2.yaw", yaw2);
     }
 
     public void setPitch2(Float pitch2){
-        plugin.getConfig().set("arena.spawnpoints.spawn2.pitch", pitch2);
+        getConfig().set("arena.spawnpoints.spawn2.pitch", pitch2);
     }
 
 
