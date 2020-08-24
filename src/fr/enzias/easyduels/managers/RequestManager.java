@@ -18,7 +18,7 @@ public class RequestManager {
     SettingsFile settings;
     public RequestManager(EasyDuels plugin) {
         this.plugin = plugin;
-        settings = new SettingsFile(plugin);
+        settings = plugin.getSettingsFile();
     }
 
     public void addRequest(Player firstPlayer, Player secondPlayer){
