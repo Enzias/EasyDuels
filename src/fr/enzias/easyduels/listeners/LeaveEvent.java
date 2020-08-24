@@ -21,7 +21,7 @@ public class LeaveEvent implements Listener {
     RequestManager request;
     public LeaveEvent(EasyDuels plugin) {
         this.plugin = plugin;
-        this.settings = new SettingsFile(plugin);
+        this.settings = plugin.getSettingsFile();
         this.arenaFile = plugin.getArenaFile();
         this.arena = plugin.getArena();
         this.request = plugin.getRequest();
@@ -32,7 +32,7 @@ public class LeaveEvent implements Listener {
     public void onPlayerLeave(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        if (request.hasRequest(player)) //change request to name
+        if (request.hasRequest(player))
             request.deleteRequest(player);
         if (arena.isStatut(ArenaStatuts.LOBBY) || arena.isStatut(ArenaStatuts.PLAYING)) {
             if (player.getLocation().getWorld().getName().equalsIgnoreCase(arenaFile.getWorldName())
