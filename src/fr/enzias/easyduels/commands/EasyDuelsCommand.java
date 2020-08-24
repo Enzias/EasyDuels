@@ -56,7 +56,7 @@ public class EasyDuelsCommand implements CommandExecutor {
 
 
             else if(Bukkit.getPlayer(args[0]) != null) {
-                if(!args[0].equalsIgnoreCase(player.getName())) {
+                if(!Bukkit.getPlayer(args[0]).getName().equalsIgnoreCase(player.getName())) {
                     // /easyduels player
                     if (!request.hasRequest(player)) {
 
@@ -84,13 +84,13 @@ public class EasyDuelsCommand implements CommandExecutor {
 
                     if (args[1].equalsIgnoreCase("spawn1")) {
                         arenaFile.setFirstLocation(player.getLocation());
-                        arenaFile.saveConfig();
+                        arenaFile.reload();
                         sender.sendMessage(messageFile.getSetFirstSpawn(), player);
                         return true;
                     }
                     if (args[1].equalsIgnoreCase("spawn2")) {
                         arenaFile.setSecondLocation(player.getLocation());
-                        arenaFile.saveConfig();
+                        arenaFile.reload();
                         sender.sendMessage(messageFile.getSetSecondSpawn(), player);
                         return true;
                     }
@@ -100,6 +100,9 @@ public class EasyDuelsCommand implements CommandExecutor {
                     }
                     if (args[1].equalsIgnoreCase("reload")) {
                         sender.sendMessage(messageFile.getReloaded(), player);
+                        arenaFile.reload();
+                        messageFile.reload();
+                        settingsFile.reload();
                         arena.resetArena();
                         return true;
                     } else
