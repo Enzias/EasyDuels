@@ -128,8 +128,11 @@ public class EasyDuels extends JavaPlugin {
                     Bukkit.getLogger().info("[EasyDuels] Plugin is up to date.");
                     upToDate = true;
                 }else{
+                    Bukkit.getLogger().warning("========================================");
                     Bukkit.getLogger().warning("[EasyDuels] Plugin is outdated!");
                     Bukkit.getLogger().warning("[EasyDuels] Latest version: " + version);
+                    Bukkit.getLogger().warning("[EasyDuels] Your version: " + getDescription().getVersion());
+                    Bukkit.getLogger().warning("========================================");
                     upToDate = false;
                 }
             });
