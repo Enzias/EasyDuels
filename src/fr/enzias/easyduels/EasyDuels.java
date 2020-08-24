@@ -32,15 +32,18 @@ public class EasyDuels extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        saveDefaultConfig();
-        saveConfig();
         if(!setupSender()) {
             getLogger().warning("[EasyDuels] Failed to load EasyDuels! Unsupported version.");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
 
-        setup();
+        if(!getDataFolder().exists())
+            getDataFolder().mkdir();
+
+
+        setupConfig();
+        setupObject();
         checkForUpdates(settingsFile.getCheckForUpdates());
         registerEvents();
         getCommand("easyduels").setExecutor(new EasyDuelsCommand(this));
@@ -50,20 +53,22 @@ public class EasyDuels extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        saveDefaultConfig();
-        saveConfig();
         Bukkit.getServer().getLogger().info("[EasyDuels] Plugin successfully disabled.");
     }
 
-    private void setup(){
-
-        arenaFile = new ArenaFile(this);
-        messageFile = new MessageFile(this);
-        settingsFile = new SettingsFile(this);
+    private void setupObject(){
         arena = new Arena(this, arenaFile.getFirstLocation(), arenaFile.getSecondLocation(),
                 settingsFile.getLobbyTime(), settingsFile.getFightTime(), settingsFile.getEndTime());
         request = new RequestManager(this);
+    }
 
+    private void setupConfig(){
+        arenaFile = new ArenaFile(this);
+        messageFile = new MessageFile(this);
+        settingsFile = new SettingsFile(this);
+        arenaFile.setup();
+        messageFile.setup();
+        settingsFile.setup();
     }
 
     private boolean setupSender(){
