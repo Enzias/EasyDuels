@@ -1,4 +1,4 @@
-# EasyDuels! [![Spiget Version](https://img.shields.io/spiget/version/83031?color=%2303a5fc&label=Latest%20version%20of%20EasyDuels&style=flat-square)](https://www.spigotmc.org/resources/%E2%9A%94%EF%B8%8Feasyduels%E2%9A%94%EF%B8%8F-a-complete-1v1-system-1-12-x-1-16-x.83031/)
+# EasyDuels! ![Spiget Version](https://img.shields.io/spiget/version/83031?color=%2303a5fc&label=Latest%20version%20of%20EasyDuels&style=flat-square)
 
 [![](https://i.goopics.net/2ERxJ.png)](https://www.spigotmc.org/resources/%E2%9A%94%EF%B8%8Feasyduels%E2%9A%94%EF%B8%8F-a-complete-1v1-system-1-12-x-1-16-x.83031/)
 
