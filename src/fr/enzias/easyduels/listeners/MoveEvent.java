@@ -20,7 +20,7 @@ public class MoveEvent implements Listener {
 
     public MoveEvent(EasyDuels plugin) {
         this.plugin = plugin;
-        this.settings = new SettingsFile(plugin);
+        this.settings = plugin.getSettingsFile();
         this.arenaFile = plugin.getArenaFile();
         this.arena = plugin.getArena();
 
