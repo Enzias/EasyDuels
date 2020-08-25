@@ -6,10 +6,7 @@ import fr.enzias.easyduels.files.ArenaFile;
 import fr.enzias.easyduels.files.MessageFile;
 import fr.enzias.easyduels.files.SettingsFile;
 import fr.enzias.easyduels.listeners.*;
-import fr.enzias.easyduels.listeners.damager.ArrowHitEvent;
-import fr.enzias.easyduels.listeners.damager.DamageEvent;
-import fr.enzias.easyduels.listeners.damager.PotionHitEvent;
-import fr.enzias.easyduels.listeners.damager.SnowBallHitEvent;
+import fr.enzias.easyduels.listeners.damager.*;
 import fr.enzias.easyduels.managers.RequestManager;
 import fr.enzias.easyduels.managers.SenderManager;
 import fr.enzias.easyduels.managers.versions.*;
@@ -119,6 +116,7 @@ public class EasyDuels extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new DamageEvent(this), this);
         getServer().getPluginManager().registerEvents(new PotionHitEvent(this), this);
         getServer().getPluginManager().registerEvents(new SnowBallHitEvent(this), this);
+        getServer().getPluginManager().registerEvents(new TridentHitEvent(this), this);
     }
 
     public void checkForUpdates(boolean check){
@@ -128,11 +126,11 @@ public class EasyDuels extends JavaPlugin {
                     Bukkit.getLogger().info("[EasyDuels] Plugin is up to date.");
                     upToDate = true;
                 }else{
-                    Bukkit.getLogger().warning("========================================");
+                    Bukkit.getLogger().warning("=====================================");
                     Bukkit.getLogger().warning("[EasyDuels] Plugin is outdated!");
                     Bukkit.getLogger().warning("[EasyDuels] Latest version: " + version);
                     Bukkit.getLogger().warning("[EasyDuels] Your version: " + getDescription().getVersion());
-                    Bukkit.getLogger().warning("========================================");
+                    Bukkit.getLogger().warning("=====================================");
                     upToDate = false;
                 }
             });
