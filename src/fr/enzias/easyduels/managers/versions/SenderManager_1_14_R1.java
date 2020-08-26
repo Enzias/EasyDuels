@@ -80,6 +80,28 @@ public class SenderManager_1_14_R1 implements SenderManager {
             Bukkit.getScheduler().runTask(plugin, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command));
     }
 
+    public void sendConsoleCommand(List<String> commands, boolean sync, String... replace) {
+        if(sync) {
+            for (String command : commands) {
+                for (int i = 0; i <= (replace.length - 2); i++) {
+                    command = command.replaceAll(replace[i], replace[i+1]);
+                    i++;
+                }
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+            }
+        }else {
+            Bukkit.getScheduler().runTask(plugin, () -> {
+                for (String command : commands) {
+                    for (int i = 0; i <= (replace.length - 2); i++) {
+                        command = command.replaceAll(replace[i], replace[i+1]);
+                        i++;
+                    }
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+                }
+            });
+        }
+    }
+
     public void sendBroadcast(String message, boolean sync){
         if(sync)
             Bukkit.broadcastMessage(syntax.coloredMessage(message));
