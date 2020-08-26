@@ -363,4 +363,10 @@ public class SettingsFile {
         } return null;
     }
 
+    public List<String> getEndRewardCommand(){
+        if(getConfig().contains("settings.timer.end.actions.rewards-command"))
+            return getConfig().getStringList("settings.timer.end.actions.rewards-command");
+        return null;
+    }
+
 }
