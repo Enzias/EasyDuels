@@ -169,9 +169,12 @@ public class TimerManager extends BukkitRunnable {
                         if(settings.getEndActionbarToLoser() != null && arena.getFirstPlayer().isOnline())
                             sender.sendActionbar(settings.getEndActionbarToLoser(), 20, settings.getEndTime()*20, 20, arena.getSecondPlayer());
                         if(settings.getEndRewardCommand() != null)
-                            sender.sendConsoleCommand(settings.getEndRewardCommand(), settings.getSyncTimer(), 
+                            sender.sendConsoleCommand(settings.getEndRewardCommand(), settings.getSyncTimer(),
                                     "%winner%", arena.getWinner().getName(), "%loser%", arena.getFirstPlayer().getName());
-                }else { //second is the loser
+                        if(settings.getEndBroadcast() != null)
+                            sender.sendBroadcast(settings.getEndBroadcast()
+                                    .replaceAll("%winner", arena.getWinner().getName()).replaceAll("%loser%", arena.getFirstPlayer().getName()), settings.getSyncTimer());
+                    }else { //second is the loser
 
                         if (settings.getResultMessage()) { //result message
                             sender.sendMessage(message.getWinner().replaceAll("%winner%", arena.getWinner().getName()).replaceAll("%loser%", arena.getSecondPlayer().getName()), arena.getWinner());
@@ -193,6 +196,9 @@ public class TimerManager extends BukkitRunnable {
                         if(settings.getEndRewardCommand() != null)
                             sender.sendConsoleCommand(settings.getEndRewardCommand(), settings.getSyncTimer(),
                                     "%winner%", arena.getWinner().getName(), "%loser%", arena.getSecondPlayer().getName());
+                        if(settings.getEndBroadcast() != null)
+                            sender.sendBroadcast(settings.getEndBroadcast()
+                                    .replaceAll("%winner", arena.getWinner().getName()).replaceAll("%loser%", arena.getSecondPlayer().getName()), settings.getSyncTimer());
                     }
                 }
             }
