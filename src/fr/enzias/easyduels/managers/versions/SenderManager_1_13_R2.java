@@ -7,14 +7,14 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.minecraft.server.v1_13_R2.IChatBaseComponent.ChatSerializer;
-import net.minecraft.server.v1_13_R2.PacketPlayOutExplosion;
-import net.minecraft.server.v1_13_R2.PacketPlayOutTitle;
-import net.minecraft.server.v1_13_R2.PacketPlayOutTitle.EnumTitleAction;
-import net.minecraft.server.v1_13_R2.Vec3D;
+import net.minecraft.server.v1_14_R1.IChatBaseComponent.ChatSerializer;
+import net.minecraft.server.v1_14_R1.PacketPlayOutExplosion;
+import net.minecraft.server.v1_14_R1.PacketPlayOutTitle;
+import net.minecraft.server.v1_14_R1.PacketPlayOutTitle.EnumTitleAction;
+import net.minecraft.server.v1_14_R1.Vec3D;
 import org.bukkit.*;
 import org.bukkit.FireworkEffect.Builder;
-import org.bukkit.craftbukkit.v1_13_R2.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
@@ -22,13 +22,13 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SenderManager_1_13_R2 implements SenderManager {
+public class SenderManager_1_14_R1 implements SenderManager {
 
     private final EasyDuels plugin;
 
     Syntax syntax = new Syntax();
 
-    public SenderManager_1_13_R2(EasyDuels plugin) {
+    public SenderManager_1_14_R1(EasyDuels plugin) {
         this.plugin = plugin;
     }
 
