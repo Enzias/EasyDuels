@@ -20,6 +20,8 @@ public interface SenderManager {
 
     public void sendConsoleCommand(String command, boolean sync);
 
+    public void sendConsoleCommand(List<String> commands, boolean sync, String... replace);
+
     public void sendBroadcast(String message, boolean sync);
 
     public void sendFirework(Player player, boolean sync);
