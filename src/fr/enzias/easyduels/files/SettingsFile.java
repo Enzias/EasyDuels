@@ -369,4 +369,11 @@ public class SettingsFile {
         return null;
     }
 
+    public String getEndBroadcast(){
+        if (getConfig().contains("settings.timer.end.actions.broadcast")
+                && !getConfig().getString("settings.timer.fight.actions.broadcast").equalsIgnoreCase("")) {
+            return getConfig().getString("settings.timer.fight.actions.broadcast");
+        } return null;
+    }
+
 }
