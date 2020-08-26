@@ -174,3 +174,7 @@ settings:
         actionbar-to-winner: '&aYou won the duel!'
         actionbar-to-loser: '&cYou lost the duel!'
         actionbar-no-winner: '&6There is no winner!'
+        rewards-command:
+          - 'give %winner% diamond_block 1'
+          - 'give %loser% diamond 1'
+        broadcast: '&f[&6&lEasy&c&lDuels&f] &c%winner% &6won the duel against &c%loser%&6!'
