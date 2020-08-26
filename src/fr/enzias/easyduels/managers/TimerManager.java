@@ -163,11 +163,14 @@ public class TimerManager extends BukkitRunnable {
                         if(settings.getEndSoundToWinner() != null)
                             sender.sendSound(settings.getEndSoundToWinner(), settings.getEndVolumeToWinner(), settings.getEndPitchToWinner(), arena.getWinner());
                         if(settings.getEndSoundToLoser() != null && arena.getFirstPlayer().isOnline())
-                                sender.sendSound(settings.getEndSoundToLoser(), settings.getEndVolumeToLoser(), settings.getEndPitchToLoser(), arena.getFirstPlayer());
+                            sender.sendSound(settings.getEndSoundToLoser(), settings.getEndVolumeToLoser(), settings.getEndPitchToLoser(), arena.getFirstPlayer());
                         if(settings.getEndActionbarToWinner() != null)
                             sender.sendActionbar(settings.getEndActionbarToWinner(), 20, settings.getEndTime()*20, 20, arena.getWinner());
                         if(settings.getEndActionbarToLoser() != null && arena.getFirstPlayer().isOnline())
-                                sender.sendActionbar(settings.getEndActionbarToLoser(), 20, settings.getEndTime()*20, 20, arena.getSecondPlayer());
+                            sender.sendActionbar(settings.getEndActionbarToLoser(), 20, settings.getEndTime()*20, 20, arena.getSecondPlayer());
+                        if(settings.getEndRewardCommand() != null)
+                            sender.sendConsoleCommand(settings.getEndRewardCommand(), settings.getSyncTimer(), 
+                                    "%winner%", arena.getWinner().getName(), "%loser%", arena.getFirstPlayer().getName());
                 }else { //second is the loser
 
                         if (settings.getResultMessage()) { //result message
@@ -186,7 +189,10 @@ public class TimerManager extends BukkitRunnable {
                         if (settings.getEndActionbarToWinner() != null)
                             sender.sendActionbar(settings.getEndActionbarToWinner(), 20, settings.getEndTime() * 20, 20, arena.getWinner());
                         if (settings.getEndActionbarToLoser() != null && arena.getSecondPlayer().isOnline())
-                                sender.sendActionbar(settings.getEndActionbarToLoser(), 20, settings.getEndTime() * 20, 20, arena.getSecondPlayer());
+                            sender.sendActionbar(settings.getEndActionbarToLoser(), 20, settings.getEndTime() * 20, 20, arena.getSecondPlayer());
+                        if(settings.getEndRewardCommand() != null)
+                            sender.sendConsoleCommand(settings.getEndRewardCommand(), settings.getSyncTimer(),
+                                    "%winner%", arena.getWinner().getName(), "%loser%", arena.getSecondPlayer().getName());
                     }
                 }
             }
