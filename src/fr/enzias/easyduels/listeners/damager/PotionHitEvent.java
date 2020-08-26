@@ -34,7 +34,8 @@ public class PotionHitEvent implements Listener {
             if(shooter.getLocation().getWorld().getName().equalsIgnoreCase(arenaFile.getWorldName()) && arena.getPlayers().contains(shooter))
 
             for (PotionEffect effect : event.getPotion().getEffects()) {
-                if (Arrays.asList(PotionEffectType.LEVITATION, PotionEffectType.HARM, PotionEffectType.SLOW, PotionEffectType.WEAKNESS, PotionEffectType.POISON)
+                if (Arrays.asList(PotionEffectType.LEVITATION, PotionEffectType.HARM, PotionEffectType.SLOW, PotionEffectType.WEAKNESS, PotionEffectType.POISON,
+                        PotionEffectType.BLINDNESS, PotionEffectType.CONFUSION, PotionEffectType.HUNGER, PotionEffectType.WITHER)
                         .contains(effect.getType())) {
 
                     if (event.getAffectedEntities() != null) {
