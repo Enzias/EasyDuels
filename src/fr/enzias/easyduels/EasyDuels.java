@@ -116,7 +116,8 @@ public class EasyDuels extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new DamageEvent(this), this);
         getServer().getPluginManager().registerEvents(new PotionHitEvent(this), this);
         getServer().getPluginManager().registerEvents(new SnowBallHitEvent(this), this);
-        getServer().getPluginManager().registerEvents(new TridentHitEvent(this), this);
+        if(!getServer().getVersion().contains("1.12"))
+            getServer().getPluginManager().registerEvents(new TridentHitEvent(this), this);
     }
 
     public void checkForUpdates(boolean check){
