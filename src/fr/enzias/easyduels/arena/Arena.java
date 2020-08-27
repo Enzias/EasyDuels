@@ -23,6 +23,7 @@ public class Arena {
     private HashMap<Player, Location> lastLocations = new HashMap<>();
     private ArenaStatuts statut;
     private Player winner = null;
+    private Player loser = null;
 
 
     public Arena(EasyDuels plugin, Location firstLocation, Location secondLocation, int lobbyTime, int playingTime, int reloadingTime) {
@@ -49,6 +50,7 @@ public class Arena {
         setFirstLocation(plugin.getArenaFile().getFirstLocation());
         setSecondLocation(plugin.getArenaFile().getSecondLocation());
         setWinner(null);
+        setLoser(null);
         setLobbyTime(plugin.getSettingsFile().getLobbyTime());
         setPlayingTime(plugin.getSettingsFile().getFightTime());
         setReloadingTime(plugin.getSettingsFile().getEndTime());
@@ -112,15 +114,40 @@ public class Arena {
     public Player getFirstPlayer(){
         return players.get(0);
     }
+    public String getFirstPlayerName(){
+        return getFirstPlayer().getName();
+    }
     public Player getSecondPlayer(){
         return players.get(1);
+    }
+    public String getSecondPlayerName(){
+        return getSecondPlayer().getName();
     }
 
     public Player getWinner(){
         return winner;
     }
     public void setWinner(Player winner){
+        if(winner.getName().equalsIgnoreCase(getFirstPlayer().getName()))
+            setLoser(getSecondPlayer());
+        else
+            setLoser(getFirstPlayer());
         this.winner = winner;
+    }
+
+    public String getWinnerName(){
+        return getWinner().getName();
+    }
+
+    public Player getLoser() {
+        return loser;
+    }
+    public void setLoser(Player loser) {
+        this.loser = loser;
+    }
+
+    public String getLoserName(){
+        return getLoser().getName();
     }
 
     public void setFirstLocation(Location firstLocation) {
