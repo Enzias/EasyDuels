@@ -141,6 +141,9 @@ public class TimerManager extends BukkitRunnable {
                         sender.sendTitle(settings.getEndTitleDraw(), 20, settings.getEndTime() * 20, 20, arena.getFirstPlayer(), arena.getSecondPlayer());
                     if (settings.getEndActionbarDraw() != null)
                         sender.sendActionbar(settings.getEndActionbarDraw(), 20, settings.getEndTime()*20, 20, arena.getFirstPlayer(), arena.getSecondPlayer());
+                    if(settings.getEndBroadcastNoWinner() != null)
+                        sender.sendBroadcast(settings.getEndBroadcastNoWinner()
+                                .replaceAll("%player%", arena.getFirstPlayer().getName()).replaceAll("%player2%", arena.getSecondPlayer().getName()), settings.getSyncTimer());
 
                 } else { //a winner
 
@@ -173,7 +176,7 @@ public class TimerManager extends BukkitRunnable {
                                     "%winner%", arena.getWinner().getName(), "%loser%", arena.getFirstPlayer().getName());
                         if(settings.getEndBroadcast() != null)
                             sender.sendBroadcast(settings.getEndBroadcast()
-                                    .replaceAll("%winner", arena.getWinner().getName()).replaceAll("%loser%", arena.getFirstPlayer().getName()), settings.getSyncTimer());
+                                    .replaceAll("%winner%", arena.getWinner().getName()).replaceAll("%loser%", arena.getFirstPlayer().getName()), settings.getSyncTimer());
                     }else { //second is the loser
 
                         if (settings.getResultMessage()) { //result message
@@ -198,7 +201,7 @@ public class TimerManager extends BukkitRunnable {
                                     "%winner%", arena.getWinner().getName(), "%loser%", arena.getSecondPlayer().getName());
                         if(settings.getEndBroadcast() != null)
                             sender.sendBroadcast(settings.getEndBroadcast()
-                                    .replaceAll("%winner", arena.getWinner().getName()).replaceAll("%loser%", arena.getSecondPlayer().getName()), settings.getSyncTimer());
+                                    .replaceAll("%winner%", arena.getWinner().getName()).replaceAll("%loser%", arena.getSecondPlayer().getName()), settings.getSyncTimer());
                     }
                 }
             }
