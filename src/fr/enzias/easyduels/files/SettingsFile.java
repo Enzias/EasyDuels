@@ -364,15 +364,22 @@ public class SettingsFile {
     }
 
     public List<String> getEndRewardCommand(){
-        if(getConfig().contains("settings.timer.end.actions.rewards-command"))
-            return getConfig().getStringList("settings.timer.end.actions.rewards-command");
+        if(getConfig().contains("settings.timer.end.actions.reward-commands"))
+            return getConfig().getStringList("settings.timer.end.actions.reward-commands");
         return null;
     }
 
     public String getEndBroadcast(){
         if (getConfig().contains("settings.timer.end.actions.broadcast")
-                && !getConfig().getString("settings.timer.fight.actions.broadcast").equalsIgnoreCase("")) {
-            return getConfig().getString("settings.timer.fight.actions.broadcast");
+                && !getConfig().getString("settings.timer.end.actions.broadcast").equalsIgnoreCase("")) {
+            return getConfig().getString("settings.timer.end.actions.broadcast");
+        } return null;
+    }
+
+    public String getEndBroadcastNoWinner(){
+        if (getConfig().contains("settings.timer.end.actions.broadcast-no-winner")
+                && !getConfig().getString("settings.timer.end.actions.broadcast-no-winner").equalsIgnoreCase("")) {
+            return getConfig().getString("settings.timer.end.actions.broadcast-no-winner");
         } return null;
     }
 
