@@ -12,6 +12,8 @@ public interface SenderManager {
 
     public void sendTitle(List<String> messages, int fadeIn, int stay, int fadeOut, Player... player);
 
+    public void sendTitlePlaceHolders(List<String> messages, int fadeIn, int stay, int fadeOut, Player player, String... replace);
+
     public void sendSound(String sound, int volume, float pitch, Player... player);
 
     public void sendActionbar(String message, int fadeIn, int stay, int fadeOut, Player... player);
