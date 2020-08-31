@@ -73,6 +73,149 @@ public class SettingsFile {
         return getConfig().getStringList("settings.blocked-commands.whitelisted-commands");
     }
 
+    //queue
+
+    public boolean getQueue(){
+        return getConfig().getBoolean("settings.queue.enable");
+    }
+
+    public int getQueueMaxPlayers(){
+        return getConfig().getInt("settings.queue.max-players");
+    }
+
+    public boolean checkQueueJoin(){
+        return getConfig().get("settings.queue.queue-join") instanceof ConfigurationSection;
+    }
+
+    public String getQueueJoinMessageToPlayer(){
+        if (getConfig().contains("settings.queue.queue-join.message-to-player")
+                && !getConfig().getString("settings.queue.queue-join.message-to-player").equalsIgnoreCase("")) {
+            return getConfig().getString("settings.queue.queue-join.message-to-player");
+        } return null;
+    }
+
+    public List<String> getQueueJoinTitleToPlayer(){
+        if (getConfig().contains("settings.queue.queue-join.title-to-player")) {
+            return getConfig().getStringList("settings.queue.queue-join.title-to-player");
+        } return null;
+    }
+
+    public String getQueueJoinSoundToPlayer(){
+        if (getConfig().contains("settings.queue.queue-join.sound-to-player")
+                && !getConfig().getString("settings.queue.queue-join.sound-to-player.sound-id").equalsIgnoreCase("")) {
+            return getConfig().getString("settings.queue.queue-join.sound-to-player.sound-id");
+        } return null;
+    }
+
+    public int getQueueJoinVolumeToPlayer(){
+        if (getConfig().contains("settings.queue.queue-join.sound-to-player.volume")) {
+            return getConfig().getInt("settings.queue.queue-join.sound-to-player.volume");
+        } return 1;
+    }
+
+    public float getQueueJoinPitchToPlayer(){
+        if (getConfig().contains("settings.queue.queue-join.sound-to-player.pitch")) {
+            return getConfig().getInt("settings.queue.queue-join.sound-to-player.pitch");
+        } return 1;
+    }
+
+    public String getQueueJoinActionbarToPlayer(){
+        if (getConfig().contains("settings.queue.queue-join.actionbar-to-player")
+                && !getConfig().getString("settings.queue.queue-join.actionbar-to-player").equalsIgnoreCase("")) {
+            return getConfig().getString("settings.queue.queue-join.actionbar-to-player");
+        } return null;
+    }
+
+    //queue leave
+
+    public boolean checkQueueLeave(){
+        return getConfig().get("settings.queue.queue-leave") instanceof ConfigurationSection;
+    }
+
+    public String getQueueLeaveMessageToPlayer(){
+        if (getConfig().contains("settings.queue.queue-leave.message-to-player")
+                && !getConfig().getString("settings.queue.queue-leave.message-to-player").equalsIgnoreCase("")) {
+            return getConfig().getString("settings.queue.queue-leave.message-to-player");
+        } return null;
+    }
+
+    public List<String> getQueueLeaveTitleToPlayer(){
+        if (getConfig().contains("settings.queue.queue-leave.title-to-player")) {
+            return getConfig().getStringList("settings.queue.queue-leave.title-to-player");
+        } return null;
+    }
+
+    public String getQueueLeaveSoundToPlayer(){
+        if (getConfig().contains("settings.queue.queue-leave.sound-to-player")
+                && !getConfig().getString("settings.queue.queue-leave.sound-to-player.sound-id").equalsIgnoreCase("")) {
+            return getConfig().getString("settings.queue.queue-leave.sound-to-player.sound-id");
+        } return null;
+    }
+
+    public int getQueueLeaveVolumeToPlayer(){
+        if (getConfig().contains("settings.queue.queue-leave.sound-to-player.volume")) {
+            return getConfig().getInt("settings.queue.queue-leave.sound-to-player.volume");
+        } return 1;
+    }
+
+    public float getQueueLeavePitchToPlayer(){
+        if (getConfig().contains("settings.queue.queue-leave.sound-to-player.pitch")) {
+            return getConfig().getInt("settings.queue.queue-leave.sound-to-player.pitch");
+        } return 1;
+    }
+
+    public String getQueueLeaveActionbarToPlayer(){
+        if (getConfig().contains("settings.queue.queue-leave.actionbar-to-player")
+                && !getConfig().getString("settings.queue.queue-leave.actionbar-to-player").equalsIgnoreCase("")) {
+            return getConfig().getString("settings.queue.queue-leave.actionbar-to-player");
+        } return null;
+    }
+
+    //queue update
+
+    public boolean checkQueueUpdate(){
+        return getConfig().get("settings.queue.queue-update") instanceof ConfigurationSection;
+    }
+
+    public String getQueueUpdateMessageToPlayer(){
+        if (getConfig().contains("settings.queue.queue-update.message-to-player")
+                && !getConfig().getString("settings.queue.queue-update.message-to-player").equalsIgnoreCase("")) {
+            return getConfig().getString("settings.queue.queue-update.message-to-player");
+        } return null;
+    }
+
+    public List<String> getQueueUpdateTitleToPlayer(){
+        if (getConfig().contains("settings.queue.queue-update.title-to-player")) {
+            return getConfig().getStringList("settings.queue.queue-update.title-to-player");
+        } return null;
+    }
+
+    public String getQueueUpdateSoundToPlayer(){
+        if (getConfig().contains("settings.queue.queue-update.sound-to-player")
+                && !getConfig().getString("settings.queue.queue-update.sound-to-player.sound-id").equalsIgnoreCase("")) {
+            return getConfig().getString("settings.queue.queue-update.sound-to-player.sound-id");
+        } return null;
+    }
+
+    public int getQueueUpdateVolumeToPlayer(){
+        if (getConfig().contains("settings.queue.queue-update.sound-to-player.volume")) {
+            return getConfig().getInt("settings.queue.queue-update.sound-to-player.volume");
+        } return 1;
+    }
+
+    public float getQueueUpdatePitchToPlayer(){
+        if (getConfig().contains("settings.queue.queue-update.sound-to-player.pitch")) {
+            return getConfig().getInt("settings.queue.queue-update.sound-to-player.pitch");
+        } return 1;
+    }
+
+    public String getQueueUpdateActionbarToPlayer(){
+        if (getConfig().contains("settings.queue.queue-update.actionbar-to-player")
+                && !getConfig().getString("settings.queue.queue-update.actionbar-to-player").equalsIgnoreCase("")) {
+            return getConfig().getString("settings.queue.queue-update.actionbar-to-player");
+        } return null;
+    }
+
     //Timer
 
     public boolean getSyncTimer() {
@@ -121,13 +264,13 @@ public class SettingsFile {
     }
 
     public int getLobbyVolumeToPlayers(int i){
-            if (getConfig().contains("settings.timer.lobby.actions." + i + ".sound-to-players")) {
+            if (getConfig().contains("settings.timer.lobby.actions." + i + ".sound-to-players.volume")) {
                 return getConfig().getInt("settings.timer.lobby.actions." + i + ".sound-to-players.volume");
             } return 1;
     }
 
     public float getLobbyPitchToPlayers(int i){
-            if (getConfig().contains("settings.timer.lobby.actions." + i + ".sound-to-players")) {
+            if (getConfig().contains("settings.timer.lobby.actions." + i + ".sound-to-players.pitch")) {
                 return getConfig().getInt("settings.timer.lobby.actions." + i + ".sound-to-players.pitch");
             } return 1;
     }
@@ -206,13 +349,13 @@ public class SettingsFile {
     }
 
     public int getFightVolumeToPlayers(int i){
-            if (getConfig().contains("settings.timer.fight.actions." + i + ".sound-to-players")) {
+            if (getConfig().contains("settings.timer.fight.actions." + i + ".sound-to-players.volume")) {
                 return getConfig().getInt("settings.timer.fight.actions." + i + ".sound-to-players.volume");
             } return 1;
     }
 
     public float getFightPitchToPlayers(int i){
-            if (getConfig().contains("settings.timer.fight.actions." + i + ".sound-to-players")) {
+            if (getConfig().contains("settings.timer.fight.actions." + i + ".sound-to-players.pitch")) {
                 return getConfig().getInt("settings.timer.fight.actions." + i + ".sound-to-players.pitch");
             } return 1;
     }
@@ -292,13 +435,13 @@ public class SettingsFile {
     }
 
     public int getEndVolumeToWinner(){
-        if (getConfig().contains("settings.timer.end.actions.sound-to-winner")) {
+        if (getConfig().contains("settings.timer.end.actions.sound-to-winner.volume")) {
             return getConfig().getInt("settings.timer.end.actions.sound-to-winner.volume");
         } return 1;
     }
 
     public float getEndPitchToWinner(){
-        if (getConfig().contains("settings.timer.end.actions.sound-to-winner")) {
+        if (getConfig().contains("settings.timer.end.actions.sound-to-winner.pitch")) {
             return getConfig().getInt("settings.timer.end.actions.sound-to-winner.pitch");
         } return 1;
     }
@@ -311,13 +454,13 @@ public class SettingsFile {
     }
 
     public int getEndVolumeToLoser(){
-        if (getConfig().contains("settings.timer.end.actions.sound-to-loser")) {
+        if (getConfig().contains("settings.timer.end.actions.sound-to-loser.volume")) {
             return getConfig().getInt("settings.timer.end.actions.sound-to-loser.volume");
         } return 1;
     }
 
     public float getEndPitchToLoser(){
-        if (getConfig().contains("settings.timer.end.actions.sound-to-loser")) {
+        if (getConfig().contains("settings.timer.end.actions.sound-to-loser.pitch")) {
             return getConfig().getInt("settings.timer.end.actions.sound-to-loser.pitch");
         } return 1;
     }
@@ -331,13 +474,13 @@ public class SettingsFile {
     }
 
     public int getEndVolumeNoWinner(){
-        if (getConfig().contains("settings.timer.end.actions.sound-no-winner")) {
+        if (getConfig().contains("settings.timer.end.actions.sound-no-winner.volume")) {
             return getConfig().getInt("settings.timer.end.actions.sound-no-winner.volume");
         } return 1;
     }
 
     public float getEndPitchNoWinner(){
-        if (getConfig().contains("settings.timer.end.actions.sound-no-winner")) {
+        if (getConfig().contains("settings.timer.end.actions.sound-no-winner.pitch")) {
             return getConfig().getInt("settings.timer.end.actions.sound-no-winner.pitch");
         } return 1;
     }
