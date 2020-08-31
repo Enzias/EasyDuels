@@ -128,10 +128,12 @@ public class Arena {
         return winner;
     }
     public void setWinner(Player winner){
-        if(winner.getName().equalsIgnoreCase(getFirstPlayer().getName()))
-            setLoser(getSecondPlayer());
-        else
-            setLoser(getFirstPlayer());
+        if(winner != null) {
+            if (winner.getName().equalsIgnoreCase(getFirstPlayer().getName()))
+                setLoser(getSecondPlayer());
+            else
+                setLoser(getFirstPlayer());
+        }
         this.winner = winner;
     }
 
