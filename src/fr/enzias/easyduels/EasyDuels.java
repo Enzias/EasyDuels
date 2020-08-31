@@ -1,7 +1,7 @@
 package fr.enzias.easyduels;
 
 import fr.enzias.easyduels.arena.Arena;
-import fr.enzias.easyduels.commands.EasyDuelsCommand;
+import fr.enzias.easyduels.commands.CommandManager;
 import fr.enzias.easyduels.files.ArenaFile;
 import fr.enzias.easyduels.files.MessageFile;
 import fr.enzias.easyduels.files.SettingsFile;
@@ -10,6 +10,7 @@ import fr.enzias.easyduels.listeners.damager.*;
 import fr.enzias.easyduels.managers.RequestManager;
 import fr.enzias.easyduels.managers.SenderManager;
 import fr.enzias.easyduels.managers.versions.*;
+import fr.enzias.easyduels.queue.QueueManager;
 import fr.enzias.easyduels.utils.UpdateChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,6 +20,7 @@ public class EasyDuels extends JavaPlugin {
 
     Arena arena;
     RequestManager request;
+    QueueManager queue;
     ArenaFile arenaFile;
     MessageFile messageFile;
     SettingsFile settingsFile;
@@ -43,7 +45,7 @@ public class EasyDuels extends JavaPlugin {
         setupObject();
         checkForUpdates(settingsFile.getCheckForUpdates());
         registerEvents();
-        getCommand("easyduels").setExecutor(new EasyDuelsCommand(this));
+        new CommandManager(this).setup();
 
         Bukkit.getServer().getLogger().info("[EasyDuels] Plugin successfully enabled.");
     }
@@ -57,6 +59,7 @@ public class EasyDuels extends JavaPlugin {
         arena = new Arena(this, arenaFile.getFirstLocation(), arenaFile.getSecondLocation(),
                 settingsFile.getLobbyTime(), settingsFile.getFightTime(), settingsFile.getEndTime());
         request = new RequestManager(this);
+        queue = new QueueManager(this);
     }
 
     private void setupConfig(){
@@ -141,7 +144,14 @@ public class EasyDuels extends JavaPlugin {
     public Arena getArena(){
         return arena;
     }
-    public RequestManager getRequest() { return request; }
+    public RequestManager getRequest() {
+        return request;
+    }
+
+    public QueueManager getQueue() {
+        return queue;
+    }
+
     public ArenaFile getArenaFile() {
         return arenaFile;
     }
@@ -151,6 +161,7 @@ public class EasyDuels extends JavaPlugin {
     public SettingsFile getSettingsFile() {
         return settingsFile;
     }
+
 
     public SenderManager getSender() {
         return manager;
