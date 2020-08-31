@@ -5,6 +5,7 @@ import fr.enzias.easyduels.arena.Arena;
 import fr.enzias.easyduels.arena.ArenaStatuts;
 import fr.enzias.easyduels.files.MessageFile;
 import fr.enzias.easyduels.files.SettingsFile;
+import fr.enzias.easyduels.queue.QueueManager;
 import fr.enzias.easyduels.utils.Count;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -16,6 +17,7 @@ public class TimerManager extends BukkitRunnable {
     MessageFile message;
     SettingsFile settings;
     SenderManager sender;
+    QueueManager queue;
     Count count = new Count();
     int lobbyTime;
     int fightTime;
@@ -29,6 +31,7 @@ public class TimerManager extends BukkitRunnable {
         this.fightTime = arena.getPlayingTime();
         this.reloadTime = arena.getReloadingTime();
         this.sender = plugin.getSender();
+        this.queue = plugin.getQueue();
     }
 
     @Override
@@ -206,6 +209,8 @@ public class TimerManager extends BukkitRunnable {
 
                 arena.resetArena();
                 arena.setStatut(ArenaStatuts.IDLE);
+                if(settings.getQueue())
+                    queue.checkQueue();
                 this.cancel();
 
             }
