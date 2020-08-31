@@ -56,6 +56,10 @@ public class MessageFile {
         return getConfig().getString("messages.player.no-permission");
     }
 
+    public String getUnknown(){
+        return getConfig().getString("messages.player.unknown-command");
+    }
+
     public List<String> getHelpMessages(){
         return getConfig().getStringList("messages.player.help-message");
     }
@@ -140,7 +144,28 @@ public class MessageFile {
         return getConfig().getString("messages.player.duel-lost");
     }
 
+    public String getAlreadyInQueue(){
+        return getConfig().getString("messages.player.already-in-queue");
+    }
+
+    public String getNotInQueue(){
+        return getConfig().getString("messages.player.not-in-queue");
+    }
+
+    public String getJoinQueueInDuel(){
+        return getConfig().getString("messages.player.join-queue-in-duel");
+    }
+
+    public String getQueueIsFull(){
+        return getConfig().getString("messages.player.queue-is-full");
+    }
+
+
     //Admin
+
+    public String getAdminUnknown(){
+        return getConfig().getString("messages.admin.unknown-command");
+    }
 
     public List<String> getAdminHelpMessages(){
         return getConfig().getStringList("messages.admin.help-message");
