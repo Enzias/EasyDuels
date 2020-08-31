@@ -46,11 +46,26 @@ public class SenderManager_1_14_R1 implements SenderManager {
 
     public void sendTitle(List<String> messages, int fadeIn, int stay, int fadeOut, Player... players){
 
-        String title1 = syntax.coloredMessage(messages.get(0));
+        String title = syntax.coloredMessage(messages.get(0));
         String subtitle = syntax.coloredMessage(messages.get(1));
 
         for(Player player : players)
-        player.sendTitle(title1, subtitle, fadeIn, stay, fadeOut);
+        player.sendTitle(title, subtitle, fadeIn, stay, fadeOut);
+
+    }
+
+    public void sendTitlePlaceHolders(List<String> messages, int fadeIn, int stay, int fadeOut, Player player, String... replace){
+
+        String title = syntax.coloredMessage(messages.get(0));
+        String subtitle = syntax.coloredMessage(messages.get(1));
+
+        for (int i = 0; i <= (replace.length - 2); i++) {
+            title = title.replaceAll(replace[i], replace[i+1]);
+            subtitle = subtitle.replaceAll(replace[i], replace[i+1]);
+            i++;
+        }
+
+        player.sendTitle(title, subtitle, fadeIn, stay, fadeOut);
 
     }
 
