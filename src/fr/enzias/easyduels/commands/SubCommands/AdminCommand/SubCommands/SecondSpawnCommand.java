@@ -21,11 +21,12 @@ public class SecondSpawnCommand extends SubCommand {
 
     @Override
     public void onCommand(Player player, String[] args) {
-
-        arenaFile.setSecondLocation(player.getLocation());
-        arenaFile.reload();
-        sender.sendMessage(messageFile.getSetSecondSpawn(), player);
-
+        if(args.length == 2) {
+            arenaFile.setSecondLocation(player.getLocation());
+            arenaFile.reload();
+            sender.sendMessage(messageFile.getSetSecondSpawn(), player);
+        }else
+            sender.sendMessage(messageFile.getAdminUnknown(), player);
     }
 
     @Override
