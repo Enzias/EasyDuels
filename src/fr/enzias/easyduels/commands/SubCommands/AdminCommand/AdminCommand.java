@@ -2,10 +2,7 @@ package fr.enzias.easyduels.commands.SubCommands.AdminCommand;
 
 import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.commands.SubCommand;
-import fr.enzias.easyduels.commands.SubCommands.AdminCommand.SubCommands.FirstSpawnCommand;
-import fr.enzias.easyduels.commands.SubCommands.AdminCommand.SubCommands.HelpCommand;
-import fr.enzias.easyduels.commands.SubCommands.AdminCommand.SubCommands.ReloadCommand;
-import fr.enzias.easyduels.commands.SubCommands.AdminCommand.SubCommands.SecondSpawnCommand;
+import fr.enzias.easyduels.commands.SubCommands.AdminCommand.SubCommands.*;
 import fr.enzias.easyduels.files.MessageFile;
 import fr.enzias.easyduels.managers.SenderManager;
 import org.bukkit.entity.Player;
@@ -25,6 +22,7 @@ public class AdminCommand extends SubCommand {
         this.commands.add(new SecondSpawnCommand(plugin));
         this.commands.add(new HelpCommand(plugin));
         this.commands.add(new ReloadCommand(plugin));
+        this.commands.add(new LockCommand(plugin));
     }
 
     @Override
