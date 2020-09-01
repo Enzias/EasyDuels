@@ -24,14 +24,17 @@ public class LockCommand extends SubCommand {
 
     @Override
     public void onCommand(Player player, String[] args) {
-        if(arena.isEnable()) {
-            arena.setEnable(false);
-            queue.deleteAllQueue();
-            sender.sendMessage(messageFile.getArenaLocked(), player);
-        }else {
-            arena.setEnable(true);
-            sender.sendMessage(messageFile.getArenaUnlocked(), player);
-        }
+        if(args.length == 2) {
+            if (arena.isEnable()) {
+                arena.setEnable(false);
+                queue.deleteAllQueue();
+                sender.sendMessage(messageFile.getArenaLocked(), player);
+            } else {
+                arena.setEnable(true);
+                sender.sendMessage(messageFile.getArenaUnlocked(), player);
+            }
+        }else
+            sender.sendMessage(messageFile.getAdminUnknown(), player);
     }
 
     @Override
