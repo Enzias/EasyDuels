@@ -23,6 +23,7 @@ public class AdminCommand extends SubCommand {
         this.commands.add(new HelpCommand(plugin));
         this.commands.add(new ReloadCommand(plugin));
         this.commands.add(new LockCommand(plugin));
+        this.commands.add(new QueueCommand(plugin));
     }
 
     @Override
@@ -30,13 +31,14 @@ public class AdminCommand extends SubCommand {
 
         if (player.hasPermission("easyduels.admin")) {
 
-            if(args.length == 2) {
+            if(args.length >= 2) {
                 for (int i = 0; i < getSubCommands().size(); i++)
                     if (args[1].equalsIgnoreCase(getSubCommands().get(i).getName())) {
                         getSubCommands().get(i).onCommand(player, args);
                         return;
                     }
             }
+
             sender.sendMessage(messageFile.getAdminUnknown(), player);
 
         } else {
