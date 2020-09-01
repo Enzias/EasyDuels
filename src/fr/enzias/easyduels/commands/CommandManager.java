@@ -2,6 +2,7 @@ package fr.enzias.easyduels.commands;
 
 import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.arena.Arena;
+import fr.enzias.easyduels.arena.ArenaStatuts;
 import fr.enzias.easyduels.commands.SubCommands.AcceptCommand.AcceptCommand;
 import fr.enzias.easyduels.commands.SubCommands.AdminCommand.AdminCommand;
 import fr.enzias.easyduels.commands.SubCommands.DenyCommand.DenyCommand;
@@ -67,13 +68,23 @@ public class CommandManager implements CommandExecutor {
 
                         if (!request.hasRequest(player)) {
 
-                            Player target = Bukkit.getPlayer(args[0]);
-                            request.addRequest(player, target);
+                            if(arena.isEnable()) {
 
-                            sender.sendMessage(messageFile.getDuelRequest().replaceAll("%player%", player.getName()), target);
-                            sender.sendHover(messageFile.getAcceptButton(), messageFile.getDenyButton(),
-                                    messageFile.getAcceptHover(), messageFile.getDenyHover(), player.getName(), target);
-                            sender.sendMessage(messageFile.getRequestSent().replaceAll("%player%", target.getName()), player);
+                                if (!arena.isStatut(ArenaStatuts.IDLE) && arena.getPlayers().contains(player)) {
+                                    sender.sendMessage(messageFile.getRequestInDuel(), player);
+                                    return true;
+                                }
+
+                                Player target = Bukkit.getPlayer(args[0]);
+                                request.addRequest(player, target);
+
+                                sender.sendMessage(messageFile.getDuelRequest().replaceAll("%player%", player.getName()), target);
+                                sender.sendHover(messageFile.getAcceptButton(), messageFile.getDenyButton(),
+                                        messageFile.getAcceptHover(), messageFile.getDenyHover(), player.getName(), target);
+                                sender.sendMessage(messageFile.getRequestSent().replaceAll("%player%", target.getName()), player);
+                            } else {
+                                sender.sendMessage(messageFile.getArenaIsLocked(), player);
+                            }
                         } else {
                             sender.sendMessage(messageFile.getAlreadyARequest(), player);
                         }
