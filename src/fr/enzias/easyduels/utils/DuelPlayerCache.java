@@ -18,6 +18,9 @@ public class DuelPlayerCache {
     }
 
     public boolean isOpponent(Player player){
-        return player.getName().equalsIgnoreCase(opponent.getName());
+        if(hasOpponent())
+            return player.getName().equalsIgnoreCase(opponent.getName());
+        else
+            return false;
     }
 }
