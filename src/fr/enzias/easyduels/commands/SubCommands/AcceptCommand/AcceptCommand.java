@@ -41,29 +41,38 @@ public class AcceptCommand extends SubCommand {
 
                 if (request.hasRequest(target) && request.hasRequestFrom(target, player)) {
 
-                    sender.sendMessage(messageFile.getRequestAccept().replaceAll("%player%", player.getName()), target);
-                    sender.sendMessage(messageFile.getYouRequestAccept().replaceAll("%player%", target.getName()), player);
-                    request.deleteRequest(target);
+                    if(arena.isEnable()) {
 
-                    if(settingsFile.getQueue()){
-                        if(queue.isNotFull()){
-                            queue.addQueueLast(player, target);
-                            queue.checkQueue();
-                        } else
-                            sender.sendMessage(messageFile.getQueueIsFull(), player, target);
-                    } else {
-                        if (!arena.isStatut(ArenaStatuts.IDLE))
-                            sender.sendMessage(messageFile.getArenaNotEmpty(), player, target);
-                        else {
-
-                            arena.addToArena(target, player);
-                            arena.setLastLocation(target, player);
-                            arena.teleportToLocation(target, player, settingsFile.getSyncTimer());
-                            arena.startMatch();
-
+                        if (!arena.isStatut(ArenaStatuts.IDLE) && arena.getPlayers().contains(player)) {
+                            sender.sendMessage(messageFile.getAcceptRequestInDuel(), player);
+                            return;
                         }
-                    }
 
+                        sender.sendMessage(messageFile.getRequestAccept().replaceAll("%player%", player.getName()), target);
+                        sender.sendMessage(messageFile.getYouRequestAccept().replaceAll("%player%", target.getName()), player);
+                        request.deleteRequest(target);
+
+                        if (settingsFile.getQueue()) {
+                            if (queue.isNotFull()) {
+                                queue.addQueueLast(player, target);
+                                queue.checkQueue();
+                            } else
+                                sender.sendMessage(messageFile.getQueueIsFull(), player, target);
+                        } else {
+                            if (!arena.isStatut(ArenaStatuts.IDLE))
+                                sender.sendMessage(messageFile.getArenaNotEmpty(), player, target);
+                            else {
+
+                                arena.addToArena(target, player);
+                                arena.setLastLocation(target, player);
+                                arena.teleportToLocation(target, player, settingsFile.getSyncTimer());
+                                arena.startMatch();
+
+                            }
+                        }
+                    } else {
+                        sender.sendMessage(messageFile.getArenaIsLocked(), player);
+                    }
                 } else {
                     sender.sendMessage(messageFile.getNoRequest().replaceAll("%player%", target.getName()), player);
                 }
