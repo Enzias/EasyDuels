@@ -34,10 +34,10 @@ public class QueueManager {
     }
 
     public void checkQueue() {
-        if(arena.isStatut(ArenaStatuts.IDLE) && !queue.isEmpty() && queue.getQueueLength() >= 2){
+        if(arena.isStatut(ArenaStatuts.IDLE) && !queue.isEmpty()){
 
-            Player target;
-            Player player;
+            Player target = null;
+            Player player = null;
 
             if(queue.getCache(queue.getFirst()).hasOpponent()){
 
@@ -45,7 +45,7 @@ public class QueueManager {
                 player = queue.getFirst();
 
                 this.deleteForceQueue(player);
-            } else {
+            } else if(queue.getQueueLength() >= 2){
                 if(queue.getCache(queue.get(1)).hasOpponent()){
 
                     target = queue.getCache(queue.get(1)).getOpponent();
@@ -60,10 +60,12 @@ public class QueueManager {
                 }
 
             }
-            arena.addToArena(target, player);
-            arena.setLastLocation(target, player);
-            arena.teleportToLocation(target, player, settings.getSyncTimer());
-            arena.startMatch();
+            if(target != null && player != null) {
+                arena.addToArena(target, player);
+                arena.setLastLocation(target, player);
+                arena.teleportToLocation(target, player, settings.getSyncTimer());
+                arena.startMatch();
+            }
         }
 
     }
@@ -99,18 +101,16 @@ public class QueueManager {
 
     public boolean isAnOpponent(Player opponent){
         for(Player player : queue.getQueue()) {
-            if(queue.isInQueue(player))
-                if (queue.getCache(player).isOpponent(opponent))
-                    return true;
+            if (queue.getCache(player).isOpponent(opponent))
+                return true;
         }
         return false;
     }
 
     public Player getOpponentOf(Player opponent){
         for(Player player : queue.getQueue()) {
-            if(queue.isInQueue(player))
-                if (queue.getCache(player).isOpponent(opponent))
-                    return player;
+            if (queue.getCache(player).isOpponent(opponent))
+                return player;
         } return null;
     }
 
