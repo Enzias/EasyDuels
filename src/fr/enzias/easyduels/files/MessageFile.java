@@ -156,10 +156,21 @@ public class MessageFile {
         return getConfig().getString("messages.player.join-queue-in-duel");
     }
 
+    public String getRequestInDuel(){
+        return getConfig().getString("messages.player.request-duel-in-duel");
+    }
+
+    public String getAcceptRequestInDuel(){
+        return getConfig().getString("messages.player.accept-duel-in-duel");
+    }
+
     public String getQueueIsFull(){
         return getConfig().getString("messages.player.queue-is-full");
     }
 
+    public String getArenaIsLocked(){
+        return getConfig().getString("messages.player.arena-is-locked");
+    }
 
     //Admin
 
@@ -169,6 +180,14 @@ public class MessageFile {
 
     public List<String> getAdminHelpMessages(){
         return getConfig().getStringList("messages.admin.help-message");
+    }
+
+    public String getArenaLocked(){
+        return getConfig().getString("messages.admin.arena-locked");
+    }
+
+    public String getArenaUnlocked(){
+        return getConfig().getString("messages.admin.arena-unlocked");
     }
 
     public String getSetFirstSpawn(){
