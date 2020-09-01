@@ -18,7 +18,10 @@ public class HelpCommand extends SubCommand {
 
     @Override
     public void onCommand(Player player, String[] args) {
-        sender.sendMessage(messageFile.getAdminHelpMessages(), player);
+        if(args.length == 2) {
+            sender.sendMessage(messageFile.getAdminHelpMessages(), player);
+        } else
+            sender.sendMessage(messageFile.getAdminUnknown(), player);
     }
 
     @Override
