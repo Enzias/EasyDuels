@@ -38,19 +38,20 @@ public class CommandEvent implements Listener {
 
             if (player.getLocation().getWorld().getName().equalsIgnoreCase(arenaFile.getWorldName())
                     && arena.getPlayers().contains(player)) {
-                if (settings.getAllCommands())
+                if (settings.getAllCommands()) {
                     for (String command : settings.getWhitelistedCommands())
                         if (!event.getMessage().toLowerCase().startsWith("/" + command)) {
                             event.setCancelled(true);
                             sender.sendMessage(message.getNoCommand(), player);
                         }
 
-            } else
-                for (String command : settings.getBlacklistedCommands())
-                    if (event.getMessage().toLowerCase().startsWith("/" + command)) {
-                        event.setCancelled(true);
-                        sender.sendMessage(message.getNoCommand(), player);
-                    }
+                } else
+                    for (String command : settings.getBlacklistedCommands())
+                        if (event.getMessage().toLowerCase().startsWith("/" + command)) {
+                            event.setCancelled(true);
+                            sender.sendMessage(message.getNoCommand(), player);
+                        }
+            }
         }
     }
 }
