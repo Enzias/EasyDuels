@@ -27,11 +27,14 @@ public class ReloadCommand extends SubCommand {
 
     @Override
     public void onCommand(Player player, String[] args) {
-        sender.sendMessage(messageFile.getReloaded(), player);
-        arenaFile.reload();
-        messageFile.reload();
-        settingsFile.reload();
-        arena.resetArena();
+        if (args.length == 2) {
+            sender.sendMessage(messageFile.getReloaded(), player);
+            arenaFile.reload();
+            messageFile.reload();
+            settingsFile.reload();
+            arena.resetArena();
+        }else
+            sender.sendMessage(messageFile.getAdminUnknown(), player);
     }
 
     @Override
