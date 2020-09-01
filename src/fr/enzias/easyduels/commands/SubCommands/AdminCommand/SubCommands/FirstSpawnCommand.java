@@ -22,10 +22,13 @@ public class FirstSpawnCommand extends SubCommand {
     @Override
     public void onCommand(Player player, String[] args) {
 
-        arenaFile.setFirstLocation(player.getLocation());
-        arenaFile.reload();
-        sender.sendMessage(messageFile.getSetFirstSpawn(), player);
+        if(args.length == 2) {
 
+            arenaFile.setFirstLocation(player.getLocation());
+            arenaFile.reload();
+            sender.sendMessage(messageFile.getSetFirstSpawn(), player);
+        } else
+            sender.sendMessage(messageFile.getAdminUnknown(), player);
     }
 
     @Override
