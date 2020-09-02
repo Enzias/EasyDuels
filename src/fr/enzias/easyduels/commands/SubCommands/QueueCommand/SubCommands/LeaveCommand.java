@@ -27,15 +27,17 @@ public class LeaveCommand extends SubCommand {
 
     @Override
     public void onCommand(Player player, String[] args) {
-        if(queue.isInQueue(player)){
-            queue.deleteQueue(player);
-        }
-        else if(queue.isAnOpponent(player)){
-            if(queue.isInQueue(queue.getOpponentOf(player)))
-                queue.deleteQueue(queue.getOpponentOf(player));
-        }
-        else
-            sender.sendMessage(messageFile.getNotInQueue(), player);
+
+        if (player.hasPermission("easyduels.queue")) {
+            if (queue.isInQueue(player)) {
+                queue.deleteQueue(player);
+            } else if (queue.isAnOpponent(player)) {
+                if (queue.isInQueue(queue.getOpponentOf(player)))
+                    queue.deleteQueue(queue.getOpponentOf(player));
+            } else
+                sender.sendMessage(messageFile.getNotInQueue(), player);
+        } else
+            sender.sendMessage(messageFile.getNoPermission(), player);
     }
 
     @Override
