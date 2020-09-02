@@ -29,23 +29,26 @@ public class JoinCommand extends SubCommand {
     @Override
     public void onCommand(Player player, String[] args) {
 
-        if (arena.isEnable()) {
-            if (!queue.isInQueue(player)) {
-                if (!arena.isStatut(ArenaStatuts.IDLE) && arena.getPlayers().contains(player)) {
-                    sender.sendMessage(messageFile.getJoinQueueInDuel(), player);
-                    return;
-                }
-                if (queue.isNotFull()) {
-                    queue.addQueueLast(player, null);
-                    queue.checkQueue();
-                } else
-                    sender.sendMessage(messageFile.getQueueIsFull(), player);
+        if(player.hasPermission("easyduels.queue")) {
+            if (arena.isEnable()) {
+                if (!queue.isInQueue(player)) {
+                    if (!arena.isStatut(ArenaStatuts.IDLE) && arena.getPlayers().contains(player)) {
+                        sender.sendMessage(messageFile.getJoinQueueInDuel(), player);
+                        return;
+                    }
+                    if (queue.isNotFull()) {
+                        queue.addQueueLast(player, null);
+                        queue.checkQueue();
+                    } else
+                        sender.sendMessage(messageFile.getQueueIsFull(), player);
 
-            } else
-                sender.sendMessage(messageFile.getAlreadyInQueue(), player);
-        } else {
-            sender.sendMessage(messageFile.getArenaIsLocked(), player);
-        }
+                } else
+                    sender.sendMessage(messageFile.getAlreadyInQueue(), player);
+            } else {
+                sender.sendMessage(messageFile.getArenaIsLocked(), player);
+            }
+        } else
+            sender.sendMessage(messageFile.getNoPermission(), player);
     }
 
     @Override
