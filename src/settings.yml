@@ -10,7 +10,7 @@ settings:
       - 'ban'
   queue:
     enable: true
-    max-players: 20
+    max-players: 15
     queue-join:
       message-to-player: '&f[&6&lEasy&c&lDuels&f] &aYou joined the queue. Your position: &2%player_position%&a!'
       title-to-player:
