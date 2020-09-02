@@ -8,6 +8,39 @@ settings:
     whitelisted-commands:
       - 'tell'
       - 'ban'
+  queue:
+    enable: true
+    max-players: 20
+    queue-join:
+      message-to-player: '&f[&6&lEasy&c&lDuels&f] &aYou joined the queue. Your position: &2%player_position%&a!'
+      title-to-player:
+        - '&aYou joined the queue!'
+        - '&2(&a%player_position%&2/&a%queue_size%&2)'
+      sound-to-player:
+        sound-id: 'ENTITY_VILLAGER_YES'
+        volume: 1
+        pitch: 1
+      actionbar-to-player: '&aSuccessfully joined the queue. %queue_size% players in the queue.'
+    queue-leave:
+      message-to-player: '&f[&6&lEasy&c&lDuels&f] &cYou left the queue. &6%queue_size% players &cin the queue now.'
+      title-to-player:
+        - '&cYou left the queue!'
+        - '&6%queue_size% players in the queue now.'
+      sound-to-player:
+        sound-id: 'ENTITY_VILLAGER_NO'
+        volume: 1
+        pitch: 1
+      actionbar-to-player: '&cSuccessfully left the queue.'
+    queue-update:
+      message-to-player: '&f[&6&lEasy&c&lDuels&f] &aYour position in the queue: &2%player_position%&a/&2%queue_size%'
+      title-to-player:
+        - '&aYour position in the queue:'
+        - '&a%player_position%&2/&a%queue_size%'
+      sound-to-players:
+        sound-id: 'ENTITY_VILLAGER_YES'
+        volume: 1
+        pitch: 1
+      actionbar-to-player: '&aYour position in the queue: &2%player_position%&a/&2%queue_size%'
   timer:
     sync-timer: true
     request:
@@ -174,7 +207,8 @@ settings:
         actionbar-to-winner: '&aYou won the duel!'
         actionbar-to-loser: '&cYou lost the duel!'
         actionbar-no-winner: '&6There is no winner!'
-        rewards-command:
+        reward-commands:
           - 'give %winner% diamond_block 1'
           - 'give %loser% diamond 1'
         broadcast: '&f[&6&lEasy&c&lDuels&f] &c%winner% &6won the duel against &c%loser%&6!'
+        broadcast-no-winner: '&f[&6&lEasy&c&lDuels&f] &6No one won in the duel between &c%player1% and &c%player2%&6!'
