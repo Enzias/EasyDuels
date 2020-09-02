@@ -40,6 +40,7 @@ public class QueueCommand extends SubCommand {
                     }
                     if (queue.isNotFull()) {
                         queue.addQueueLast(target, null);
+                        sender.sendMessage(messageFile.getForcedQueue().replaceAll("%player%", target.getName()), player);
                         queue.checkQueue();
                     } else
                         sender.sendMessage(messageFile.getQueueIsFull(), player);
