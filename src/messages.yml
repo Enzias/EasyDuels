@@ -1,6 +1,7 @@
 messages:
   player:
     no-permission: '&f[&6&lEasy&c&lDuels&f] &cYou don''t have permission to do that!'
+    unknown-command: '&f[&6&lEasy&c&lDuels&f] &cUnknown command. Please use &6/easyduels help&c!'
     help-message:
       - '&6-&c-&6-&c-&6-&c-&6-&c-&6- &6&lEasy&c&lDuels &6-&c-&6-&c-&6-&c-&6-&c-&6-'
       - ''
@@ -33,7 +34,15 @@ messages:
     no-winner: '&f[&6&lEasy&c&lDuels&f] &6No one won the duel!'
     duel-win: '&f[&6&lEasy&c&lDuels&f] &aYou won the duel!'
     duel-lost: '&f[&6&lEasy&c&lDuels&f] &cYou lost the duel!'
+    already-in-queue: '&f[&6&lEasy&c&lDuels&f] &cYou are already in the queue!'
+    not-in-queue: '&f[&6&lEasy&c&lDuels&f] &cYou are not in the queue!'
+    join-queue-in-duel: '&f[&6&lEasy&c&lDuels&f] &cYou can''t join the queue while you are in a duel!'
+    request-duel-in-duel: '&f[&6&lEasy&c&lDuels&f] &cYou can''t send a request while you are in a duel!'
+    accept-duel-in-duel: '&f[&6&lEasy&c&lDuels&f] &cYou can''t accept a request while you are in a duel!'
+    queue-is-full: '&f[&6&lEasy&c&lDuels&f] &cThe queue is currently full!'
+    arena-is-locked: '&f[&6&lEasy&c&lDuels&f] &cThe arena is locked!'
   admin:
+    unknown-command: '&f[&6&lEasy&c&lDuels&f] &cUnknown command. Please use &6/easyduels admin help&c!'
     help-message:
       - '&6-&c-&6-&c-&6-&c-&6-&c-&6- &6&lEasy&c&lDuels &6-&c-&6-&c-&6-&c-&6-&c-&6-'
       - ''
@@ -43,6 +52,14 @@ messages:
       - '&6⬥ &c/&6easyduels &cadmin reload &6- &6Reload the plugin.'
       - ''
       - '&6-&c-&6-&c-&6-&c-&6-&c-&6- &6&lEasy&c&lDuels &6-&c-&6-&c-&6-&c-&6-&c-&6-'
+    arena-locked: '&f[&6&lEasy&c&lDuels&f] &aThe arena has been locked.'
+    arena-unlocked: '&f[&6&lEasy&c&lDuels&f] &aThe arena has been unlocked.'
+    join-in-duel: '&f[&6&lEasy&c&lDuels&f] &cThe player %player% is in a duel!'
+    duel-himself: '&f[&6&lEasy&c&lDuels&f] &cA player can''t fight himself in a duel!'
+    already-in-queue: '&f[&6&lEasy&c&lDuels&f] &c%player% is already in the queue!'
+    forced-duel-start: '&f[&6&lEasy&c&lDuels&f] &aA forced duel started between %player1% and %player2%.'
+    forced-duel-queue: '&f[&6&lEasy&c&lDuels&f] &a%You forced &2%player1% &aand &2%player2% &ato join the queue.'
+    forced-queue: '&f[&6&lEasy&c&lDuels&f] &aYou forced &2%player% &ato join the queue.'
     set-spawn-1: '&f[&6&lEasy&c&lDuels&f] &aThe first spawn has been set to your location.'
     set-spawn-2: '&f[&6&lEasy&c&lDuels&f] &aThe second spawn has been set to your location.'
     reloaded: '&f[&6&lEasy&c&lDuels&f] &aSuccessfully reloaded.'
