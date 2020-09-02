@@ -52,43 +52,55 @@ public class AdminCommand extends SubCommand {
             }
             if (args.length == 3) {
                 if (Bukkit.getPlayer(args[1]) == null) {
-                    sender.sendMessage(messageFile.getOfflinePlayer().replaceAll("%player%", args[1]));
+                    sender.sendMessage(messageFile.getOfflinePlayer().replaceAll("%player%", args[1]), player);
                     return;
                 }
                 if (Bukkit.getPlayer(args[2]) == null) {
-                    sender.sendMessage(messageFile.getOfflinePlayer().replaceAll("%player%", args[2]));
+                    sender.sendMessage(messageFile.getOfflinePlayer().replaceAll("%player%", args[2]), player);
                     return;
                 }
                 Player player1 = Bukkit.getPlayer(args[1]);
                 Player player2 = Bukkit.getPlayer(args[2]);
 
-                if (!arena.isStatut(ArenaStatuts.IDLE) && arena.getPlayers().contains(player1)) {
-                    sender.sendMessage(messageFile.getAdminJoinQueueInDuel().replaceAll("%player%", player1.getName()), player);
+                if(player1.getName().equalsIgnoreCase(player2.getName())){
+                    sender.sendMessage(messageFile.getDuelHimSelf(), player);
                     return;
                 }
-                if (!arena.isStatut(ArenaStatuts.IDLE) && arena.getPlayers().contains(player2)) {
-                    sender.sendMessage(messageFile.getAdminJoinQueueInDuel().replaceAll("%player%", player2.getName()), player);
-                    return;
-                }
-
-                if (settingsFile.getQueue()) {
-                    if (queue.isNotFull()) {
-                        queue.addQueueLast(player1, player2);
-                        queue.checkQueue();
-                    } else
-                        sender.sendMessage(messageFile.getQueueIsFull(), player);
-                } else {
-                    if (!arena.isStatut(ArenaStatuts.IDLE))
-                        sender.sendMessage(messageFile.getArenaNotEmpty(), player);
-                    else {
-
-                        arena.addToArena(player1, player2);
-                        arena.setLastLocation(player1, player2);
-                        arena.teleportToLocation(player1, player2, settingsFile.getSyncTimer());
-                        arena.startMatch();
-
+                if (!queue.isInQueue(player1)) {
+                    if (!arena.isStatut(ArenaStatuts.IDLE) && arena.getPlayers().contains(player1)) {
+                        sender.sendMessage(messageFile.getAdminJoinQueueInDuel().replaceAll("%player%", player1.getName()), player);
+                        return;
                     }
-                }
+                    if (!arena.isStatut(ArenaStatuts.IDLE) && arena.getPlayers().contains(player2)) {
+                        sender.sendMessage(messageFile.getAdminJoinQueueInDuel().replaceAll("%player%", player2.getName()), player);
+                        return;
+                    }
+
+                    if (settingsFile.getQueue()) {
+                        if (queue.isNotFull()) {
+                            queue.addQueueLast(player1, player2);
+                            sender.sendMessage(messageFile.getForcedDuelQueue()
+                                    .replaceAll("%player1%", player1.getName()).replaceAll("%player2%", player2.getName()), player);
+                            queue.checkQueue();
+                        } else
+                            sender.sendMessage(messageFile.getQueueIsFull(), player);
+                    } else {
+                        if (!arena.isStatut(ArenaStatuts.IDLE))
+                            sender.sendMessage(messageFile.getArenaNotEmpty(), player);
+                        else {
+
+                            sender.sendMessage(messageFile.getForcedDuelStart()
+                                    .replaceAll("%player1%", player1.getName()).replaceAll("%player2%", player2.getName()), player);
+                            arena.addToArena(player1, player2);
+                            arena.setLastLocation(player1, player2);
+                            arena.teleportToLocation(player1, player2, settingsFile.getSyncTimer());
+                            arena.startMatch();
+
+                        }
+                    }
+                } else
+                    sender.sendMessage(messageFile.getAdminAlreadyInQueue()
+                            .replaceAll("%player%", player1.getName()), player);
 
             } else {
                 sender.sendMessage(messageFile.getAdminUnknown(), player);
