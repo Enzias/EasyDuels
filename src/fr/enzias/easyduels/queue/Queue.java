@@ -61,6 +61,10 @@ public class Queue {
         return cache.get(player);
     }
 
+    public void deleteCache(Player player){
+        cache.remove(player);
+    }
+
     public LinkedList<Player> getQueue() {
         return queue;
     }
