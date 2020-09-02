@@ -90,8 +90,6 @@ public class QueueManager {
     }
 
     public void deleteAllQueue(){
-        for(Player player : queue.getQueue())
-            sendQueueLeave(player);
         queue.clear();
     }
 
