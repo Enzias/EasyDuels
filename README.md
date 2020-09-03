@@ -11,6 +11,8 @@ EasyDuels is a plugin for **spigot servers** (1.12 - 1.16.2), offering a **new 1
 * A lot of configurable settings.
 * Fully customizable timer & countdown (never seen before)!
 
+More features [here](https://github.com/Enzias/EasyDuels/wiki/Features).
+
 If you need support, check the wiki. Most questions you may have should be answered here.
 For any issue or suggestion click [here](https://github.com/Enzias/EasyDuels/issues).
 
