@@ -15,6 +15,7 @@ More features [here](https://github.com/Enzias/EasyDuels/wiki/Features).
 
 If you need support, check the wiki. Most questions you may have should be answered here.
 For any issue or suggestion click [here](https://github.com/Enzias/EasyDuels/issues).
+Leave a review [here](https://www.spigotmc.org/resources/%E2%9A%94%EF%B8%8Feasyduels%E2%9A%94%EF%B8%8F-a-complete-1v1-system-1-12-x-1-16-x.83031/) to support me!
 
 ## Links
 * [Download](https://www.spigotmc.org/resources/%E2%9A%94%EF%B8%8Feasyduels%E2%9A%94%EF%B8%8F-a-complete-1v1-system-1-12-x-1-16-x.83031/) (Spigot) **Now available** 
