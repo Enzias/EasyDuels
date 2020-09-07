@@ -12,6 +12,7 @@ import fr.enzias.easyduels.managers.SenderManager;
 import fr.enzias.easyduels.managers.versions.*;
 import fr.enzias.easyduels.queue.QueueManager;
 import fr.enzias.easyduels.utils.UpdateChecker;
+import fr.enzias.easyduels.utils.VaultHook;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -25,8 +26,8 @@ public class EasyDuels extends JavaPlugin {
     MessageFile messageFile;
     SettingsFile settingsFile;
     SenderManager manager;
+    VaultHook vaultHook;
     public boolean upToDate;
-
 
     @Override
     public void onEnable() {
@@ -40,9 +41,11 @@ public class EasyDuels extends JavaPlugin {
         if(!getDataFolder().exists())
             getDataFolder().mkdir();
 
-
         setupConfig();
         setupObject();
+        if(!vaultHook.setupEconomy()){
+            Bukkit.getLogger().warning("[EasyDuels] Money bet is disabled.");
+        }
         checkForUpdates(settingsFile.getCheckForUpdates());
         registerEvents();
         new CommandManager(this).setup();
@@ -58,6 +61,7 @@ public class EasyDuels extends JavaPlugin {
     private void setupObject(){
         arena = new Arena(this, arenaFile.getFirstLocation(), arenaFile.getSecondLocation(),
                 settingsFile.getLobbyTime(), settingsFile.getFightTime(), settingsFile.getEndTime());
+        vaultHook = new VaultHook(this);
         request = new RequestManager(this);
         queue = new QueueManager(this);
     }
@@ -144,6 +148,7 @@ public class EasyDuels extends JavaPlugin {
     public Arena getArena(){
         return arena;
     }
+
     public RequestManager getRequest() {
         return request;
     }
@@ -155,15 +160,20 @@ public class EasyDuels extends JavaPlugin {
     public ArenaFile getArenaFile() {
         return arenaFile;
     }
+
     public MessageFile getMessageFile() {
         return messageFile;
     }
+
     public SettingsFile getSettingsFile() {
         return settingsFile;
     }
 
-
     public SenderManager getSender() {
         return manager;
+    }
+
+    public VaultHook getVaultHook(){
+        return vaultHook;
     }
 }
