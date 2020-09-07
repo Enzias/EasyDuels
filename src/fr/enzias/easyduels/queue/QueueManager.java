@@ -113,110 +113,117 @@ public class QueueManager {
     }
 
     public void sendQueueJoin(Player player) {
-        if (queue.getCache(player).hasOpponent()) {
-            Player opponent = queue.getCache(player).getOpponent();
-            if (settings.getQueueJoinMessageToPlayer() != null)
-                sender.sendMessage(settings.getQueueJoinMessageToPlayer()
-                        .replaceAll("%player_position%", queue.getPosition(player) + "")
-                        .replaceAll("%queue_size%", queue.getQueueLength() + ""), player, opponent);
-            if (settings.getQueueJoinTitleToPlayer() != null) {
-                sender.sendTitlePlaceHolders(settings.getQueueJoinTitleToPlayer(), 18, 100, 1, player,
-                        "%player_position%", queue.getPosition(player) + "", "%queue_size%", queue.getQueueLength() + "");
-                sender.sendTitlePlaceHolders(settings.getQueueJoinTitleToPlayer(), 18, 100, 1, opponent,
-                        "%player_position%", queue.getPosition(player) + "", "%queue_size%", queue.getQueueLength() + "");
+        if(settings.checkQueueJoin()) {
+            if (queue.getCache(player).hasOpponent()) {
+                Player opponent = queue.getCache(player).getOpponent();
+                if (settings.getQueueJoinMessageToPlayer() != null)
+                    sender.sendMessage(settings.getQueueJoinMessageToPlayer()
+                            .replaceAll("%player_position%", queue.getPosition(player) + "")
+                            .replaceAll("%queue_size%", queue.getQueueLength() + ""), player, opponent);
+                if (settings.getQueueJoinTitleToPlayer() != null) {
+                    sender.sendTitlePlaceHolders(settings.getQueueJoinTitleToPlayer(), 18, 100, 1, player,
+                            "%player_position%", queue.getPosition(player) + "", "%queue_size%", queue.getQueueLength() + "");
+                    sender.sendTitlePlaceHolders(settings.getQueueJoinTitleToPlayer(), 18, 100, 1, opponent,
+                            "%player_position%", queue.getPosition(player) + "", "%queue_size%", queue.getQueueLength() + "");
+                }
+                if (settings.getQueueJoinSoundToPlayer() != null)
+                    sender.sendSound(settings.getQueueJoinSoundToPlayer(), settings.getQueueJoinVolumeToPlayer(), settings.getQueueJoinPitchToPlayer(), player, opponent);
+                if (settings.getQueueJoinActionbarToPlayer() != null)
+                    sender.sendActionbar(settings.getQueueJoinActionbarToPlayer()
+                                    .replaceAll("%player_position%", queue.getPosition(player) + "")
+                                    .replaceAll("%queue_size%", queue.getQueueLength() + "")
+                            , 18, 100, 18, player, opponent);
+            } else {
+                if (settings.getQueueJoinMessageToPlayer() != null)
+                    sender.sendMessage(settings.getQueueJoinMessageToPlayer()
+                            .replaceAll("%player_position%", queue.getPosition(player) + "")
+                            .replaceAll("%queue_size%", queue.getQueueLength() + ""), player);
+                if (settings.getQueueJoinTitleToPlayer() != null)
+                    sender.sendTitlePlaceHolders(settings.getQueueJoinTitleToPlayer(), 18, 100, 1, player,
+                            "%player_position%", queue.getPosition(player) + "", "%queue_size%", queue.getQueueLength() + "");
+                if (settings.getQueueJoinSoundToPlayer() != null)
+                    sender.sendSound(settings.getQueueJoinSoundToPlayer(), settings.getQueueJoinVolumeToPlayer(), settings.getQueueJoinPitchToPlayer(), player);
+                if (settings.getQueueJoinActionbarToPlayer() != null)
+                    sender.sendActionbar(settings.getQueueJoinActionbarToPlayer()
+                                    .replaceAll("%player_position%", queue.getPosition(player) + "")
+                                    .replaceAll("%queue_size%", queue.getQueueLength() + "")
+                            , 18, 100, 18, player);
             }
-            if (settings.getQueueJoinSoundToPlayer() != null)
-                sender.sendSound(settings.getQueueJoinSoundToPlayer(), settings.getQueueJoinVolumeToPlayer(), settings.getQueueJoinPitchToPlayer(), player, opponent);
-            if (settings.getQueueJoinActionbarToPlayer() != null)
-                sender.sendActionbar(settings.getQueueJoinActionbarToPlayer()
-                                .replaceAll("%player_position%", queue.getPosition(player) + "")
-                                .replaceAll("%queue_size%", queue.getQueueLength() + "")
-                        , 18, 100, 18, player, opponent);
-        } else {
-            if (settings.getQueueJoinMessageToPlayer() != null)
-                sender.sendMessage(settings.getQueueJoinMessageToPlayer()
-                        .replaceAll("%player_position%", queue.getPosition(player) + "")
-                        .replaceAll("%queue_size%", queue.getQueueLength() + ""), player);
-            if (settings.getQueueJoinTitleToPlayer() != null)
-                sender.sendTitlePlaceHolders(settings.getQueueJoinTitleToPlayer(), 18, 100, 1, player,
-                        "%player_position%", queue.getPosition(player) + "", "%queue_size%", queue.getQueueLength() + "");
-            if (settings.getQueueJoinSoundToPlayer() != null)
-                sender.sendSound(settings.getQueueJoinSoundToPlayer(), settings.getQueueJoinVolumeToPlayer(), settings.getQueueJoinPitchToPlayer(), player);
-            if (settings.getQueueJoinActionbarToPlayer() != null)
-                sender.sendActionbar(settings.getQueueJoinActionbarToPlayer()
-                                .replaceAll("%player_position%", queue.getPosition(player) + "")
-                                .replaceAll("%queue_size%", queue.getQueueLength() + "")
-                        , 18, 100, 18, player);
         }
     }
 
     public void sendQueueLeave(Player player) {
-        if (queue.getCache(player).hasOpponent() && queue.getCache(player).getOpponent().isOnline()) {
-            Player opponent = queue.getCache(player).getOpponent();
-            if (settings.getQueueLeaveMessageToPlayer() != null)
-                sender.sendMessage(settings.getQueueLeaveMessageToPlayer()
-                        .replaceAll("%queue_size%", queue.getQueueLength() + ""), opponent);
-            if (settings.getQueueLeaveTitleToPlayer() != null) {
-                sender.sendTitlePlaceHolders(settings.getQueueLeaveTitleToPlayer(), 18, 100, 1, opponent,
-                        "%queue_size%", queue.getQueueLength() + "");
+        if(settings.checkQueueLeave()) {
+            if (queue.getCache(player).hasOpponent() && queue.getCache(player).getOpponent().isOnline()) {
+                Player opponent = queue.getCache(player).getOpponent();
+                if (settings.getQueueLeaveMessageToPlayer() != null)
+                    sender.sendMessage(settings.getQueueLeaveMessageToPlayer()
+                            .replaceAll("%queue_size%", queue.getQueueLength() + ""), opponent);
+                if (settings.getQueueLeaveTitleToPlayer() != null) {
+                    sender.sendTitlePlaceHolders(settings.getQueueLeaveTitleToPlayer(), 18, 100, 1, opponent,
+                            "%queue_size%", queue.getQueueLength() + "");
+                }
+                if (settings.getQueueLeaveSoundToPlayer() != null)
+                    sender.sendSound(settings.getQueueLeaveSoundToPlayer(), settings.getQueueLeaveVolumeToPlayer(), settings.getQueueLeavePitchToPlayer(), opponent);
+                if (settings.getQueueLeaveActionbarToPlayer() != null)
+                    sender.sendActionbar(settings.getQueueLeaveMessageToPlayer()
+                                    .replaceAll("%queue_size%", queue.getQueueLength() + "")
+                            , 18, 100, 18, opponent);
             }
-            if (settings.getQueueLeaveSoundToPlayer() != null)
-                sender.sendSound(settings.getQueueLeaveSoundToPlayer(), settings.getQueueLeaveVolumeToPlayer(), settings.getQueueLeavePitchToPlayer(), opponent);
-            if (settings.getQueueLeaveActionbarToPlayer() != null)
-                sender.sendActionbar(settings.getQueueLeaveMessageToPlayer()
-                                .replaceAll("%queue_size%", queue.getQueueLength() + "")
-                        , 18, 100, 18, opponent);
-        } if (player.isOnline()) {
-            if (settings.getQueueLeaveMessageToPlayer() != null)
-                sender.sendMessage(settings.getQueueLeaveMessageToPlayer()
-                        .replaceAll("%queue_size%", queue.getQueueLength() + ""), player);
-            if (settings.getQueueLeaveTitleToPlayer() != null)
-                sender.sendTitlePlaceHolders(settings.getQueueLeaveTitleToPlayer(), 18, 100, 1, player,
-                        "%queue_size%", queue.getQueueLength() + "");
-            if (settings.getQueueLeaveSoundToPlayer() != null)
-                sender.sendSound(settings.getQueueLeaveSoundToPlayer(), settings.getQueueLeaveVolumeToPlayer(), settings.getQueueLeavePitchToPlayer(), player);
-            if (settings.getQueueLeaveActionbarToPlayer() != null)
-                sender.sendActionbar(settings.getQueueLeaveActionbarToPlayer()
-                                .replaceAll("%queue_size%", queue.getQueueLength() + "")
-                        , 18, 100, 18, player);
+            if (player.isOnline()) {
+                if (settings.getQueueLeaveMessageToPlayer() != null)
+                    sender.sendMessage(settings.getQueueLeaveMessageToPlayer()
+                            .replaceAll("%queue_size%", queue.getQueueLength() + ""), player);
+                if (settings.getQueueLeaveTitleToPlayer() != null)
+                    sender.sendTitlePlaceHolders(settings.getQueueLeaveTitleToPlayer(), 18, 100, 1, player,
+                            "%queue_size%", queue.getQueueLength() + "");
+                if (settings.getQueueLeaveSoundToPlayer() != null)
+                    sender.sendSound(settings.getQueueLeaveSoundToPlayer(), settings.getQueueLeaveVolumeToPlayer(), settings.getQueueLeavePitchToPlayer(), player);
+                if (settings.getQueueLeaveActionbarToPlayer() != null)
+                    sender.sendActionbar(settings.getQueueLeaveActionbarToPlayer()
+                                    .replaceAll("%queue_size%", queue.getQueueLength() + "")
+                            , 18, 100, 18, player);
+            }
         }
     }
 
     public void sendQueueUpdate(Player player) {
-        if (queue.getCache(player).hasOpponent()) {
-            Player opponent = queue.getCache(player).getOpponent();
-            if (settings.getQueueUpdateMessageToPlayer() != null)
-                sender.sendMessage(settings.getQueueUpdateMessageToPlayer()
-                        .replaceAll("%player_position%", queue.getPosition(player) + "")
-                        .replaceAll("%queue_size%", queue.getQueueLength() + ""), player, opponent);
-            if (settings.getQueueUpdateTitleToPlayer() != null) {
-                sender.sendTitlePlaceHolders(settings.getQueueUpdateTitleToPlayer(), 18, 100, 1, player,
-                        "%player_position%", queue.getPosition(player) + "", "%queue_size%", queue.getQueueLength() + "");
-                sender.sendTitlePlaceHolders(settings.getQueueUpdateTitleToPlayer(), 18, 100, 1, opponent,
-                        "%player_position%", queue.getPosition(player) + "", "%queue_size%", queue.getQueueLength() + "");
+        if(settings.checkQueueUpdate()) {
+            if (queue.getCache(player).hasOpponent()) {
+                Player opponent = queue.getCache(player).getOpponent();
+                if (settings.getQueueUpdateMessageToPlayer() != null)
+                    sender.sendMessage(settings.getQueueUpdateMessageToPlayer()
+                            .replaceAll("%player_position%", queue.getPosition(player) + "")
+                            .replaceAll("%queue_size%", queue.getQueueLength() + ""), player, opponent);
+                if (settings.getQueueUpdateTitleToPlayer() != null) {
+                    sender.sendTitlePlaceHolders(settings.getQueueUpdateTitleToPlayer(), 18, 100, 1, player,
+                            "%player_position%", queue.getPosition(player) + "", "%queue_size%", queue.getQueueLength() + "");
+                    sender.sendTitlePlaceHolders(settings.getQueueUpdateTitleToPlayer(), 18, 100, 1, opponent,
+                            "%player_position%", queue.getPosition(player) + "", "%queue_size%", queue.getQueueLength() + "");
+                }
+                if (settings.getQueueUpdateSoundToPlayer() != null)
+                    sender.sendSound(settings.getQueueUpdateSoundToPlayer(), settings.getQueueUpdateVolumeToPlayer(), settings.getQueueUpdatePitchToPlayer(), player, opponent);
+                if (settings.getQueueUpdateActionbarToPlayer() != null)
+                    sender.sendActionbar(settings.getQueueUpdateActionbarToPlayer()
+                                    .replaceAll("%player_position%", queue.getPosition(player) + "")
+                                    .replaceAll("%queue_size%", queue.getQueueLength() + "")
+                            , 18, 100, 18, player, opponent);
+            } else {
+                if (settings.getQueueUpdateMessageToPlayer() != null)
+                    sender.sendMessage(settings.getQueueUpdateMessageToPlayer()
+                            .replaceAll("%player_position%", queue.getPosition(player) + "")
+                            .replaceAll("%queue_size%", queue.getQueueLength() + ""), player);
+                if (settings.getQueueUpdateTitleToPlayer() != null)
+                    sender.sendTitlePlaceHolders(settings.getQueueUpdateTitleToPlayer(), 18, 100, 1, player,
+                            "%player_position%", queue.getPosition(player) + "", "%queue_size%", queue.getQueueLength() + "");
+                if (settings.getQueueUpdateSoundToPlayer() != null)
+                    sender.sendSound(settings.getQueueUpdateSoundToPlayer(), settings.getQueueUpdateVolumeToPlayer(), settings.getQueueUpdatePitchToPlayer(), player);
+                if (settings.getQueueUpdateActionbarToPlayer() != null)
+                    sender.sendActionbar(settings.getQueueUpdateActionbarToPlayer()
+                                    .replaceAll("%player_position%", queue.getPosition(player) + "")
+                                    .replaceAll("%queue_size%", queue.getQueueLength() + "")
+                            , 18, 100, 18, player);
             }
-            if (settings.getQueueUpdateSoundToPlayer() != null)
-                sender.sendSound(settings.getQueueUpdateSoundToPlayer(), settings.getQueueUpdateVolumeToPlayer(), settings.getQueueUpdatePitchToPlayer(), player, opponent);
-            if (settings.getQueueUpdateActionbarToPlayer() != null)
-                sender.sendActionbar(settings.getQueueUpdateActionbarToPlayer()
-                                .replaceAll("%player_position%", queue.getPosition(player) + "")
-                                .replaceAll("%queue_size%", queue.getQueueLength() + "")
-                        , 18, 100, 18, player, opponent);
-        } else {
-            if (settings.getQueueUpdateMessageToPlayer() != null)
-                sender.sendMessage(settings.getQueueUpdateMessageToPlayer()
-                        .replaceAll("%player_position%", queue.getPosition(player) + "")
-                        .replaceAll("%queue_size%", queue.getQueueLength() + ""), player);
-            if (settings.getQueueUpdateTitleToPlayer() != null)
-                sender.sendTitlePlaceHolders(settings.getQueueUpdateTitleToPlayer(), 18, 100, 1, player,
-                        "%player_position%", queue.getPosition(player) + "", "%queue_size%", queue.getQueueLength() + "");
-            if (settings.getQueueUpdateSoundToPlayer() != null)
-                sender.sendSound(settings.getQueueUpdateSoundToPlayer(), settings.getQueueUpdateVolumeToPlayer(), settings.getQueueUpdatePitchToPlayer(), player);
-            if (settings.getQueueUpdateActionbarToPlayer() != null)
-                sender.sendActionbar(settings.getQueueUpdateActionbarToPlayer()
-                                .replaceAll("%player_position%", queue.getPosition(player) + "")
-                                .replaceAll("%queue_size%", queue.getQueueLength() + "")
-                        , 18, 100, 18, player);
         }
     }
 
