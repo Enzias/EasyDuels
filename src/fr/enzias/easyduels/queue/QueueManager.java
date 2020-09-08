@@ -6,6 +6,8 @@ import fr.enzias.easyduels.arena.ArenaStatuts;
 import fr.enzias.easyduels.files.SettingsFile;
 import fr.enzias.easyduels.managers.SenderManager;
 import fr.enzias.easyduels.utils.DuelPlayerCache;
+import fr.enzias.easyduels.utils.VaultHook;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class QueueManager {
@@ -15,12 +17,14 @@ public class QueueManager {
     Queue queue;
     SenderManager sender;
     SettingsFile settings;
+    VaultHook vaultHook;
     public QueueManager(EasyDuels plugin) {
         this.plugin = plugin;
         this.arena = plugin.getArena();
         this.settings = plugin.getSettingsFile();
         this.queue = new Queue(plugin);
         this.sender = plugin.getSender();
+        this.vaultHook = plugin.getVaultHook();
     }
 
     public boolean isNotFull(){
@@ -28,7 +32,13 @@ public class QueueManager {
     }
 
     public void addQueueLast(Player player, Player opponent){
-        DuelPlayerCache cache = new DuelPlayerCache(opponent);
+        DuelPlayerCache cache = new DuelPlayerCache(opponent, -1);
+        queue.add(player, cache);
+        sendQueueJoin(player);
+    }
+
+    public void addQueueLast(Player player, Player opponent, int bet){
+        DuelPlayerCache cache = new DuelPlayerCache(opponent, bet);
         queue.add(player, cache);
         sendQueueJoin(player);
     }
@@ -61,6 +71,12 @@ public class QueueManager {
 
             }
             if(target != null && player != null) {
+
+                if(settings.getMoneyBet() && queue.getCache(player).hasBet()) {
+                    vaultHook.takeBoth(queue.getCache(player).getBet(), target, player);
+                    arena.setBet(queue.getCache(player).getBet());
+                }
+
                 arena.addToArena(target, player);
                 arena.setLastLocation(target, player);
                 arena.teleportToLocation(target, player, settings.getSyncTimer());
