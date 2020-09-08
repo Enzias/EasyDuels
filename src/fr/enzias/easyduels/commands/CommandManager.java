@@ -82,41 +82,45 @@ public class CommandManager implements CommandExecutor {
 
                                 if(args.length == 2) {
                                     if (vaultHook.isNotNull() && settingsFile.getMoneyBet()) {
-                                        if (vaultHook.isValidAmount(args[1])) {
-                                            int amount = vaultHook.getValidAmount(args[1]);
+                                        if(player.hasPermission("easyduels.money")) {
+                                            if (vaultHook.isValidAmount(args[1])) {
+                                                int amount = vaultHook.getValidAmount(args[1]);
 
-                                            if (vaultHook.isAbove(amount)) {
+                                                if (vaultHook.isAbove(amount)) {
 
-                                                if (vaultHook.isUnder(amount)) {
+                                                    if (vaultHook.isUnder(amount)) {
 
-                                                    if (vaultHook.hasEnough(amount, player)) {
+                                                        if (vaultHook.hasEnough(amount, player)) {
 
-                                                        if (vaultHook.hasEnough(amount, target)) {
+                                                            if (vaultHook.hasEnough(amount, target)) {
 
-                                                            request.addRequest(player, target, amount);
+                                                                request.addRequest(player, target, amount);
 
-                                                            sender.sendMessage(messageFile.getDuelRequest().replaceAll("%player%", player.getName()), target);
-                                                            sender.sendMessage(messageFile.getDuelBetRequest().replaceAll("%amount%", Integer.toString(amount)), target);
-                                                            sender.sendHover(messageFile.getAcceptButton(), messageFile.getDenyButton(),
-                                                                    messageFile.getAcceptHover(), messageFile.getDenyHover(), player.getName(), target);
-                                                            sender.sendMessage(messageFile.getRequestSent().replaceAll("%player%", target.getName()), player);
+                                                                sender.sendMessage(messageFile.getDuelRequest().replaceAll("%player%", player.getName()), target);
+                                                                sender.sendMessage(messageFile.getDuelBetRequest().replaceAll("%amount%", Integer.toString(amount)), target);
+                                                                sender.sendHover(messageFile.getAcceptButton(), messageFile.getDenyButton(),
+                                                                        messageFile.getAcceptHover(), messageFile.getDenyHover(), player.getName(), target);
+                                                                sender.sendMessage(messageFile.getRequestSent().replaceAll("%player%", target.getName()), player);
 
-                                                        } else {
-                                                            sender.sendMessage(messageFile.getPlayerNotEnoughMoney()
-                                                                    .replaceAll("%player%", target.getName()), player);
-                                                        }
+                                                            } else {
+                                                                sender.sendMessage(messageFile.getPlayerNotEnoughMoney()
+                                                                        .replaceAll("%player%", target.getName()), player);
+                                                            }
+                                                        } else
+                                                            sender.sendMessage(messageFile.getYouNotEnoughMoney(), player);
                                                     } else
-                                                        sender.sendMessage(messageFile.getYouNotEnoughMoney(), player);
+                                                        sender.sendMessage(messageFile.getGreaterMaximum()
+                                                                .replaceAll("%amount%", Integer.toString(settingsFile.getMaxAmount())), player);
                                                 } else
-                                                    sender.sendMessage(messageFile.getGreaterMaximum()
-                                                            .replaceAll("%amount%", Integer.toString(settingsFile.getMaxAmount())), player);
+                                                    sender.sendMessage(messageFile.getBelowMinimum()
+                                                            .replaceAll("%amount%", Integer.toString(settingsFile.getMinAmount())), player);
                                             } else
-                                                sender.sendMessage(messageFile.getBelowMinimum()
-                                                        .replaceAll("%amount%", Integer.toString(settingsFile.getMinAmount())), player);
+                                                sender.sendMessage(messageFile.getInvalidAmount(), player);
                                         } else
-                                            sender.sendMessage(messageFile.getInvalidAmount(), player);
-                                        return true;
-                                    } sender.sendMessage(messageFile.getUnknown(), player);
+                                            sender.sendMessage(messageFile.getNoPermission(), player);
+                                    } else
+                                        sender.sendMessage(messageFile.getUnknown(), player);
+                                    return true;
                                 }
 
 
