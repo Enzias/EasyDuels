@@ -5,9 +5,11 @@ import org.bukkit.entity.Player;
 public class DuelPlayerCache {
 
     private Player opponent;
-    public DuelPlayerCache(Player opponent){
+    private int bet;
+    public DuelPlayerCache(Player opponent, int bet){
 
         this.opponent = opponent;
+        this.bet = bet;
     }
     public Player getOpponent() {
         return opponent;
@@ -22,5 +24,16 @@ public class DuelPlayerCache {
             return player.getName().equalsIgnoreCase(opponent.getName());
         else
             return false;
+    }
+
+    public boolean hasBet(){
+        return bet > 0;
+    }
+
+    public int getBet() {
+        if(hasBet())
+            return bet;
+        else
+            return 0;
     }
 }
