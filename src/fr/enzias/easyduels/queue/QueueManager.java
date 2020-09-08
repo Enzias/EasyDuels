@@ -7,7 +7,6 @@ import fr.enzias.easyduels.files.SettingsFile;
 import fr.enzias.easyduels.managers.SenderManager;
 import fr.enzias.easyduels.utils.DuelPlayerCache;
 import fr.enzias.easyduels.utils.VaultHook;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class QueueManager {
@@ -73,7 +72,6 @@ public class QueueManager {
             if(target != null && player != null) {
 
                 if(settings.getMoneyBet() && queue.getCache(player).hasBet()) {
-                    vaultHook.takeBoth(queue.getCache(player).getBet(), target, player);
                     arena.setBet(queue.getCache(player).getBet());
                 }
 
@@ -107,6 +105,12 @@ public class QueueManager {
 
     public void deleteAllQueue(){
         queue.clear();
+    }
+
+    public void tryGiveBackBoth(Player player){
+        if(settings.getMoneyBet() && queue.getCache(player).hasBet()) {
+            vaultHook.giveBackBoth(queue.getCache(player).getBet(), player, queue.getCache(player).getOpponent());
+        }
     }
 
     public boolean isInQueue(Player player){
