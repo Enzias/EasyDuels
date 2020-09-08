@@ -30,10 +30,13 @@ public class LeaveCommand extends SubCommand {
 
         if (player.hasPermission("easyduels.queue")) {
             if (queue.isInQueue(player)) {
+                queue.tryGiveBackBoth(player);
                 queue.deleteQueue(player);
             } else if (queue.isAnOpponent(player)) {
-                if (queue.isInQueue(queue.getOpponentOf(player)))
+                if (queue.isInQueue(queue.getOpponentOf(player))) {
+                    queue.tryGiveBackBoth(queue.getOpponentOf(player));
                     queue.deleteQueue(queue.getOpponentOf(player));
+                }
             } else
                 sender.sendMessage(messageFile.getNotInQueue(), player);
         } else
