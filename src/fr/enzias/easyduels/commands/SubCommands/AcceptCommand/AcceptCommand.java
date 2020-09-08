@@ -9,6 +9,7 @@ import fr.enzias.easyduels.files.SettingsFile;
 import fr.enzias.easyduels.managers.RequestManager;
 import fr.enzias.easyduels.managers.SenderManager;
 import fr.enzias.easyduels.queue.QueueManager;
+import fr.enzias.easyduels.utils.VaultHook;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -20,6 +21,7 @@ public class AcceptCommand extends SubCommand {
     RequestManager request;
     SenderManager sender;
     QueueManager queue;
+    VaultHook vaultHook;
 
     public AcceptCommand(EasyDuels plugin) {
         super(plugin);
@@ -29,6 +31,7 @@ public class AcceptCommand extends SubCommand {
         this.settingsFile = plugin.getSettingsFile();
         this.sender = plugin.getSender();
         this.queue = plugin.getQueue();
+        this.vaultHook = plugin.getVaultHook();
     }
 
     @Override
@@ -45,6 +48,47 @@ public class AcceptCommand extends SubCommand {
 
                         if (!arena.isStatut(ArenaStatuts.IDLE) && arena.getPlayers().contains(player)) {
                             sender.sendMessage(messageFile.getAcceptRequestInDuel(), player);
+                            return;
+                        }
+
+                        if(settingsFile.getMoneyBet() && request.hasBet(target)){
+                            int amount = request.getBet(target);
+                            if(vaultHook.hasEnough(amount, player)) {
+
+                                if (vaultHook.hasEnough(amount, target)) {
+
+                                    sender.sendMessage(messageFile.getRequestAccept().replaceAll("%player%", player.getName()), target);
+                                    sender.sendMessage(messageFile.getYouRequestAccept().replaceAll("%player%", target.getName()), player);
+                                    request.deleteRequest(target);
+
+                                    if (settingsFile.getQueue()) {
+                                        if (queue.isNotFull()) {
+                                            queue.addQueueLast(player, target, amount);
+                                            vaultHook.takeBoth(amount, target, player);
+                                            queue.checkQueue();
+                                        } else
+                                            sender.sendMessage(messageFile.getQueueIsFull(), player, target);
+                                    } else {
+                                        if (!arena.isStatut(ArenaStatuts.IDLE))
+                                            sender.sendMessage(messageFile.getArenaNotEmpty(), player, target);
+                                        else {
+
+                                            arena.setBet(amount);
+                                            vaultHook.takeBoth(amount, target, player);
+
+                                            arena.addToArena(target, player);
+                                            arena.setLastLocation(target, player);
+                                            arena.teleportToLocation(target, player, settingsFile.getSyncTimer());
+                                            arena.startMatch();
+
+                                        }
+                                    }
+
+                                }else
+                                    sender.sendMessage(messageFile.getPlayerNotEnoughMoney()
+                                            .replaceAll("%player%", target.getName()), player);
+                            }else
+                                sender.sendMessage(messageFile.getYouNotEnoughMoney(), player);
                             return;
                         }
 
