@@ -3,6 +3,7 @@ package fr.enzias.easyduels.utils;
 import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.files.SettingsFile;
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -14,6 +15,7 @@ public class VaultHook {
     SettingsFile settings;
     public VaultHook(EasyDuels plugin) {
         this.plugin = plugin;
+        this.settings = plugin.getSettingsFile();
     }
 
     public boolean setupEconomy(){
@@ -35,6 +37,8 @@ public class VaultHook {
     }
 
     public boolean isUnder(int i){
+        if(settings.getMaxAmount() <= 0)
+            return true;
         return i <= settings.getMaxAmount();
     }
 
@@ -60,27 +64,27 @@ public class VaultHook {
 
     public void giveBackBoth(int amount, Player player, Player player1){
         if(isNotNull()){
-            economy.depositPlayer(player, amount);
-            economy.depositPlayer(player1, amount);
+            EconomyResponse a = economy.depositPlayer(player, amount);
+            EconomyResponse b = economy.depositPlayer(player1, amount);
         }
     }
 
     public void give(int amount, Player player){
         if(isNotNull()){
-            economy.depositPlayer(player, amount);
+            EconomyResponse a = economy.depositPlayer(player, amount);
         }
     }
 
     public void takeBoth(int amount, Player player, Player player1){
         if(isNotNull()){
-            economy.withdrawPlayer(player, amount);
-            economy.withdrawPlayer(player1, amount);
+            EconomyResponse a = economy.withdrawPlayer(player, amount);
+            EconomyResponse b = economy.withdrawPlayer(player1, amount);
         }
     }
 
     public void take(int amount, Player player){
         if(isNotNull()){
-            economy.withdrawPlayer(player, amount);
+            EconomyResponse a = economy.withdrawPlayer(player, amount);
         }
     }
 
