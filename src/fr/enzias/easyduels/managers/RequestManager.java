@@ -15,6 +15,7 @@ public class RequestManager {
     private final EasyDuels plugin;
     private HashMap<UUID, UUID> requests = new HashMap<UUID, UUID>();
     private HashMap<UUID, BukkitTask> tasks = new HashMap<UUID, org.bukkit.scheduler.BukkitTask>();
+    private HashMap<UUID, Integer> money = new HashMap<UUID, Integer>();
     SettingsFile settings;
     public RequestManager(EasyDuels plugin) {
         this.plugin = plugin;
@@ -32,14 +33,35 @@ public class RequestManager {
         }
     }
 
+    public void addRequest(Player firstPlayer, Player secondPlayer, int money){
+        requests.put(firstPlayer.getUniqueId(), secondPlayer.getUniqueId());
+        this.money.put(firstPlayer.getUniqueId(), money);
+
+        if(settings.getSyncTimer()){
+            tasks.put(firstPlayer.getUniqueId(), Bukkit.getScheduler().runTaskTimer(plugin, new Cooldown(plugin, firstPlayer), 0,20));
+        }
+        else{
+            tasks.put(firstPlayer.getUniqueId(), Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, new Cooldown(plugin, firstPlayer), 0, 20));
+        }
+    }
+
     public void deleteRequest(Player player){
         requests.remove(player.getUniqueId());
         tasks.get(player.getUniqueId()).cancel();
         tasks.remove(player.getUniqueId());
+        money.remove(player.getUniqueId());
     }
 
     public boolean hasRequest(Player player){
         return  requests.containsKey(player.getUniqueId());
+    }
+
+    public boolean hasBet(Player player){
+        return money.containsKey(player.getUniqueId());
+    }
+
+    public int getBet(Player player){
+        return money.get(player.getUniqueId());
     }
 
     public boolean hasRequestFrom(Player player, Player target){
