@@ -12,6 +12,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class CommandEvent implements Listener {
 
     private final EasyDuels plugin;
@@ -32,6 +35,7 @@ public class CommandEvent implements Listener {
 
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent event) {
+
         if (!arena.isStatut(ArenaStatuts.IDLE)) {
 
             Player player = event.getPlayer();
@@ -53,5 +57,21 @@ public class CommandEvent implements Listener {
                         }
             }
         }
+
+        Player player = event.getPlayer();
+        String strippedCommand = event.getMessage().replace("/", "");
+        String[] arguments = strippedCommand.split(" ");
+
+        for(String alias : settings.getAliases()){
+            if (arguments[0].equalsIgnoreCase(alias)) {
+                event.setCancelled(true);
+                String preparedArguments = arguments.length > 1 ? Arrays
+                        .stream(arguments, 1, arguments.length)
+                        .collect(Collectors.joining(" ")) : "";
+                player.performCommand("easyduels ".concat(preparedArguments));
+                break;
+            }
+        }
+
     }
 }
