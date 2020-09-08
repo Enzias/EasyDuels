@@ -13,6 +13,7 @@ import fr.enzias.easyduels.files.MessageFile;
 import fr.enzias.easyduels.files.SettingsFile;
 import fr.enzias.easyduels.managers.RequestManager;
 import fr.enzias.easyduels.managers.SenderManager;
+import fr.enzias.easyduels.utils.VaultHook;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -31,6 +32,7 @@ public class CommandManager implements CommandExecutor {
     SettingsFile settingsFile;
     RequestManager request;
     SenderManager sender;
+    VaultHook vaultHook;
 
     public CommandManager(EasyDuels plugin) {
         this.plugin = plugin;
@@ -40,6 +42,7 @@ public class CommandManager implements CommandExecutor {
         this.messageFile = plugin.getMessageFile();
         this.settingsFile = plugin.getSettingsFile();
         this.sender = plugin.getSender();
+        this.vaultHook = plugin.getVaultHook();
     }
 
     @Override
@@ -62,7 +65,7 @@ public class CommandManager implements CommandExecutor {
                     return true;
             }
 
-            if(args.length == 1) {
+            if(args.length == 1 || args.length == 2) {
                 if (Bukkit.getPlayer(args[0]) != null) {
                     if (!Bukkit.getPlayer(args[0]).getName().equalsIgnoreCase(player.getName())) {
 
@@ -76,6 +79,47 @@ public class CommandManager implements CommandExecutor {
                                 }
 
                                 Player target = Bukkit.getPlayer(args[0]);
+
+                                if(args.length == 2) {
+                                    if (vaultHook.isNotNull() && settingsFile.getMoneyBet()) {
+                                        if (vaultHook.isValidAmount(args[1])) {
+                                            int amount = vaultHook.getValidAmount(args[1]);
+
+                                            if (vaultHook.isAbove(amount)) {
+
+                                                if (vaultHook.isUnder(amount)) {
+
+                                                    if (vaultHook.hasEnough(amount, player)) {
+
+                                                        if (vaultHook.hasEnough(amount, target)) {
+
+                                                            request.addRequest(player, target, amount);
+
+                                                            sender.sendMessage(messageFile.getDuelRequest().replaceAll("%player%", player.getName()), target);
+                                                            sender.sendMessage(messageFile.getDuelBetRequest().replaceAll("%amount%", Integer.toString(amount)), target);
+                                                            sender.sendHover(messageFile.getAcceptButton(), messageFile.getDenyButton(),
+                                                                    messageFile.getAcceptHover(), messageFile.getDenyHover(), player.getName(), target);
+                                                            sender.sendMessage(messageFile.getRequestSent().replaceAll("%player%", target.getName()), player);
+
+                                                        } else {
+                                                            sender.sendMessage(messageFile.getPlayerNotEnoughMoney()
+                                                                    .replaceAll("%player%", target.getName()), player);
+                                                        }
+                                                    } else
+                                                        sender.sendMessage(messageFile.getYouNotEnoughMoney(), player);
+                                                } else
+                                                    sender.sendMessage(messageFile.getGreaterMaximum()
+                                                            .replaceAll("%amount%", Integer.toString(settingsFile.getMaxAmount())), player);
+                                            } else
+                                                sender.sendMessage(messageFile.getBelowMinimum()
+                                                        .replaceAll("%amount%", Integer.toString(settingsFile.getMinAmount())), player);
+                                        } else
+                                            sender.sendMessage(messageFile.getInvalidAmount(), player);
+                                        return true;
+                                    } sender.sendMessage(messageFile.getUnknown(), player);
+                                }
+
+
                                 request.addRequest(player, target);
 
                                 sender.sendMessage(messageFile.getDuelRequest().replaceAll("%player%", player.getName()), target);
