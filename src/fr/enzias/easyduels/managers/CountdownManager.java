@@ -126,6 +126,10 @@ public class CountdownManager{
                     sender.sendBroadcast(settings.getEndBroadcastNoWinner()
                             .replaceAll("%player1%", arena.getFirstPlayerName())
                             .replaceAll("%player2%", arena.getSecondPlayerName()), settings.getSyncTimer());
+                if (settings.getBetMessageNoWinner() != null)
+                    sender.sendMessage(settings.getBetMessageNoWinner()
+                            .replaceAll("%amount%", arena.getBet() + "")
+                            , arena.getFirstPlayer(), arena.getSecondPlayer());
                 if(arena.getBet() != 0){
                     vaultHook.giveBackBoth(arena.getBet(), arena.getFirstPlayer(), arena.getSecondPlayer());
                 }
@@ -150,6 +154,9 @@ public class CountdownManager{
                         sender.sendSound(settings.getEndSoundToLoser(), settings.getEndVolumeToLoser(), settings.getEndPitchToLoser(), arena.getLoser());
                     if (settings.getEndActionbarToLoser() != null)
                         sender.sendActionbar(settings.getEndActionbarToLoser(), 20, settings.getEndTime() * 20, 20, arena.getLoser());
+                    if (settings.getBetMessageToLoser() != null)
+                        sender.sendMessage(settings.getBetMessageToLoser()
+                                .replaceAll("%amount%", arena.getBet() + ""), arena.getLoser());
                 }
                 if (settings.getEndTitleToWinner() != null)
                     sender.sendTitle(settings.getEndTitleToWinner(), 20, settings.getEndTime() * 20, 20, arena.getWinner());
@@ -163,6 +170,9 @@ public class CountdownManager{
                 if (settings.getEndBroadcast() != null)
                     sender.sendBroadcast(settings.getEndBroadcast()
                             .replaceAll("%winner%", arena.getWinnerName()).replaceAll("%loser%", arena.getLoserName()), settings.getSyncTimer());
+                if (settings.getBetMessageToWinner() != null)
+                    sender.sendMessage(settings.getBetMessageToWinner()
+                            .replaceAll("%amount%", arena.getBet() + ""), arena.getWinner());
                 if(arena.getBet() != 0){
                     vaultHook.give(arena.getBet()*2, arena.getWinner());
                 }
