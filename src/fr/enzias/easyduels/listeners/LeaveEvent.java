@@ -38,11 +38,14 @@ public class LeaveEvent implements Listener {
             request.deleteRequest(player);
 
         if(queue.isInQueue(player)){
+            queue.tryGiveBackBoth(player);
             queue.deleteQueue(player);
         }
         if(queue.isAnOpponent(player)){
-            if(queue.isInQueue(queue.getOpponentOf(player)))
+            if(queue.isInQueue(queue.getOpponentOf(player))) {
+                queue.tryGiveBackBoth(queue.getOpponentOf(player));
                 queue.deleteQueue(queue.getOpponentOf(player));
+            }
         }
 
         if (arena.isStatut(ArenaStatuts.LOBBY) || arena.isStatut(ArenaStatuts.PLAYING)) {
