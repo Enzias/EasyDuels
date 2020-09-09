@@ -48,7 +48,7 @@ messages:
     player-not-enough-money: '&f[&6&lEasy&c&lDuels&f] &c%player% does not have enough money!'
     below-minimum: '&f[&6&lEasy&c&lDuels&f] &cYou must bet at least &6%amount% &ccoins!'
     greater-maximum: '&f[&6&lEasy&c&lDuels&f] &cYou cannot bet more than &6%amount% &ccoins!'
-    invalid-amount: '&f[&6&lEasy&c&lDuels&f] &cPlease enter a valid bet amount!' #nombre inférieur ou 0 ou pas un chiffre
+    invalid-amount: '&f[&6&lEasy&c&lDuels&f] &cPlease enter a valid bet amount!'
   admin:
     unknown-command: '&f[&6&lEasy&c&lDuels&f] &cUnknown command. Please use &6/easyduels admin help&c!'
     help-message:
