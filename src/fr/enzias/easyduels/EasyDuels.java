@@ -44,8 +44,8 @@ public class EasyDuels extends JavaPlugin {
         setupConfig();
         setupObject();
         if(!vaultHook.setupEconomy()){
-            Bukkit.getLogger().warning("[EasyDuels] Money bet is disabled.");
-        }
+            Bukkit.getLogger().warning("[EasyDuels] Money bet is not available.");
+        } else Bukkit.getLogger().info("[EasyDuels] Money bet is available.");
         checkForUpdates(settingsFile.getCheckForUpdates());
         registerEvents();
         new CommandManager(this).setup();
