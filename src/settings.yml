@@ -1,5 +1,10 @@
 settings:
   check-for-updates: true
+  command-aliases:
+    - 'easyduel'
+    - 'ed'
+    - 'duel'
+    - 'duels'
   blocked-commands:
     all: false
     blacklisted-commands:
@@ -12,7 +17,7 @@ settings:
     enable: true
     max-players: 15
     queue-join:
-      message-to-player: '&f[&6&lEasy&c&lDuels&f] &aYou joined the queue. Your position: &2%player_position%&a!'
+      message-to-player: '&f[&6&lEasy&c&lDuels&f] &aYou joined the queue. Your position: &2%player_position%# &a!'
       title-to-player:
         - '&aYou joined the queue!'
         - '&2(&a%player_position%&2/&a%queue_size%&2)'
@@ -41,6 +46,10 @@ settings:
         volume: 1
         pitch: 1
       actionbar-to-player: '&aYour position in the queue: &2%player_position%&a/&2%queue_size%'
+  money-bet:
+    enable: true
+    minimum-amount: 5000 
+    maximum-amount: 100000 
   timer:
     sync-timer: true
     request:
@@ -183,6 +192,9 @@ settings:
         results-message: true
         fake-explosion: true
         firework: true
+        bet-message-to-winner: '&f[&6&lEasy&c&lDuels&f] &aYou won the money bet: &2%amount% coins&a!'
+        bet-message-to-loser: '&f[&6&lEasy&c&lDuels&f] &cYou lost the money bet: &6%amount% coins&c!'
+        bet-message-no-winner: '&f[&6&lEasy&c&lDuels&f] &6No one won the money bet! You missed: &c%amount% coins&6!'
         title-to-winner:
           - '&aWinner'
           - '&6You won the duel!'
