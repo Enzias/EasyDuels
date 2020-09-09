@@ -1,17 +1,14 @@
 name: EasyDuels
-version: 1.3.0
+version: 1.4.0
 description: Simple 1V1 plugin.
 author: Enzias
 main: fr.enzias.easyduels.EasyDuels
+softdepend: [Vault]
 commands:
   easyduels:
     description: Main command
     permission: easyduels.duel
     usage: /<command>
-    aliases:
-      - ed
-      - duels
-      - duel
 permissions:
   easyduels.*:
     description: Gives access to all Easyduels commands.
@@ -32,4 +29,7 @@ permissions:
     default: true
   easyduels.queue:
     description: Gives access to queue command.
+    default: true
+  easyduels.money:
+    description: Allows you to make duels with money bet.
     default: true
