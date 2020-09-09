@@ -108,6 +108,10 @@ public class MessageFile {
         return getConfig().getString("messages.player.duel-request.message");
     }
 
+    public String getDuelBetRequest(){
+        return getConfig().getString("messages.player.duel-request.bet-message");
+    }
+
     public String getAcceptButton(){
         return getConfig().getString("messages.player.duel-request.accept.button");
     }
@@ -170,6 +174,26 @@ public class MessageFile {
 
     public String getArenaIsLocked(){
         return getConfig().getString("messages.player.arena-is-locked");
+    }
+
+    public String getYouNotEnoughMoney(){
+        return getConfig().getString("messages.player.you-not-enough-money");
+    }
+
+    public String getPlayerNotEnoughMoney(){
+        return getConfig().getString("messages.player.player-not-enough-money");
+    }
+
+    public String getBelowMinimum(){
+        return getConfig().getString("messages.player.below-minimum");
+    }
+
+    public String getGreaterMaximum(){
+        return getConfig().getString("messages.player.greater-maximum");
+    }
+
+    public String getInvalidAmount(){
+        return getConfig().getString("messages.player.invalid-amount");
     }
 
     //Admin
