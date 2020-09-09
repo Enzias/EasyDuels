@@ -59,6 +59,10 @@ public class SettingsFile {
             return true;
     }
 
+    public List<String> getAliases(){
+        return getConfig().getStringList("settings.command-aliases");
+    }
+
     //Blocked Commands
 
     public boolean getAllCommands(){
@@ -214,6 +218,25 @@ public class SettingsFile {
                 && !getConfig().getString("settings.queue.queue-update.actionbar-to-player").equalsIgnoreCase("")) {
             return getConfig().getString("settings.queue.queue-update.actionbar-to-player");
         } return null;
+    }
+
+    //Money Bet
+
+    public boolean getMoneyBet(){
+        return getConfig().getBoolean("settings.money-bet.enable");
+    }
+
+    public int getMinAmount(){
+        if(getConfig().contains("settings.money-bet.minimum-amount"))
+            return Math.max(getConfig().getInt("settings.money-bet.minimum-amount"), 0);
+        return 0;
+    }
+
+    public int getMaxAmount(){
+        if (!getConfig().contains("settings.money-bet.maximum-amount")
+                || getConfig().getInt("settings.money-bet.maximum-amount") <= 0)
+            return -1;
+        return getConfig().getInt("settings.money-bet.maximum-amount");
     }
 
     //Timer
@@ -407,6 +430,27 @@ public class SettingsFile {
         if(getConfig().contains("settings.timer.end.actions.firework")){
             return getConfig().getBoolean("settings.timer.end.actions.firework");
         } return false;
+    }
+
+    public String getBetMessageToWinner(){
+        if(getConfig().contains("settings.timer.end.actions.bet-message-to-winner")
+            && !getConfig().getString("settings.timer.end.actions.bet-message-to-winner").equalsIgnoreCase(""))
+            return getConfig().getString("settings.timer.end.actions.bet-message-to-winner");
+        return null;
+    }
+
+    public String getBetMessageToLoser(){
+        if(getConfig().contains("settings.timer.end.actions.bet-message-to-loser")
+                && !getConfig().getString("settings.timer.end.actions.bet-message-to-loser").equalsIgnoreCase(""))
+            return getConfig().getString("settings.timer.end.actions.bet-message-to-loser");
+        return null;
+    }
+
+    public String getBetMessageNoWinner(){
+        if(getConfig().contains("settings.timer.end.actions.bet-message-no-winner")
+                && !getConfig().getString("settings.timer.end.actions.bet-message-no-winner").equalsIgnoreCase(""))
+            return getConfig().getString("settings.timer.end.actions.bet-message-no-winner");
+        return null;
     }
 
     public List<String> getEndTitleToWinner(){
