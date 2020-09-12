@@ -69,6 +69,10 @@ public class SettingsFile {
         return getConfig().getBoolean("settings.blocked-commands.all");
     }
 
+    public boolean getInventory(){
+        return getConfig().getBoolean("settings.blocked-commands.inventory");
+    }
+
     public List<String> getBlacklistedCommands(){
         return getConfig().getStringList("settings.blocked-commands.blacklisted-commands");
     }
