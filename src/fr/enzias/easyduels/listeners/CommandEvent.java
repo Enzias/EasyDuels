@@ -9,8 +9,11 @@ import fr.enzias.easyduels.files.SettingsFile;
 import fr.enzias.easyduels.managers.SenderManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.inventory.PlayerInventory;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -33,7 +36,7 @@ public class CommandEvent implements Listener {
         this.arena = plugin.getArena();
     }
 
-    @EventHandler
+    @EventHandler (priority = EventPriority.LOWEST)
     public void onCommand(PlayerCommandPreprocessEvent event) {
 
         if (!arena.isStatut(ArenaStatuts.IDLE)) {
@@ -43,11 +46,12 @@ public class CommandEvent implements Listener {
             if (player.getLocation().getWorld().getName().equalsIgnoreCase(arenaFile.getWorldName())
                     && arena.getPlayers().contains(player)) {
                 if (settings.getAllCommands()) {
-                    for (String command : settings.getWhitelistedCommands())
-                        if (!event.getMessage().toLowerCase().startsWith("/" + command)) {
-                            event.setCancelled(true);
-                            sender.sendMessage(message.getNoCommand(), player);
-                        }
+                    for (String command : settings.getWhitelistedCommands()) {
+                        if (event.getMessage().toLowerCase().startsWith("/" + command))
+                            return;
+                    }
+                    event.setCancelled(true);
+                    sender.sendMessage(message.getNoCommand(), player);
 
                 } else
                     for (String command : settings.getBlacklistedCommands())
@@ -73,5 +77,25 @@ public class CommandEvent implements Listener {
             }
         }
 
+    }
+
+    @EventHandler
+    public void onInvOpen(InventoryOpenEvent event) {
+
+        if (!arena.isStatut(ArenaStatuts.IDLE) && settings.getInventory()) {
+
+            Player player = (Player) event.getPlayer();
+
+            if (player.getLocation().getWorld().getName().equalsIgnoreCase(arenaFile.getWorldName())
+                    && arena.getPlayers().contains(player)) {
+
+                if (!(event.getInventory() instanceof PlayerInventory)) {
+
+                    event.getPlayer().closeInventory();
+                    event.setCancelled(true);
+
+                }
+            }
+        }
     }
 }
