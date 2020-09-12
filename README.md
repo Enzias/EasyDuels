@@ -7,7 +7,7 @@ EasyDuels is a plugin for **spigot servers** (1.12 - 1.16.2), offering a **new 1
 
 * A single arena for your players to fight in 1v1.
 * Supports your language (fully customizable messages).
-* Supports 1.12 to 1.16.2.
+* Supports 1.12 to 1.16.3.
 * A lot of configurable settings.
 * Fully customizable timer & countdown (never seen before)!
 
