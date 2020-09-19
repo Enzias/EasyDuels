@@ -19,5 +19,6 @@ Leave a review [here](https://www.spigotmc.org/resources/%E2%9A%94%EF%B8%8Feasyd
 
 ## Links
 * [Download](https://www.spigotmc.org/resources/%E2%9A%94%EF%B8%8Feasyduels%E2%9A%94%EF%B8%8F-a-complete-1v1-system-1-12-x-1-16-x.83031/) (Spigot) **Now available** 
+* [Discord Server](https://discord.gg/pQyzSZv)
 * [Wiki](https://github.com/Enzias/EasyDuels/wiki)
 * [Report an Issue](https://github.com/Enzias/EasyDuels/issues)
