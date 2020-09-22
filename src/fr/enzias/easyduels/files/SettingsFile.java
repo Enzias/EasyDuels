@@ -45,8 +45,8 @@ public class SettingsFile {
     }
 
     public void reload(){
-        save();
         settingsConfig = YamlConfiguration.loadConfiguration(settingsFile);
+        save();
     }
 
     public FileConfiguration getConfig(){
