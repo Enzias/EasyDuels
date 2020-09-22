@@ -35,12 +35,13 @@ public class AdminCommand extends SubCommand {
         this.vaultHook = plugin.getVaultHook();
         this.commands.add(new FirstSpawnCommand(plugin));
         this.commands.add(new SecondSpawnCommand(plugin));
+        this.commands.add(new LobbyCommand(plugin));
+        this.commands.add(new SpectateCommand(plugin));
         this.commands.add(new HelpCommand(plugin));
         this.commands.add(new ReloadCommand(plugin));
         this.commands.add(new LockCommand(plugin));
         this.commands.add(new QueueCommand(plugin));
     }
-
     @Override
     public void onCommand(Player player, String[] args) {
 
