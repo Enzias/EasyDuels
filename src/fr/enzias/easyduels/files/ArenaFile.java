@@ -188,13 +188,13 @@ public class ArenaFile {
     public void setSpectateLocation(Location location){
 
         setWorldName(location.getWorld().getName());
-        setSpectateLocation(syntax.locToString(location));
+        setSpectateLocation1(syntax.locToString(location));
         setSpectateYaw(location.getYaw());
         setSpectatePitch(location.getPitch());
 
     }
 
-    public void setSpectateLocation(String location2){
+    public void setSpectateLocation1(String location2){
         getConfig().set("arena.spectate.xyz", location2);
     }
 
@@ -243,7 +243,7 @@ public class ArenaFile {
     public void setLobbyLocation(Location location){
 
         setLobbyWorldName(location.getWorld().getName());
-        setLobbyLocation(syntax.locToString(location));
+        setLobbyLocation1(syntax.locToString(location));
         setLobbyYaw(location.getYaw());
         setLobbyPitch(location.getPitch());
 
@@ -253,7 +253,7 @@ public class ArenaFile {
         getConfig().set("lobby.world", worldName);
     }
 
-    public void setLobbyLocation(String location1){
+    public void setLobbyLocation1(String location1){
         getConfig().set("lobby.xyz", location1);
     }
 
