@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 public class SettingsFile {
@@ -60,17 +61,23 @@ public class SettingsFile {
     }
 
     public List<String> getAliases(){
-        return getConfig().getStringList("settings.command-aliases");
+        if(getConfig().contains("settings.command-aliases"))
+            return getConfig().getStringList("settings.command-aliases");
+        else return Arrays.asList("easyduel", "ed", "duel", "duels");
     }
 
     //Blocked Commands
 
     public boolean getAllCommands(){
-        return getConfig().getBoolean("settings.blocked-commands.all");
+        if(getConfig().contains("settings.blocked-commands.all"))
+            return getConfig().getBoolean("settings.blocked-commands.all");
+        else return false;
     }
 
     public boolean getInventory(){
-        return getConfig().getBoolean("settings.blocked-commands.inventory");
+        if(getConfig().contains("settings.blocked-commands.inventory"))
+            return getConfig().getBoolean("settings.blocked-commands.inventory");
+        else return false;
     }
 
     public List<String> getBlacklistedCommands(){
@@ -84,11 +91,16 @@ public class SettingsFile {
     //queue
 
     public boolean getQueue(){
-        return getConfig().getBoolean("settings.queue.enable");
+        if(getConfig().contains("settings.queue.enable"))
+            return getConfig().getBoolean("settings.queue.enable");
+        else
+            return false;
     }
 
     public int getQueueMaxPlayers(){
-        return getConfig().getInt("settings.queue.max-players");
+        if(getConfig().contains("settings.queue.max-players"))
+            return getConfig().getInt("settings.queue.max-players");
+        else return 30;
     }
 
     public boolean checkQueueJoin(){
@@ -227,7 +239,10 @@ public class SettingsFile {
     //Money Bet
 
     public boolean getMoneyBet(){
-        return getConfig().getBoolean("settings.money-bet.enable");
+        if(getConfig().contains("settings.money-bet.enable"))
+            return getConfig().getBoolean("settings.money-bet.enable");
+        else
+            return false;
     }
 
     public int getMinAmount(){
@@ -246,24 +261,32 @@ public class SettingsFile {
     //Timer
 
     public boolean getSyncTimer() {
-       return getConfig().contains("settings.timer.sync-timer");
+        if(getConfig().contains("settings.timer.sync-timer"))
+            return getConfig().contains("settings.timer.sync-timer");
+        else return true;
     }
 
 
     //Request
 
     public int getExpirationRequest(){
+        if(getConfig().contains("settings.timer.request.expiration"))
             return getConfig().getInt("settings.timer.request.expiration");
+        else return 30;
     }
 
     //Lobby
 
     public int getLobbyTime(){
-        return getConfig().getInt("settings.timer.lobby.duration");
+        if(getConfig().contains("settings.timer.lobby.duration"))
+            return getConfig().getInt("settings.timer.lobby.duration");
+        else return 10;
     }
 
     public boolean getPreventMove(){
-        return getConfig().getBoolean("settings.timer.lobby.prevent-move");
+        if(getConfig().contains("settings.timer.lobby.prevent-move"))
+            return getConfig().getBoolean("settings.timer.lobby.prevent-move");
+        else return false;
     }
 
     public boolean checkLobbyTime(int i){
@@ -333,11 +356,15 @@ public class SettingsFile {
     //Fight
 
     public int getFightTime(){
-        return getConfig().getInt("settings.timer.fight.duration");
+        if(getConfig().contains("settings.timer.fight.duration"))
+            return getConfig().getInt("settings.timer.fight.duration");
+        else return 300;
     }
 
     public String getFightGameMode(){
-        return getConfig().getString("settings.timer.fight.gamemode");
+        if(getConfig().contains("settings.timer.fight.gamemode"))
+            return getConfig().getString("settings.timer.fight.gamemode");
+        return "SURVIVAL";
     }
 
     public boolean checkFightTime(int i){
@@ -411,11 +438,15 @@ public class SettingsFile {
     //End - Reloading
 
     public int getEndTime(){
-        return getConfig().getInt("settings.timer.end.duration");
+        if(getConfig().contains("settings.timer.end.duration"))
+            return getConfig().getInt("settings.timer.end.duration");
+        else return 10;
     }
 
     public String getEndGameMode(){
-        return getConfig().getString("settings.timer.end.gamemode");
+        if(getConfig().contains("settings.timer.end.gamemode"))
+            return getConfig().getString("settings.timer.end.gamemode");
+        else return "SURVIVAL";
     }
 
     public boolean getResultMessage(){
