@@ -63,19 +63,27 @@ public class ArenaFile {
     }
 
     public String getWorldName(){
-        return getConfig().getString("arena.world");
+        if(getConfig().contains("arena.world"))
+            return getConfig().getString("arena.world");
+        return "world";
     }
 
     public String getCoordinates1(){
-        return getConfig().getString("arena.spawnpoints.spawn1.xyz");
+        if(getConfig().contains("arena.spawnpoints.spawn1.xyz"))
+            return getConfig().getString("arena.spawnpoints.spawn1.xyz");
+        return "0/0/0";
     }
 
     public float getYaw1(){
-        return getConfig().getInt("arena.spawnpoints.spawn1.yaw");
+        if(getConfig().contains("arena.spawnpoints.spawn1.yaw"))
+            return getConfig().getInt("arena.spawnpoints.spawn1.yaw");
+        return 90.0f;
     }
 
     public float getPitch1(){
-        return getConfig().getInt("arena.spawnpoints.spawn1.pitch");
+        if(getConfig().contains("arena.spawnpoints.spawn1.pitch"))
+            return getConfig().getInt("arena.spawnpoints.spawn1.pitch");
+        return 0;
     }
 
     public Location getSecondLocation(){
@@ -84,15 +92,21 @@ public class ArenaFile {
     }
 
     public String getCoordinates2(){
-        return getConfig().getString("arena.spawnpoints.spawn2.xyz");
+        if(getConfig().contains("arena.spawnpoints.spawn2.xyz"))
+            return getConfig().getString("arena.spawnpoints.spawn2.xyz");
+        return "0/0/0";
     }
 
     public float getYaw2(){
-        return getConfig().getInt("arena.spawnpoints.spawn2.yaw");
+        if(getConfig().contains("arena.spawnpoints.spawn2.yaw"))
+            return getConfig().getInt("arena.spawnpoints.spawn2.yaw");
+        return 90.0f;
     }
 
     public float getPitch2(){
-        return getConfig().getInt("arena.spawnpoints.spawn2.pitch");
+        if(getConfig().contains("arena.spawnpoints.spawn2.pitch"))
+            return getConfig().getInt("arena.spawnpoints.spawn2.pitch");
+        return 0;
     }
 
     //Arena Settings --> Setters
@@ -143,5 +157,111 @@ public class ArenaFile {
         getConfig().set("arena.spawnpoints.spawn2.pitch", pitch2);
     }
 
+    //spectate
 
+    public String getCoordinatesSpectate(){
+        if(getConfig().contains("arena.spectate.xyz"))
+            return getConfig().getString("arena.spectate.xyz");
+        return "0/0/0";
+    }
+
+    public float getYawSpectate(){
+        if(getConfig().contains("arena.spectate.yaw"))
+            return getConfig().getInt("arena.spectate.yaw");
+        return 90.0f;
+    }
+
+    public float getPitchSpectate(){
+        if(getConfig().contains("arena.spectate.pitch"))
+            return getConfig().getInt("arena.spectate.pitch");
+        return 0;
+    }
+
+    public Location getSpectateLocation(){
+        return new Location(Bukkit.createWorld(new WorldCreator(getWorldName()))
+                , syntax.stringToLoc(getCoordinatesSpectate()).getX()
+                , syntax.stringToLoc(getCoordinatesSpectate()).getY()
+                , syntax.stringToLoc(getCoordinatesSpectate()).getZ()
+                , getYawSpectate(), getPitchSpectate());
+    }
+
+    public void setSpectateLocation(Location location){
+
+        setWorldName(location.getWorld().getName());
+        setSpectateLocation(syntax.locToString(location));
+        setSpectateYaw(location.getYaw());
+        setSpectatePitch(location.getPitch());
+
+    }
+
+    public void setSpectateLocation(String location2){
+        getConfig().set("arena.spectate.xyz", location2);
+    }
+
+    public void setSpectateYaw(Float yaw2){
+        getConfig().set("arena.spectate.yaw", yaw2);
+    }
+
+    public void setSpectatePitch(Float pitch2){
+        getConfig().set("arena.spectate.pitch", pitch2);
+    }
+
+    //lobby
+
+    public String getLobbyWorldName(){
+        if(getConfig().contains("lobby.world"))
+            return getConfig().getString("lobby.world");
+        return "world";
+    }
+
+    public String getCoordinatesLobby(){
+        if(getConfig().contains("lobby.xyz"))
+            return getConfig().getString("lobby.xyz");
+        return "0/0/0";
+    }
+
+    public float getYawLobby(){
+        if(getConfig().contains("lobby.yaw"))
+            return getConfig().getInt("lobby.yaw");
+        return 90.0f;
+    }
+
+    public float getPitchLobby(){
+        if(getConfig().contains("lobby.pitch"))
+            return getConfig().getInt("lobby.pitch");
+        return 0;
+    }
+
+    public Location getLobbyLocation(){
+        return new Location(Bukkit.createWorld(new WorldCreator(getLobbyWorldName()))
+                , syntax.stringToLoc(getCoordinatesLobby()).getX()
+                , syntax.stringToLoc(getCoordinatesLobby()).getY()
+                , syntax.stringToLoc(getCoordinatesLobby()).getZ()
+                , getYawLobby(), getPitchLobby());
+    }
+
+    public void setLobbyLocation(Location location){
+
+        setLobbyWorldName(location.getWorld().getName());
+        setLobbyLocation(syntax.locToString(location));
+        setLobbyYaw(location.getYaw());
+        setLobbyPitch(location.getPitch());
+
+    }
+
+    public void setLobbyWorldName(String worldName){
+        getConfig().set("lobby.world", worldName);
+    }
+
+    public void setLobbyLocation(String location1){
+        getConfig().set("lobby.xyz", location1);
+    }
+
+    public void setLobbyYaw(Float yaw1){
+        getConfig().set("lobby.yaw", yaw1);
+    }
+
+    public void setLobbyPitch(Float pitch1){
+        getConfig().set("lobby.pitch", pitch1);
+    }
 }
