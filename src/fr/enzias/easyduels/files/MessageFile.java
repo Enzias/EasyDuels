@@ -43,8 +43,8 @@ public class MessageFile {
     }
 
     public void reload(){
-        save();
         messageConfig = YamlConfiguration.loadConfiguration(messageFile);
+        save();
     }
 
     public FileConfiguration getConfig(){
@@ -358,6 +358,18 @@ public class MessageFile {
         if(getConfig().contains("messages.admin.set-spawn-2"))
             return getConfig().getString("messages.admin.set-spawn-2");
         else return "&f[&6&lEasy&c&lDuels&f] &aThe second spawn has been set to your location.";
+    }
+
+    public String getSetLobby(){
+        if(getConfig().contains("messages.admin.set-lobby"))
+            return getConfig().getString("messages.admin.set-lobby");
+        else return "&f[&6&lEasy&c&lDuels&f] &aThe lobby has been set to your location.";
+    }
+
+    public String getSetSpectate(){
+        if(getConfig().contains("messages.admin.set-spectate"))
+            return getConfig().getString("messages.admin.set-spectate");
+        else return "&f[&6&lEasy&c&lDuels&f] &aThe spectate spawn has been set to your location.";
     }
 
     public String getReloaded(){
