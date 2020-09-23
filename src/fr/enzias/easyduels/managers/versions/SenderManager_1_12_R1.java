@@ -33,8 +33,10 @@ public class SenderManager_1_12_R1 implements SenderManager {
     }
 
     public void sendMessage(String message, Player... players){
+        if(message.isEmpty())
+            return;
         for(Player player : players)
-        player.sendMessage(syntax.coloredMessage(message));
+            player.sendMessage(syntax.coloredMessage(message));
     }
 
     public void sendMessage(List<String> list, Player... players){
@@ -162,7 +164,9 @@ public class SenderManager_1_12_R1 implements SenderManager {
         }
     }
 
-    public void sendHover(String acceptMessage, String denyMessage, String acceptHover, String denyHover, String target, Player player){
+    public void sendHover(String acceptMessage, String denyMessage, String acceptHover, String denyHover, String before, String between, String after,String target, Player player){
+        TextComponent base = new TextComponent(syntax.coloredMessage(before));
+
         TextComponent accept = new TextComponent(syntax.coloredMessage(acceptMessage));
         accept.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(syntax.coloredMessage(acceptHover)).create()));
         accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/easyduels accept " + target));
@@ -171,7 +175,10 @@ public class SenderManager_1_12_R1 implements SenderManager {
         deny.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(syntax.coloredMessage(denyHover)).create()));
         deny.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/easyduels deny " + target));
 
-        accept.addExtra(deny);
+        base.addExtra(accept);
+        base.addExtra(between);
+        base.addExtra(deny);
+        base.addExtra(after);
 
         player.spigot().sendMessage(accept);
     }
