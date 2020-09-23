@@ -3,6 +3,7 @@ package fr.enzias.easyduels.queue;
 import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.arena.Arena;
 import fr.enzias.easyduels.arena.ArenaStatuts;
+import fr.enzias.easyduels.arena.Spectate;
 import fr.enzias.easyduels.files.SettingsFile;
 import fr.enzias.easyduels.managers.SenderManager;
 import fr.enzias.easyduels.utils.DuelPlayerCache;
@@ -13,6 +14,7 @@ public class QueueManager {
 
     private final EasyDuels plugin;
     Arena arena;
+    Spectate spectate;
     Queue queue;
     SenderManager sender;
     SettingsFile settings;
@@ -20,6 +22,7 @@ public class QueueManager {
     public QueueManager(EasyDuels plugin) {
         this.plugin = plugin;
         this.arena = plugin.getArena();
+        this.spectate = plugin.getSpectate();
         this.settings = plugin.getSettingsFile();
         this.queue = new Queue(plugin);
         this.sender = plugin.getSender();
@@ -74,6 +77,11 @@ public class QueueManager {
 
             }
             if(target != null && player != null) {
+
+                if(spectate.isSpectating(target))
+                    spectate.finishSpectating(target);
+                if(spectate.isSpectating(player))
+                    spectate.finishSpectating(player);
 
                 if(settings.getMoneyBet() && queue.getCache(player).hasBet()) {
                     arena.setBet(queue.getCache(player).getBet());
