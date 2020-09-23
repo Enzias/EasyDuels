@@ -80,6 +80,12 @@ public class CommandManager implements CommandExecutor {
 
                                 Player target = Bukkit.getPlayer(args[0]);
 
+                                if (target.getLocation().getWorld().getName().equalsIgnoreCase(arenaFile.getWorldName())
+                                        && arena.getPlayers().contains(target)){
+                                    sender.sendMessage(messageFile.getPlayerInDuel().replaceAll("%player%", target.getName()), player);
+                                    return true;
+                                }
+
                                 if(args.length == 2) {
                                     if (vaultHook.isNotNull() && settingsFile.getMoneyBet()) {
                                         if(player.hasPermission("easyduels.money")) {
@@ -99,7 +105,9 @@ public class CommandManager implements CommandExecutor {
                                                                 sender.sendMessage(messageFile.getDuelRequest().replaceAll("%player%", player.getName()), target);
                                                                 sender.sendMessage(messageFile.getDuelBetRequest().replaceAll("%amount%", Integer.toString(amount)), target);
                                                                 sender.sendHover(messageFile.getAcceptButton(), messageFile.getDenyButton(),
-                                                                        messageFile.getAcceptHover(), messageFile.getDenyHover(), player.getName(), target);
+                                                                        messageFile.getAcceptHover(), messageFile.getDenyHover(),
+                                                                        messageFile.getBeforeAccept(), messageFile.getBetweenButtons(),
+                                                                        messageFile.getAfterDeny(), player.getName(), target);
                                                                 sender.sendMessage(messageFile.getRequestSent().replaceAll("%player%", target.getName()), player);
 
                                                             } else {
@@ -128,7 +136,9 @@ public class CommandManager implements CommandExecutor {
 
                                 sender.sendMessage(messageFile.getDuelRequest().replaceAll("%player%", player.getName()), target);
                                 sender.sendHover(messageFile.getAcceptButton(), messageFile.getDenyButton(),
-                                        messageFile.getAcceptHover(), messageFile.getDenyHover(), player.getName(), target);
+                                        messageFile.getAcceptHover(), messageFile.getDenyHover(),
+                                        messageFile.getBeforeAccept(), messageFile.getBetweenButtons(),
+                                        messageFile.getAfterDeny(), player.getName(), target);
                                 sender.sendMessage(messageFile.getRequestSent().replaceAll("%player%", target.getName()), player);
                             } else {
                                 sender.sendMessage(messageFile.getArenaIsLocked(), player);
