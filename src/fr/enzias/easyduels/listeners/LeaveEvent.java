@@ -4,6 +4,7 @@ package fr.enzias.easyduels.listeners;
 import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.arena.Arena;
 import fr.enzias.easyduels.arena.ArenaStatuts;
+import fr.enzias.easyduels.arena.Spectate;
 import fr.enzias.easyduels.files.ArenaFile;
 import fr.enzias.easyduels.files.SettingsFile;
 import fr.enzias.easyduels.managers.RequestManager;
@@ -21,6 +22,7 @@ public class LeaveEvent implements Listener {
     Arena arena;
     RequestManager request;
     QueueManager queue;
+    Spectate spectate;
     public LeaveEvent(EasyDuels plugin) {
         this.plugin = plugin;
         this.settings = plugin.getSettingsFile();
@@ -28,6 +30,7 @@ public class LeaveEvent implements Listener {
         this.arena = plugin.getArena();
         this.request = plugin.getRequest();
         this.queue = plugin.getQueue();
+        this.spectate = plugin.getSpectate();
     }
 
     @EventHandler
@@ -46,6 +49,13 @@ public class LeaveEvent implements Listener {
                 queue.tryGiveBackBoth(queue.getOpponentOf(player));
                 queue.deleteQueue(queue.getOpponentOf(player));
             }
+        }
+
+        if (!arena.isStatut(ArenaStatuts.IDLE)) {
+
+            if (player.getLocation().getWorld().getName().equalsIgnoreCase(arenaFile.getWorldName())
+                    && spectate.isSpectating(player))
+                spectate.finishSpectating(player);
         }
 
         if (arena.isStatut(ArenaStatuts.LOBBY) || arena.isStatut(ArenaStatuts.PLAYING)) {
