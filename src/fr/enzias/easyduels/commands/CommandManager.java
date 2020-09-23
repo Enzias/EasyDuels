@@ -8,6 +8,7 @@ import fr.enzias.easyduels.commands.SubCommands.AdminCommand.AdminCommand;
 import fr.enzias.easyduels.commands.SubCommands.DenyCommand.DenyCommand;
 import fr.enzias.easyduels.commands.SubCommands.HelpCommand;
 import fr.enzias.easyduels.commands.SubCommands.QueueCommand.QueueCommand;
+import fr.enzias.easyduels.commands.SubCommands.SpectateCommand.SpectateCommand;
 import fr.enzias.easyduels.files.ArenaFile;
 import fr.enzias.easyduels.files.MessageFile;
 import fr.enzias.easyduels.files.SettingsFile;
@@ -165,6 +166,8 @@ public class CommandManager implements CommandExecutor {
         this.commands.add(new DenyCommand(plugin));
         if(settingsFile.getQueue())
             this.commands.add(new QueueCommand(plugin));
+        if(settingsFile.getSpectate())
+            this.commands.add(new SpectateCommand(plugin));
         this.commands.add(new AdminCommand(plugin));
     }
 
