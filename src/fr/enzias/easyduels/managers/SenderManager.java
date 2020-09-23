@@ -30,7 +30,7 @@ public interface SenderManager {
 
     public void sendExplosion(Player player);
 
-    public void sendHover(String acceptMessage, String denyMessage, String acceptHover, String denyHover, String target, Player player);
+    public void sendHover(String acceptMessage, String denyMessage, String acceptHover, String denyHover, String before, String between, String after,String target, Player player);
 
     public void sendGameMode(String gameMode, boolean sync, Player... players);
 }
