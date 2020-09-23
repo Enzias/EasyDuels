@@ -63,9 +63,19 @@ public class AcceptCommand extends SubCommand {
 
                                     if (settingsFile.getQueue()) {
                                         if (queue.isNotFull()) {
-                                            queue.addQueueLast(player, target, amount);
-                                            vaultHook.takeBoth(amount, target, player);
-                                            queue.checkQueue();
+                                            if(!queue.isEmpty() || !arena.isStatut(ArenaStatuts.IDLE)) {
+                                                queue.addQueueLast(player, target, amount);
+                                                vaultHook.takeBoth(amount, target, player);
+                                                queue.checkQueue();
+                                            }else{
+                                                arena.setBet(amount);
+                                                vaultHook.takeBoth(amount, target, player);
+
+                                                arena.addToArena(target, player);
+                                                arena.setLastLocation(target, player);
+                                                arena.teleportToLocation(target, player, settingsFile.getSyncTimer());
+                                                arena.startMatch();
+                                            }
                                         } else
                                             sender.sendMessage(messageFile.getQueueIsFull(), player, target);
                                     } else {
