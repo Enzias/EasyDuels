@@ -133,6 +133,12 @@ public class MessageFile {
         else return "&f[&6&lEasy&c&lDuels&f] &cThe arena is not available at the moment!";
     }
 
+    public String getPlayerInDuel(){
+        if(getConfig().contains("messages.player.player-in-duel"))
+            return getConfig().getString("messages.player.player-in-duel");
+        else return "&f[&6&lEasy&c&lDuels&f] &cThe player &6%player% &cis in a duel!";
+    }
+
     public String getRequestSent(){
         if(getConfig().contains("messages.player.request-sent"))
             return getConfig().getString("messages.player.request-sent");
@@ -151,6 +157,12 @@ public class MessageFile {
         else return "&f[&6&lEasy&c&lDuels&f] &6By accepting this duel request, you will put &c%amount% &6coins at stake.";
     }
 
+    public String getBeforeAccept(){
+        if(getConfig().contains("messages.player.duel-request.before-accept-message"))
+            return getConfig().getString("messages.player.duel-request.before-accept-message");
+        else return "'&f[&6&lEasy&c&lDuels&f] &6Choose and option :'";
+    }
+
     public String getAcceptButton(){
         if(getConfig().contains("messages.player.duel-request.accept.button"))
             return getConfig().getString("messages.player.duel-request.accept.button");
@@ -161,6 +173,12 @@ public class MessageFile {
         if(getConfig().contains("messages.player.duel-request.accept.hover"))
             return getConfig().getString("messages.player.duel-request.accept.hover");
         else return "&aClick to accept the request !";
+    }
+
+    public String getBetweenButtons(){
+        if(getConfig().contains("messages.player.duel-request.between-buttons-message"))
+            return getConfig().getString("messages.player.duel-request.between-buttons-message");
+        else return " ";
     }
 
     public String getDenyButton(){
@@ -175,6 +193,12 @@ public class MessageFile {
         else return "&cClick to deny the request !";
     }
 
+    public String getAfterDeny(){
+        if(getConfig().contains("messages.player.duel-request.after-deny-message"))
+            return getConfig().getString("messages.player.duel-request.after-deny-message");
+        else return "&6!";
+    }
+
     public String getExpiredRequest(){
         if(getConfig().contains("messages.player.expired-request"))
             return getConfig().getString("messages.player.expired-request");
@@ -185,6 +209,12 @@ public class MessageFile {
         if(getConfig().contains("messages.player.no-command"))
             return getConfig().getString("messages.player.no-command");
         else return "&f[&6&lEasy&c&lDuels&f] &cYou can't use this command in duel!";
+    }
+
+    public String getNoCommandSpectate(){
+        if(getConfig().contains("messages.player.no-command-spectate"))
+            return getConfig().getString("messages.player.no-command-spectate");
+        else return "&f[&6&lEasy&c&lDuels&f] &cYou can''t use this command while spectating!";
     }
 
     public String getNoWinner(){
@@ -275,6 +305,42 @@ public class MessageFile {
         if(getConfig().contains("messages.player.invalid-amount"))
             return getConfig().getString("messages.player.invalid-amount");
         else return "&f[&6&lEasy&c&lDuels&f] &cPlease enter a valid bet amount!";
+    }
+
+    public String getNowSpectating(){
+        if(getConfig().contains("messages.player.now-spectating"))
+            return getConfig().getString("messages.player.now-spectating");
+        else return "&f[&6&lEasy&c&lDuels&f] &aYou are now spectating the duel.";
+    }
+
+    public String getNoSpectating(){
+        if(getConfig().contains("messages.player.no-spectating"))
+            return getConfig().getString("messages.player.no-spectating");
+        else return "&f[&6&lEasy&c&lDuels&f] &aYou are no longer spectating the duel.";
+    }
+
+    public String getSpectateInDuel(){
+        if(getConfig().contains("messages.player.spectate-in-duel"))
+            return getConfig().getString("messages.player.spectate-in-duel");
+        else return "&f[&6&lEasy&c&lDuels&f] &cYou can''t spectate a match while you are in a duel!";
+    }
+
+    public String getAlreadySpectating(){
+        if(getConfig().contains("messages.player.already-spectating"))
+            return getConfig().getString("messages.player.already-spectating");
+        else return "&f[&6&lEasy&c&lDuels&f] &cYou are already spectating the duel!";
+    }
+
+    public String getNotSpectating(){
+        if(getConfig().contains("messages.player.not-spectating"))
+            return getConfig().getString("messages.player.not-spectating");
+        else return "&f[&6&lEasy&c&lDuels&f] &cYou are not spectating the duel!";
+    }
+
+    public String getNoDuel(){
+        if(getConfig().contains("messages.player.no-duel"))
+            return getConfig().getString("messages.player.no-duel");
+        else return "&f[&6&lEasy&c&lDuels&f] &cThere is no duel to spectate!";
     }
 
     //Admin
