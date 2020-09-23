@@ -3,6 +3,7 @@ package fr.enzias.easyduels.commands.SubCommands.AcceptCommand;
 import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.arena.Arena;
 import fr.enzias.easyduels.arena.ArenaStatuts;
+import fr.enzias.easyduels.arena.Spectate;
 import fr.enzias.easyduels.commands.SubCommand;
 import fr.enzias.easyduels.files.MessageFile;
 import fr.enzias.easyduels.files.SettingsFile;
@@ -16,6 +17,7 @@ import org.bukkit.entity.Player;
 public class AcceptCommand extends SubCommand {
 
     Arena arena;
+    Spectate spectate;
     MessageFile messageFile;
     SettingsFile settingsFile;
     RequestManager request;
@@ -26,6 +28,7 @@ public class AcceptCommand extends SubCommand {
     public AcceptCommand(EasyDuels plugin) {
         super(plugin);
         this.arena = plugin.getArena();
+        this.spectate = plugin.getSpectate();
         this.request = plugin.getRequest();
         this.messageFile = plugin.getMessageFile();
         this.settingsFile = plugin.getSettingsFile();
@@ -68,6 +71,11 @@ public class AcceptCommand extends SubCommand {
                                                 vaultHook.takeBoth(amount, target, player);
                                                 queue.checkQueue();
                                             }else{
+                                                if(spectate.isSpectating(target))
+                                                    spectate.finishSpectating(target);
+                                                if(spectate.isSpectating(player))
+                                                    spectate.finishSpectating(player);
+
                                                 arena.setBet(amount);
                                                 vaultHook.takeBoth(amount, target, player);
 
@@ -82,6 +90,11 @@ public class AcceptCommand extends SubCommand {
                                         if (!arena.isStatut(ArenaStatuts.IDLE))
                                             sender.sendMessage(messageFile.getArenaNotEmpty(), player, target);
                                         else {
+
+                                            if(spectate.isSpectating(target))
+                                                spectate.finishSpectating(target);
+                                            if(spectate.isSpectating(player))
+                                                spectate.finishSpectating(player);
 
                                             arena.setBet(amount);
                                             vaultHook.takeBoth(amount, target, player);
@@ -116,6 +129,11 @@ public class AcceptCommand extends SubCommand {
                             if (!arena.isStatut(ArenaStatuts.IDLE))
                                 sender.sendMessage(messageFile.getArenaNotEmpty(), player, target);
                             else {
+
+                                if(spectate.isSpectating(target))
+                                    spectate.finishSpectating(target);
+                                if(spectate.isSpectating(player))
+                                    spectate.finishSpectating(player);
 
                                 arena.addToArena(target, player);
                                 arena.setLastLocation(target, player);
