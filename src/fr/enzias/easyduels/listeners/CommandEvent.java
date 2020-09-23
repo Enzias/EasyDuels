@@ -3,6 +3,7 @@ package fr.enzias.easyduels.listeners;
 import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.arena.Arena;
 import fr.enzias.easyduels.arena.ArenaStatuts;
+import fr.enzias.easyduels.arena.Spectate;
 import fr.enzias.easyduels.files.ArenaFile;
 import fr.enzias.easyduels.files.MessageFile;
 import fr.enzias.easyduels.files.SettingsFile;
@@ -26,6 +27,7 @@ public class CommandEvent implements Listener {
     private ArenaFile arenaFile;
     private SenderManager sender;
     private Arena arena;
+    private Spectate spectate;
 
     public CommandEvent(EasyDuels plugin) {
         this.plugin = plugin;
@@ -34,6 +36,7 @@ public class CommandEvent implements Listener {
         this.arenaFile = plugin.getArenaFile();
         this.sender = plugin.getSender();
         this.arena = plugin.getArena();
+        this.spectate = plugin.getSpectate();
     }
 
     @EventHandler (priority = EventPriority.LOWEST)
@@ -42,6 +45,24 @@ public class CommandEvent implements Listener {
         if (!arena.isStatut(ArenaStatuts.IDLE)) {
 
             Player player = event.getPlayer();
+
+            if(player.getLocation().getWorld().getName().equalsIgnoreCase(arenaFile.getWorldName())
+                    && spectate.isSpectating(player)){
+                if (settings.getSpectateAllCommands()) {
+                    for (String command : settings.getSpectateWhitelistedCommands()) {
+                        if (event.getMessage().toLowerCase().startsWith("/" + command))
+                            return;
+                    }
+                    event.setCancelled(true);
+                    sender.sendMessage(message.getNoCommandSpectate(), player);
+
+                } else
+                    for (String command : settings.getSpectateBlacklistedCommands())
+                        if (event.getMessage().toLowerCase().startsWith("/" + command)) {
+                            event.setCancelled(true);
+                            sender.sendMessage(message.getNoCommandSpectate(), player);
+                        }
+            }
 
             if (player.getLocation().getWorld().getName().equalsIgnoreCase(arenaFile.getWorldName())
                     && arena.getPlayers().contains(player)) {
@@ -81,6 +102,21 @@ public class CommandEvent implements Listener {
 
     @EventHandler
     public void onInvOpen(InventoryOpenEvent event) {
+
+        if (!arena.isStatut(ArenaStatuts.IDLE)) {
+
+            Player player = (Player) event.getPlayer();
+
+            if (player.getLocation().getWorld().getName().equalsIgnoreCase(arenaFile.getWorldName())
+                    && spectate.isSpectating(player)) {
+                if (!(event.getInventory() instanceof PlayerInventory)) {
+
+                    event.getPlayer().closeInventory();
+                    event.setCancelled(true);
+
+                }
+            }
+        }
 
         if (!arena.isStatut(ArenaStatuts.IDLE) && settings.getInventory()) {
 
