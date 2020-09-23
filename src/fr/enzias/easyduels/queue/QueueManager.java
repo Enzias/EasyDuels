@@ -30,6 +30,10 @@ public class QueueManager {
         return queue.getQueueLength() != settings.getQueueMaxPlayers();
     }
 
+    public boolean isEmpty(){
+        return queue.getQueueLength() == 0;
+    }
+
     public void addQueueLast(Player player, Player opponent){
         DuelPlayerCache cache = new DuelPlayerCache(opponent, -1);
         queue.add(player, cache);
