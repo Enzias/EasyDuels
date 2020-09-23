@@ -1,6 +1,7 @@
 package fr.enzias.easyduels;
 
 import fr.enzias.easyduels.arena.Arena;
+import fr.enzias.easyduels.arena.Spectate;
 import fr.enzias.easyduels.commands.CommandManager;
 import fr.enzias.easyduels.files.ArenaFile;
 import fr.enzias.easyduels.files.MessageFile;
@@ -20,6 +21,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class EasyDuels extends JavaPlugin {
 
     Arena arena;
+    Spectate spectate;
     RequestManager request;
     QueueManager queue;
     ArenaFile arenaFile;
@@ -59,8 +61,9 @@ public class EasyDuels extends JavaPlugin {
     }
 
     private void setupObject(){
-        arena = new Arena(this, arenaFile.getFirstLocation(), arenaFile.getSecondLocation(),
+        arena = new Arena(this, arenaFile.getFirstLocation(), arenaFile.getSecondLocation(), arenaFile.getLobbyLocation(),
                 settingsFile.getLobbyTime(), settingsFile.getFightTime(), settingsFile.getEndTime());
+        spectate = new Spectate(this, arenaFile.getSpectateLocation());
         vaultHook = new VaultHook(this);
         request = new RequestManager(this);
         queue = new QueueManager(this);
@@ -147,6 +150,10 @@ public class EasyDuels extends JavaPlugin {
 
     public Arena getArena(){
         return arena;
+    }
+
+    public Spectate getSpectate() {
+        return spectate;
     }
 
     public RequestManager getRequest() {
