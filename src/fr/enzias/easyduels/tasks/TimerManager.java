@@ -3,6 +3,7 @@ package fr.enzias.easyduels.tasks;
 import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.arena.Arena;
 import fr.enzias.easyduels.arena.ArenaStatuts;
+import fr.enzias.easyduels.arena.Spectate;
 import fr.enzias.easyduels.files.SettingsFile;
 import fr.enzias.easyduels.managers.CountdownManager;
 import fr.enzias.easyduels.queue.QueueManager;
@@ -16,6 +17,7 @@ public class TimerManager extends BukkitRunnable {
     SettingsFile settings;
     QueueManager queue;
     CountdownManager countdown;
+    Spectate spectate;
     int lobbyTime;
     int fightTime;
     int reloadTime;
@@ -28,6 +30,7 @@ public class TimerManager extends BukkitRunnable {
         this.lobbyTime = arena.getLobbyTime();
         this.fightTime = arena.getPlayingTime();
         this.reloadTime = arena.getReloadingTime();
+        this.spectate = plugin.getSpectate();
     }
 
     @Override
@@ -83,6 +86,7 @@ public class TimerManager extends BukkitRunnable {
                     });
                 }
 
+                spectate.endMatch();
                 arena.resetArena();
                 arena.setStatut(ArenaStatuts.IDLE);
                 if(settings.getQueue())
