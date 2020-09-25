@@ -166,12 +166,14 @@ public class SenderManager_1_12_R1 implements SenderManager {
 
     public void sendHover(String acceptMessage, String denyMessage, String acceptHover, String denyHover, String before, String target, Player player){
         TextComponent base = new TextComponent("");
-        String[] split = before.split(" ");
-        for(int i=0; i < split.length; i++){
-            TextComponent a = new TextComponent(syntax.coloredMessage(split[i]));
-            base.addExtra(a); base.addExtra(" ");
+        if(!before.isEmpty()) {
+            String[] split = before.split(" ");
+            for (int i = 0; i < split.length; i++) {
+                TextComponent a = new TextComponent(syntax.coloredMessage(split[i]));
+                base.addExtra(a);
+                base.addExtra(" ");
+            }
         }
-
         TextComponent accept = new TextComponent(syntax.coloredMessage(acceptMessage));
         accept.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(syntax.coloredMessage(acceptHover)).create()));
         accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/easyduels accept " + target));
