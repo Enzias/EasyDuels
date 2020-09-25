@@ -82,7 +82,7 @@ public class CommandManager implements CommandExecutor {
                                 Player target = Bukkit.getPlayer(args[0]);
 
                                 if (target.getLocation().getWorld().getName().equalsIgnoreCase(arenaFile.getWorldName())
-                                        && arena.getPlayers().contains(target)){
+                                        && arena.getPlayers().contains(target) && !arena.isStatut(ArenaStatuts.IDLE)){
                                     sender.sendMessage(messageFile.getPlayerInDuel().replaceAll("%player%", target.getName()), player);
                                     return true;
                                 }
@@ -107,8 +107,7 @@ public class CommandManager implements CommandExecutor {
                                                                 sender.sendMessage(messageFile.getDuelBetRequest().replaceAll("%amount%", Integer.toString(amount)), target);
                                                                 sender.sendHover(messageFile.getAcceptButton(), messageFile.getDenyButton(),
                                                                         messageFile.getAcceptHover(), messageFile.getDenyHover(),
-                                                                        messageFile.getBeforeAccept(), messageFile.getBetweenButtons(),
-                                                                        messageFile.getAfterDeny(), player.getName(), target);
+                                                                        messageFile.getBeforeAccept(), player.getName(), target);
                                                                 sender.sendMessage(messageFile.getRequestSent().replaceAll("%player%", target.getName()), player);
 
                                                             } else {
@@ -138,8 +137,7 @@ public class CommandManager implements CommandExecutor {
                                 sender.sendMessage(messageFile.getDuelRequest().replaceAll("%player%", player.getName()), target);
                                 sender.sendHover(messageFile.getAcceptButton(), messageFile.getDenyButton(),
                                         messageFile.getAcceptHover(), messageFile.getDenyHover(),
-                                        messageFile.getBeforeAccept(), messageFile.getBetweenButtons(),
-                                        messageFile.getAfterDeny(), player.getName(), target);
+                                        messageFile.getBeforeAccept(), player.getName(), target);
                                 sender.sendMessage(messageFile.getRequestSent().replaceAll("%player%", target.getName()), player);
                             } else {
                                 sender.sendMessage(messageFile.getArenaIsLocked(), player);
