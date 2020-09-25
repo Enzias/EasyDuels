@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Spectate {
 
@@ -36,11 +37,11 @@ public class Spectate {
     }
 
     public void setSpectating(Player player) {
-        spectators.add(player);
         sender.sendMessage(message.getNowSpectating(), player);
         locations.put(player, player.getLocation());
         teleportToSpectate(player);
         sender.sendGameMode(settings.getSpectateGamemode(), settings.getSyncTimer(), player);
+        spectators.add(player);
     }
 
     public void finishSpectating(Player player) {
@@ -51,10 +52,11 @@ public class Spectate {
     }
 
     public void endMatch() {
-        for (Player player : spectators) {
+        for (Iterator<Player> iterator = spectators.iterator(); iterator.hasNext();) {
+            Player player = iterator.next();
             sender.sendGameMode(settings.getAfterSpectateGamemode(), settings.getSyncTimer(), player);
             sender.sendMessage(message.getNoSpectating(), player);
-            spectators.remove(player);
+            iterator.remove();
             teleportToLastLocation(player);
         }
     }
