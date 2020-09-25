@@ -158,9 +158,9 @@ public class MessageFile {
     }
 
     public String getBeforeAccept(){
-        if(getConfig().contains("messages.player.duel-request.before-accept-message"))
-            return getConfig().getString("messages.player.duel-request.before-accept-message");
-        else return "'&f[&6&lEasy&c&lDuels&f] &6Choose and option :'";
+        if(getConfig().contains("messages.player.duel-request.before-button-message"))
+            return getConfig().getString("messages.player.duel-request.before-button-message");
+        else return "&f[&6&lEasy&c&lDuels&f] &6Choose &6an &6option: ";
     }
 
     public String getAcceptButton(){
@@ -175,12 +175,6 @@ public class MessageFile {
         else return "&aClick to accept the request !";
     }
 
-    public String getBetweenButtons(){
-        if(getConfig().contains("messages.player.duel-request.between-buttons-message"))
-            return getConfig().getString("messages.player.duel-request.between-buttons-message");
-        else return " ";
-    }
-
     public String getDenyButton(){
         if(getConfig().contains("messages.player.duel-request.deny.button"))
             return getConfig().getString("messages.player.duel-request.deny.button");
@@ -191,12 +185,6 @@ public class MessageFile {
         if(getConfig().contains("messages.player.duel-request.deny.hover"))
             return getConfig().getString("messages.player.duel-request.deny.hover");
         else return "&cClick to deny the request !";
-    }
-
-    public String getAfterDeny(){
-        if(getConfig().contains("messages.player.duel-request.after-deny-message"))
-            return getConfig().getString("messages.player.duel-request.after-deny-message");
-        else return "&6!";
     }
 
     public String getExpiredRequest(){
