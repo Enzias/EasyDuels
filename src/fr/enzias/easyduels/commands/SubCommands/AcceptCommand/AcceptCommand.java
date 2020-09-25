@@ -120,9 +120,21 @@ public class AcceptCommand extends SubCommand {
                         request.deleteRequest(target);
 
                         if (settingsFile.getQueue()) {
-                            if (queue.isNotFull()) {
-                                queue.addQueueLast(player, target);
-                                queue.checkQueue();
+                            if (queue.isNotFull()){
+                                if(!queue.isEmpty() || !arena.isStatut(ArenaStatuts.IDLE)) {
+                                    queue.addQueueLast(player, target);
+                                    queue.checkQueue();
+                                }else{
+                                    if(spectate.isSpectating(target))
+                                        spectate.finishSpectating(target);
+                                    if(spectate.isSpectating(player))
+                                        spectate.finishSpectating(player);
+
+                                    arena.addToArena(target, player);
+                                    arena.setLastLocation(target, player);
+                                    arena.teleportToLocation(target, player, settingsFile.getSyncTimer());
+                                    arena.startMatch();
+                                }
                             } else
                                 sender.sendMessage(messageFile.getQueueIsFull(), player, target);
                         } else {
