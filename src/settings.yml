@@ -51,6 +51,19 @@ settings:
     enable: true
     minimum-amount: 5000
     maximum-amount: 100000
+  spectate:
+    enable: true
+    gamemode: 'SPECTATOR'
+    after-spectate-gamemode: 'SURVIVAL'
+    blocked-commands:
+      all: false
+      inventory: true
+      blacklisted-commands:
+        - 'spawn'
+        - 'tp'
+      whitelisted-commands:
+        - 'tell'
+        - 'ban'
   timer:
     sync-timer: true
     request:
@@ -119,7 +132,7 @@ settings:
             pitch: 1
     fight:
       duration: 300
-      gamemode: SURVIVAL
+      gamemode: 'SURVIVAL'
       actions:
         all:
           actionbar-to-players: '&cTime remaining : &6%timer%'
@@ -188,11 +201,16 @@ settings:
             pitch: 1
     end:
       duration: 10
-      gamemode: SURVIVAL
+      gamemode: 'SURVIVAL'
       actions:
         results-message: true
         fake-explosion: true
         firework: true
+        teleport:
+          winner: 0
+          loser: 2
+          no-winner: 1
+          spectator: 0
         bet-message-to-winner: '&f[&6&lEasy&c&lDuels&f] &aYou won the money bet: &2%amount% coins&a!'
         bet-message-to-loser: '&f[&6&lEasy&c&lDuels&f] &cYou lost the money bet: &6%amount% coins&c!'
         bet-message-no-winner: '&f[&6&lEasy&c&lDuels&f] &6No one won the money bet! You missed: &c%amount% coins&6!'
