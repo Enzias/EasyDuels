@@ -1,8 +1,9 @@
 name: EasyDuels
-version: 1.4.1
+version: 1.5.0
 description: Simple 1V1 plugin.
 author: Enzias
 main: fr.enzias.easyduels.EasyDuels
+api-version: 1.13
 softdepend: [Vault]
 commands:
   easyduels:
@@ -32,4 +33,7 @@ permissions:
     default: true
   easyduels.money:
     description: Allows you to make duels with money bet.
+    default: true
+  easyduels.spectate:
+    description: Gives access to spectate command.
     default: true
