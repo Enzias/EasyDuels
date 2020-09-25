@@ -22,10 +22,12 @@ messages:
     request-deny-1: '&f[&6&lEasy&c&lDuels&f] &cThe player &6%player% &chas refused your duel request!'
     request-deny-2: '&f[&6&lEasy&c&lDuels&f] &aYou refused the duel request of &2%player%&a.'
     arena-not-empty: '&f[&6&lEasy&c&lDuels&f] &cThe arena is not available at the moment!'
+    player-in-duel: '&f[&6&lEasy&c&lDuels&f] &cThe player &6%player% &cis in a duel!'
     request-sent: '&f[&6&lEasy&c&lDuels&f] &aYou sent a request to &2%player%&a.'
     duel-request:
       message: '&f[&6&lEasy&c&lDuels&f] &aYou received a duel request from &2%player%&a.'
       bet-message: '&f[&6&lEasy&c&lDuels&f] &6By accepting this duel request, you will put &c%amount% &6coins at stake.'
+      before-button-message: '&f[&6&lEasy&c&lDuels&f] &6Choose &6an &6option: '
       accept:
         button: '&f[&aAccept&f]'
         hover: '&aClick to accept the request !'
@@ -49,6 +51,13 @@ messages:
     below-minimum: '&f[&6&lEasy&c&lDuels&f] &cYou must bet at least &6%amount% &ccoins!'
     greater-maximum: '&f[&6&lEasy&c&lDuels&f] &cYou cannot bet more than &6%amount% &ccoins!'
     invalid-amount: '&f[&6&lEasy&c&lDuels&f] &cPlease enter a valid bet amount!'
+    no-command-spectate: '&f[&6&lEasy&c&lDuels&f] &cYou can''t use this command while spectating!'
+    now-spectating: '&f[&6&lEasy&c&lDuels&f] &aYou are now spectating the duel.'
+    no-spectating: '&f[&6&lEasy&c&lDuels&f] &aYou are no longer spectating the duel.'
+    spectate-in-duel: '&f[&6&lEasy&c&lDuels&f] &cYou can''t spectate a match while you are in a duel!'
+    already-spectating: '&f[&6&lEasy&c&lDuels&f] &cYou are already spectating the duel!'
+    not-spectating: '&f[&6&lEasy&c&lDuels&f] &cYou are not spectating a duel!'
+    no-duel: '&f[&6&lEasy&c&lDuels&f] &cThere is no duel to spectate!'
   admin:
     unknown-command: '&f[&6&lEasy&c&lDuels&f] &cUnknown command. Please use &6/easyduels admin help&c!'
     help-message:
@@ -73,4 +82,6 @@ messages:
     forced-queue: '&f[&6&lEasy&c&lDuels&f] &aYou forced &2%player% &ato join the queue.'
     set-spawn-1: '&f[&6&lEasy&c&lDuels&f] &aThe first spawn has been set to your location.'
     set-spawn-2: '&f[&6&lEasy&c&lDuels&f] &aThe second spawn has been set to your location.'
+    set-lobby: '&f[&6&lEasy&c&lDuels&f] &aThe lobby has been set to your location.'
+    set-spectate: '&f[&6&lEasy&c&lDuels&f] &aThe spectate spawn has been set to your location.'
     reloaded: '&f[&6&lEasy&c&lDuels&f] &aSuccessfully reloaded.'
