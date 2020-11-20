@@ -43,6 +43,12 @@ public class DeathEvent implements Listener {
             Player player = event.getEntity();
             if (player.getLocation().getWorld().getName().equalsIgnoreCase(arenaFile.getWorldName())
                     && arena.getPlayers().contains(player)) {
+                if(settings.getKeepInventory()){
+                    event.setKeepInventory(true);
+                    event.setKeepLevel(true);
+                    event.getDrops().clear();
+                    event.setDroppedExp(0);
+                }
 
                 if (player.getUniqueId().equals(arena.getFirstPlayerUUID())) {
                     arena.setWinner(arena.getSecondPlayer());
