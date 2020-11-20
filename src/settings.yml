@@ -202,6 +202,7 @@ settings:
     end:
       duration: 10
       gamemode: 'SURVIVAL'
+      keep-inventory: true
       actions:
         results-message: true
         fake-explosion: true
