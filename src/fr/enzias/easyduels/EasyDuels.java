@@ -3,9 +3,9 @@ package fr.enzias.easyduels;
 import fr.enzias.easyduels.arena.Arena;
 import fr.enzias.easyduels.arena.Spectate;
 import fr.enzias.easyduels.commands.CommandManager;
-import fr.enzias.easyduels.files.ArenaFile;
-import fr.enzias.easyduels.files.MessageFile;
-import fr.enzias.easyduels.files.SettingsFile;
+import fr.enzias.easyduels.filemanager.files.ArenaFile;
+import fr.enzias.easyduels.filemanager.files.MessageFile;
+import fr.enzias.easyduels.filemanager.files.SettingsFile;
 import fr.enzias.easyduels.listeners.*;
 import fr.enzias.easyduels.listeners.damager.*;
 import fr.enzias.easyduels.managers.RequestManager;
@@ -20,15 +20,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class EasyDuels extends JavaPlugin {
 
-    Arena arena;
-    Spectate spectate;
-    RequestManager request;
-    QueueManager queue;
-    ArenaFile arenaFile;
-    MessageFile messageFile;
-    SettingsFile settingsFile;
-    SenderManager manager;
-    VaultHook vaultHook;
+    private Arena arena;
+    private Spectate spectate;
+    private RequestManager request;
+    private QueueManager queue;
+    private ArenaFile arenaFile;
+    private MessageFile messageFile;
+    private SettingsFile settingsFile;
+    private SenderManager manager;
+    private VaultHook vaultHook;
     public boolean upToDate;
 
     @Override
@@ -108,6 +108,9 @@ public class EasyDuels extends JavaPlugin {
                 break;
             case "v1_16_R2":
                 manager = new SenderManager_1_16_R2(this);
+                break;
+            case "v1_16_R3":
+                manager = new SenderManager_1_16_R3(this);
                 break;
             default:
                 return false;
