@@ -1,23 +1,14 @@
-package fr.enzias.easyduels.commands.SubCommands.DenyCommand;
+package fr.enzias.easyduels.commands.subcommands.denycommand;
 
 import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.commands.SubCommand;
-import fr.enzias.easyduels.files.MessageFile;
-import fr.enzias.easyduels.managers.RequestManager;
-import fr.enzias.easyduels.managers.SenderManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class DenyCommand extends SubCommand {
 
-    MessageFile messageFile;
-    RequestManager request;
-    SenderManager sender;
     public DenyCommand(EasyDuels plugin) {
         super(plugin);
-        this.request = plugin.getRequest();
-        this.messageFile = plugin.getMessageFile();
-        this.sender = plugin.getSender();
     }
 
     @Override
