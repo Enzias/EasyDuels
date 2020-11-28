@@ -1,15 +1,9 @@
-package fr.enzias.easyduels.commands.SubCommands.AdminCommand;
+package fr.enzias.easyduels.commands.subcommands.admincommand;
 
 import fr.enzias.easyduels.EasyDuels;
-import fr.enzias.easyduels.arena.Arena;
 import fr.enzias.easyduels.arena.ArenaStatuts;
 import fr.enzias.easyduels.commands.SubCommand;
-import fr.enzias.easyduels.commands.SubCommands.AdminCommand.SubCommands.*;
-import fr.enzias.easyduels.files.MessageFile;
-import fr.enzias.easyduels.files.SettingsFile;
-import fr.enzias.easyduels.managers.SenderManager;
-import fr.enzias.easyduels.queue.QueueManager;
-import fr.enzias.easyduels.utils.VaultHook;
+import fr.enzias.easyduels.commands.subcommands.admincommand.subcommands.*;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -18,21 +12,9 @@ import java.util.ArrayList;
 public class AdminCommand extends SubCommand {
 
     private ArrayList<SubCommand> commands = new ArrayList<>();
-    Arena arena;
-    MessageFile messageFile;
-    SettingsFile settingsFile;
-    SenderManager sender;
-    QueueManager queue;
-    VaultHook vaultHook;
 
     public AdminCommand(EasyDuels plugin) {
         super(plugin);
-        this.arena = plugin.getArena();
-        this.messageFile = plugin.getMessageFile();
-        this.settingsFile = plugin.getSettingsFile();
-        this.sender = plugin.getSender();
-        this.queue = plugin.getQueue();
-        this.vaultHook = plugin.getVaultHook();
         this.commands.add(new FirstSpawnCommand(plugin));
         this.commands.add(new SecondSpawnCommand(plugin));
         this.commands.add(new LobbyCommand(plugin));
@@ -107,6 +89,11 @@ public class AdminCommand extends SubCommand {
                                                         sender.sendMessage(messageFile.getArenaNotEmpty(), player);
                                                     else {
 
+                                                        if(spectate.isSpectating(player1))
+                                                            spectate.finishSpectating(player1);
+                                                        if(spectate.isSpectating(player2))
+                                                            spectate.finishSpectating(player2);
+
                                                         arena.setBet(amount);
                                                         vaultHook.takeBoth(amount, player1, player2);
 
@@ -153,6 +140,11 @@ public class AdminCommand extends SubCommand {
                         if (!arena.isStatut(ArenaStatuts.IDLE))
                             sender.sendMessage(messageFile.getArenaNotEmpty(), player);
                         else {
+
+                            if(spectate.isSpectating(player1))
+                                spectate.finishSpectating(player1);
+                            if(spectate.isSpectating(player2))
+                                spectate.finishSpectating(player2);
 
                             sender.sendMessage(messageFile.getForcedDuelStart()
                                     .replaceAll("%player1%", player1.getName()).replaceAll("%player2%", player2.getName()), player);
