@@ -1,8 +1,8 @@
 package fr.enzias.easyduels.arena;
 
 import fr.enzias.easyduels.EasyDuels;
-import fr.enzias.easyduels.files.MessageFile;
-import fr.enzias.easyduels.files.SettingsFile;
+import fr.enzias.easyduels.filemanager.files.MessageFile;
+import fr.enzias.easyduels.filemanager.files.SettingsFile;
 import fr.enzias.easyduels.managers.SenderManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -15,11 +15,11 @@ import java.util.Iterator;
 public class Spectate {
 
     private final EasyDuels plugin;
-    SettingsFile settings;
-    SenderManager sender;
-    MessageFile message;
-    Arena arena;
-    Location spectate;
+    private SettingsFile settings;
+    private SenderManager sender;
+    private MessageFile message;
+    private Arena arena;
+    private Location spectate;
     private ArrayList<Player> spectators = new ArrayList<>();
     private HashMap<Player, Location> locations = new HashMap<>();
 
