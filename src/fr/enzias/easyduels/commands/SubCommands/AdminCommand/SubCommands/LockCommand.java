@@ -1,25 +1,13 @@
-package fr.enzias.easyduels.commands.SubCommands.AdminCommand.SubCommands;
+package fr.enzias.easyduels.commands.subcommands.admincommand.subcommands;
 
 import fr.enzias.easyduels.EasyDuels;
-import fr.enzias.easyduels.arena.Arena;
 import fr.enzias.easyduels.commands.SubCommand;
-import fr.enzias.easyduels.files.MessageFile;
-import fr.enzias.easyduels.managers.SenderManager;
-import fr.enzias.easyduels.queue.QueueManager;
 import org.bukkit.entity.Player;
 
 public class LockCommand extends SubCommand {
 
-    Arena arena;
-    MessageFile messageFile;
-    SenderManager sender;
-    QueueManager queue;
     public LockCommand(EasyDuels plugin) {
         super(plugin);
-        this.arena = plugin.getArena();
-        this.messageFile = plugin.getMessageFile();
-        this.sender = plugin.getSender();
-        this.queue = plugin.getQueue();
     }
 
     @Override
