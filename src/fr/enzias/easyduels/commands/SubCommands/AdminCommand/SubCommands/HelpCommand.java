@@ -1,19 +1,13 @@
-package fr.enzias.easyduels.commands.SubCommands.AdminCommand.SubCommands;
+package fr.enzias.easyduels.commands.subcommands.admincommand.subcommands;
 
 import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.commands.SubCommand;
-import fr.enzias.easyduels.files.MessageFile;
-import fr.enzias.easyduels.managers.SenderManager;
 import org.bukkit.entity.Player;
 
 public class HelpCommand extends SubCommand {
 
-    MessageFile messageFile;
-    SenderManager sender;
     public HelpCommand(EasyDuels plugin) {
         super(plugin);
-        this.messageFile = plugin.getMessageFile();
-        this.sender = plugin.getSender();
     }
 
     @Override
