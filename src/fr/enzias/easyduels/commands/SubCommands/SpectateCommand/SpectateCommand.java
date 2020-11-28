@@ -1,11 +1,9 @@
-package fr.enzias.easyduels.commands.SubCommands.SpectateCommand;
+package fr.enzias.easyduels.commands.subcommands.spectatecommand;
 
 import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.commands.SubCommand;
-import fr.enzias.easyduels.commands.SubCommands.SpectateCommand.SubCommands.JoinCommand;
-import fr.enzias.easyduels.commands.SubCommands.SpectateCommand.SubCommands.LeaveCommand;
-import fr.enzias.easyduels.files.MessageFile;
-import fr.enzias.easyduels.managers.SenderManager;
+import fr.enzias.easyduels.commands.subcommands.spectatecommand.subcommands.JoinCommand;
+import fr.enzias.easyduels.commands.subcommands.spectatecommand.subcommands.LeaveCommand;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -13,12 +11,9 @@ import java.util.ArrayList;
 public class SpectateCommand extends SubCommand {
 
     private ArrayList<SubCommand> commands = new ArrayList<>();
-    MessageFile messageFile;
-    SenderManager sender;
+
     public SpectateCommand(EasyDuels plugin) {
         super(plugin);
-        this.messageFile = plugin.getMessageFile();
-        this.sender = plugin.getSender();
         this.commands.add(new JoinCommand(plugin));
         this.commands.add(new LeaveCommand(plugin));
     }
