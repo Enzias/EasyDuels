@@ -1,29 +1,14 @@
-package fr.enzias.easyduels.commands.SubCommands.SpectateCommand.SubCommands;
+package fr.enzias.easyduels.commands.subcommands.spectatecommand.subcommands;
 
 import fr.enzias.easyduels.EasyDuels;
-import fr.enzias.easyduels.arena.Arena;
 import fr.enzias.easyduels.arena.ArenaStatuts;
-import fr.enzias.easyduels.arena.Spectate;
 import fr.enzias.easyduels.commands.SubCommand;
-import fr.enzias.easyduels.files.ArenaFile;
-import fr.enzias.easyduels.files.MessageFile;
-import fr.enzias.easyduels.managers.SenderManager;
 import org.bukkit.entity.Player;
 
 public class JoinCommand extends SubCommand {
 
-    Arena arena;
-    Spectate spectate;
-    ArenaFile arenaFile;
-    MessageFile messageFile;
-    SenderManager sender;
     public JoinCommand(EasyDuels plugin) {
         super(plugin);
-        this.arena = plugin.getArena();
-        this.spectate = plugin.getSpectate();
-        this.arenaFile = plugin.getArenaFile();
-        this.messageFile = plugin.getMessageFile();
-        this.sender = plugin.getSender();
     }
 
     @Override
