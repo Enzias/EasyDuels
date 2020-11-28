@@ -3,15 +3,15 @@ package fr.enzias.easyduels.commands;
 import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.arena.Arena;
 import fr.enzias.easyduels.arena.ArenaStatuts;
-import fr.enzias.easyduels.commands.SubCommands.AcceptCommand.AcceptCommand;
-import fr.enzias.easyduels.commands.SubCommands.AdminCommand.AdminCommand;
-import fr.enzias.easyduels.commands.SubCommands.DenyCommand.DenyCommand;
-import fr.enzias.easyduels.commands.SubCommands.HelpCommand;
-import fr.enzias.easyduels.commands.SubCommands.QueueCommand.QueueCommand;
-import fr.enzias.easyduels.commands.SubCommands.SpectateCommand.SpectateCommand;
-import fr.enzias.easyduels.files.ArenaFile;
-import fr.enzias.easyduels.files.MessageFile;
-import fr.enzias.easyduels.files.SettingsFile;
+import fr.enzias.easyduels.commands.subcommands.acceptcommand.AcceptCommand;
+import fr.enzias.easyduels.commands.subcommands.admincommand.AdminCommand;
+import fr.enzias.easyduels.commands.subcommands.denycommand.DenyCommand;
+import fr.enzias.easyduels.commands.subcommands.HelpCommand;
+import fr.enzias.easyduels.commands.subcommands.queuecommand.QueueCommand;
+import fr.enzias.easyduels.commands.subcommands.spectatecommand.SpectateCommand;
+import fr.enzias.easyduels.filemanager.files.ArenaFile;
+import fr.enzias.easyduels.filemanager.files.MessageFile;
+import fr.enzias.easyduels.filemanager.files.SettingsFile;
 import fr.enzias.easyduels.managers.RequestManager;
 import fr.enzias.easyduels.managers.SenderManager;
 import fr.enzias.easyduels.utils.VaultHook;
@@ -27,13 +27,13 @@ public class CommandManager implements CommandExecutor {
 
     private ArrayList<SubCommand> commands = new ArrayList<>();
     private final EasyDuels plugin;
-    Arena arena;
-    ArenaFile arenaFile;
-    MessageFile messageFile;
-    SettingsFile settingsFile;
-    RequestManager request;
-    SenderManager sender;
-    VaultHook vaultHook;
+    private Arena arena;
+    private ArenaFile arenaFile;
+    private MessageFile messageFile;
+    private SettingsFile settingsFile;
+    private RequestManager request;
+    private SenderManager sender;
+    private VaultHook vaultHook;
 
     public CommandManager(EasyDuels plugin) {
         this.plugin = plugin;
