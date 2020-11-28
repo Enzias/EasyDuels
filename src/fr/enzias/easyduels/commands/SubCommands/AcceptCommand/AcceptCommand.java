@@ -1,40 +1,15 @@
-package fr.enzias.easyduels.commands.SubCommands.AcceptCommand;
+package fr.enzias.easyduels.commands.subcommands.acceptcommand;
 
 import fr.enzias.easyduels.EasyDuels;
-import fr.enzias.easyduels.arena.Arena;
 import fr.enzias.easyduels.arena.ArenaStatuts;
-import fr.enzias.easyduels.arena.Spectate;
 import fr.enzias.easyduels.commands.SubCommand;
-import fr.enzias.easyduels.files.MessageFile;
-import fr.enzias.easyduels.files.SettingsFile;
-import fr.enzias.easyduels.managers.RequestManager;
-import fr.enzias.easyduels.managers.SenderManager;
-import fr.enzias.easyduels.queue.QueueManager;
-import fr.enzias.easyduels.utils.VaultHook;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class AcceptCommand extends SubCommand {
 
-    Arena arena;
-    Spectate spectate;
-    MessageFile messageFile;
-    SettingsFile settingsFile;
-    RequestManager request;
-    SenderManager sender;
-    QueueManager queue;
-    VaultHook vaultHook;
-
     public AcceptCommand(EasyDuels plugin) {
         super(plugin);
-        this.arena = plugin.getArena();
-        this.spectate = plugin.getSpectate();
-        this.request = plugin.getRequest();
-        this.messageFile = plugin.getMessageFile();
-        this.settingsFile = plugin.getSettingsFile();
-        this.sender = plugin.getSender();
-        this.queue = plugin.getQueue();
-        this.vaultHook = plugin.getVaultHook();
     }
 
     @Override
