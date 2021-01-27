@@ -466,6 +466,11 @@ public class SettingsFile {
             return getConfig().getBoolean("settings.timer.end.actions.firework");
         } return false;
     }
+    public boolean getKeepInventory(){
+        if(getConfig().contains("settings.timer.end.actions.keep-inventory")){
+            return getConfig().getBoolean("settings.timer.end.actions.keep-inventory");
+        } return false;
+    }
 
     public String getBetMessageToWinner(){
         if(getConfig().contains("settings.timer.end.actions.bet-message-to-winner")
