@@ -3,11 +3,11 @@
 [![](https://i.goopics.net/2ERxJ.png)](https://www.spigotmc.org/resources/%E2%9A%94%EF%B8%8Feasyduels%E2%9A%94%EF%B8%8F-a-complete-1v1-system-1-12-x-1-16-x.83031/)
 
 ## Welcome!
-EasyDuels is a plugin for **spigot servers** (1.12 - 1.16.2), offering a **new 1v1 system** for your server. It has many features allowing you to **customize everything.** It only allows you to have a **single arena** on your server. Here are some features:
+EasyDuels is a plugin for **spigot servers** (1.12 - 1.16.x), offering a **new 1v1 system** for your server. It has many features allowing you to **customize everything.** It only allows you to have a **single arena** on your server. Here are some features:
 
 * A single arena for your players to fight in 1v1.
 * Supports your language (fully customizable messages).
-* Supports 1.12 to 1.16.3.
+* Supports 1.12 to 1.16.x.
 * A lot of configurable settings.
 * Fully customizable timer & countdown (never seen before)!
 
