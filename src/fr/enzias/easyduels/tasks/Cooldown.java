@@ -1,10 +1,10 @@
 package fr.enzias.easyduels.tasks;
 
 import fr.enzias.easyduels.EasyDuels;
-import fr.enzias.easyduels.files.MessageFile;
-import fr.enzias.easyduels.files.SettingsFile;
+import fr.enzias.easyduels.filemanager.files.MessageFile;
+import fr.enzias.easyduels.filemanager.files.SettingsFile;
 import fr.enzias.easyduels.managers.RequestManager;
-import fr.enzias.easyduels.managers.SenderManager;
+import fr.enzias.easyduels.managers.versions.SenderManager;
 import org.bukkit.entity.Player;
 
 public class Cooldown implements Runnable {
