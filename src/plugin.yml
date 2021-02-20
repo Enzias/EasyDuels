@@ -1,5 +1,5 @@
 name: EasyDuels
-version: 1.5.1
+version: 1.6.0
 description: Simple 1V1 plugin.
 author: Enzias
 main: fr.enzias.easyduels.EasyDuels
@@ -15,25 +15,32 @@ permissions:
     description: Gives access to all Easyduels commands.
     default: op
     children:
-      easyduels.admin: true
+      easyduels.admin.*: true
       easyduels.duel: true
       easyduels.help: true
       easyduels.queue: true
-  easyduels.admin:
-    description: Gives access to admin command.
+      easyduels.spectate: true
+      easyduels.money: true
+      easyduels.myprofile: true
+      easyduels.othersprofile: true
+  easyduels.admin.*:
     default: false
+    children:
+      easyduels.admin.set: true
+      easyduels.admin.reload: true
+      easyduels.admin.help: true
+      easyduels.admin.manager: true
+      easyduels.admin.rank: true
+      easyduels.admin.rankall: true
   easyduels.duel:
-    description: Allows you to make duels.
     default: true
   easyduels.help:
-    description: Gives access to help command.
     default: true
   easyduels.queue:
-    description: Gives access to queue command.
     default: true
   easyduels.money:
-    description: Allows you to make duels with money bet.
     default: true
   easyduels.spectate:
-    description: Gives access to spectate command.
     default: true
+  easyduels.myprofile:
+    default: false
