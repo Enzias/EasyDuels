@@ -37,7 +37,8 @@ public class TeleportEvent implements Listener {
         }
 
         if (arena.isStatut(ArenaStatuts.PLAYING) || arena.isStatut(ArenaStatuts.LOBBY))
-            if(event.getCause() != PlayerTeleportEvent.TeleportCause.PLUGIN) {
+            if(event.getCause() != PlayerTeleportEvent.TeleportCause.PLUGIN &&
+                    event.getFrom().getWorld().getName() != event.getTo().getWorld().getName()) {
 
                 Player player = event.getPlayer();
 
