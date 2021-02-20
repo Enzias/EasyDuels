@@ -1,4 +1,4 @@
-package fr.enzias.easyduels.files;
+package fr.enzias.easyduels.filemanager.files;
 
 import fr.enzias.easyduels.EasyDuels;
 import org.bukkit.configuration.ConfigurationSection;
@@ -258,6 +258,46 @@ public class SettingsFile {
         return getConfig().getInt("settings.money-bet.maximum-amount");
     }
 
+    //spectate
+
+    public boolean getSpectate(){
+        if(getConfig().contains("settings.spectate.enable"))
+            return getConfig().getBoolean("settings.spectate.enable");
+        return false;
+    }
+
+    public String getSpectateGamemode(){
+        if(getConfig().contains("settings.spectate.enable"))
+            return getConfig().getString("settings.spectate.gamemode");
+        return "SPECTATOR";
+    }
+
+    public String getAfterSpectateGamemode(){
+        if(getConfig().contains("settings.spectate.after-spectate-gamemode"))
+            return getConfig().getString("settings.spectate.after-spectate-gamemode");
+        return "SURVIVAL";
+    }
+
+    public boolean getSpectateAllCommands(){
+        if(getConfig().contains("settings.blocked-commands.all"))
+            return getConfig().getBoolean("settings.blocked-commands.all");
+        else return false;
+    }
+
+    public boolean getSpectateInventory(){
+        if(getConfig().contains("settings.blocked-commands.inventory"))
+            return getConfig().getBoolean("settings.blocked-commands.inventory");
+        else return false;
+    }
+
+    public List<String> getSpectateBlacklistedCommands(){
+        return getConfig().getStringList("settings.blocked-commands.blacklisted-commands");
+    }
+
+    public List<String> getSpectateWhitelistedCommands() {
+        return getConfig().getStringList("settings.blocked-commands.whitelisted-commands");
+    }
+
     //Timer
 
     public boolean getSyncTimer() {
@@ -455,6 +495,12 @@ public class SettingsFile {
         } return false;
     }
 
+    public boolean getKeepInventory(){
+        if(getConfig().contains("settings.timer.end.actions.keep-inventory")){
+            return getConfig().getBoolean("settings.timer.end.actions.keep-inventory");
+        } return false;
+    }
+
     public boolean getFakeExplosion(){
         if(getConfig().contains("settings.timer.end.actions.fake-explosion")){
             return getConfig().getBoolean("settings.timer.end.actions.fake-explosion");
@@ -466,10 +512,41 @@ public class SettingsFile {
             return getConfig().getBoolean("settings.timer.end.actions.firework");
         } return false;
     }
-    public boolean getKeepInventory(){
-        if(getConfig().contains("settings.timer.end.actions.keep-inventory")){
-            return getConfig().getBoolean("settings.timer.end.actions.keep-inventory");
-        } return false;
+
+    public int getWinnerTeleport(){
+        if(getConfig().contains("settings.timer.end.actions.teleport.winner"))
+            if(getConfig().getInt("settings.timer.end.actions.teleport.winner") == 0
+                    || getConfig().getInt("settings.timer.end.actions.teleport.winner") == 1) {
+                return getConfig().getInt("settings.timer.end.actions.teleport.winner");
+            }
+        return 2;
+    }
+
+    public int getLoserTeleport(){
+        if(getConfig().contains("settings.timer.end.actions.teleport.loser"))
+            if(getConfig().getInt("settings.timer.end.actions.teleport.loser") == 0
+                    || getConfig().getInt("settings.timer.end.actions.teleport.loser") == 1) {
+                return getConfig().getInt("settings.timer.end.actions.teleport.loser");
+            }
+        return 2;
+    }
+
+    public int getNoWinnerTeleport(){
+        if(getConfig().contains("settings.timer.end.actions.teleport.no-winner"))
+            if(getConfig().getInt("settings.timer.end.actions.teleport.no-winner") == 0
+                    || getConfig().getInt("settings.timer.end.actions.teleport.no-winner") == 1) {
+                return getConfig().getInt("settings.timer.end.actions.teleport.no-winner");
+            }
+        return 2;
+    }
+
+    public int getSpectatorTeleport(){
+        if(getConfig().contains("settings.timer.end.actions.teleport.spectator"))
+            if(getConfig().getInt("settings.timer.end.actions.teleport.spectator") == 0
+                    || getConfig().getInt("settings.timer.end.actions.teleport.spectator") == 1) {
+                return getConfig().getInt("settings.timer.end.actions.teleport.spectator");
+            }
+        return 2;
     }
 
     public String getBetMessageToWinner(){
