@@ -4,8 +4,8 @@ import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.arena.Arena;
 import fr.enzias.easyduels.arena.ArenaStatuts;
 import fr.enzias.easyduels.arena.Spectate;
-import fr.enzias.easyduels.files.ArenaFile;
-import fr.enzias.easyduels.files.SettingsFile;
+import fr.enzias.easyduels.filemanager.files.ArenaFile;
+import fr.enzias.easyduels.filemanager.files.SettingsFile;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -43,6 +43,7 @@ public class DeathEvent implements Listener {
             Player player = event.getEntity();
             if (player.getLocation().getWorld().getName().equalsIgnoreCase(arenaFile.getWorldName())
                     && arena.getPlayers().contains(player)) {
+
                 if(settings.getKeepInventory()){
                     event.setKeepInventory(true);
                     event.setKeepLevel(true);
