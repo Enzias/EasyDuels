@@ -2,8 +2,9 @@ package fr.enzias.easyduels.managers;
 
 import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.arena.Arena;
-import fr.enzias.easyduels.files.MessageFile;
-import fr.enzias.easyduels.files.SettingsFile;
+import fr.enzias.easyduels.filemanager.files.MessageFile;
+import fr.enzias.easyduels.filemanager.files.SettingsFile;
+import fr.enzias.easyduels.managers.versions.SenderManager;
 import fr.enzias.easyduels.utils.Count;
 import fr.enzias.easyduels.utils.VaultHook;
 
@@ -15,6 +16,7 @@ public class CountdownManager{
     SettingsFile settings;
     SenderManager sender;
     VaultHook vaultHook;
+    LevelManager levelManager;
     Count count = new Count();
     public CountdownManager(EasyDuels plugin) {
         this.plugin = plugin;
@@ -23,6 +25,7 @@ public class CountdownManager{
         this.settings = plugin.getSettingsFile();
         this.sender = plugin.getSender();
         this.vaultHook = plugin.getVaultHook();
+        this.levelManager = plugin.getLevelManager();
     }
 
     public void sendLobbyTimer(int lobbyTime){
@@ -134,7 +137,29 @@ public class CountdownManager{
 
                     vaultHook.giveBackBoth(arena.getBet(), arena.getFirstPlayer(), arena.getSecondPlayer());
                 }
-
+                if(levelManager.getActive()) {
+                    long reward = levelManager.getNoWinnerRewardExp();
+                    if(reward != 0) {
+                        if (levelManager.canGain(arena.getFirstPlayer())) {
+                            levelManager.giveExpLegit(arena.getFirstPlayer(), reward);
+                            sender.sendMessage(message.getExpGain().replaceAll("%reward%", String.valueOf(reward)), arena.getFirstPlayer());
+                            sender.sendMessage(message.getExpNow()
+                                            .replaceAll("%experience%", String.valueOf(levelManager.getExpFromManager(arena.getFirstPlayer())))
+                                            .replaceAll("%level%", String.valueOf(levelManager.getLevel(arena.getFirstPlayer()))),
+                                    arena.getFirstPlayer());
+                            levelManager.saveExpData(arena.getFirstPlayer());
+                        }
+                        if (levelManager.canGain(arena.getSecondPlayer())) {
+                            levelManager.giveExpLegit(arena.getSecondPlayer(), reward);
+                            sender.sendMessage(message.getExpGain().replaceAll("%reward%", String.valueOf(reward)), arena.getSecondPlayer());
+                            sender.sendMessage(message.getExpNow()
+                                            .replaceAll("%experience%", String.valueOf(levelManager.getExpFromManager(arena.getSecondPlayer())))
+                                            .replaceAll("%level%", String.valueOf(levelManager.getLevel(arena.getSecondPlayer()))),
+                                    arena.getSecondPlayer());
+                            levelManager.saveExpData(arena.getSecondPlayer());
+                        }
+                    }
+                }
             } else {
 
                 if (settings.getFakeExplosion())
@@ -155,10 +180,25 @@ public class CountdownManager{
                         sender.sendSound(settings.getEndSoundToLoser(), settings.getEndVolumeToLoser(), settings.getEndPitchToLoser(), arena.getLoser());
                     if (settings.getEndActionbarToLoser() != null)
                         sender.sendActionbar(settings.getEndActionbarToLoser(), 20, settings.getEndTime() * 20, 20, arena.getLoser());
-                    if(arena.getBet() != 0)
+                    if (arena.getBet() != 0) {
                         if (settings.getBetMessageToLoser() != null)
                             sender.sendMessage(settings.getBetMessageToLoser()
-                                    .replaceAll("%amount%", arena.getBet()*2 + ""), arena.getLoser());
+                                    .replaceAll("%amount%", arena.getBet() * 2 + ""), arena.getLoser());
+                    }
+                    if (levelManager.getActive()) {
+                        long reward = levelManager.getLoserRewardExp();
+                        if(reward != 0) {
+                            if (levelManager.canGain(arena.getLoser())) {
+                                levelManager.giveExpLegit(arena.getLoser(), reward);
+                                sender.sendMessage(message.getExpGain().replaceAll("%reward%", String.valueOf(reward)), arena.getLoser());
+                                sender.sendMessage(message.getExpNow()
+                                                .replaceAll("%experience%", String.valueOf(levelManager.getExpFromManager(arena.getLoser())))
+                                                .replaceAll("%level%", String.valueOf(levelManager.getLevel(arena.getLoser()))),
+                                        arena.getLoser());
+                                levelManager.saveExpData(arena.getLoser());
+                            }
+                        }
+                    }
 
                 }
                 if (settings.getEndTitleToWinner() != null)
@@ -179,6 +219,20 @@ public class CountdownManager{
                                 .replaceAll("%amount%", arena.getBet()*2 + ""), arena.getWinner());
 
                     vaultHook.give(arena.getBet()*2, arena.getWinner());
+                }
+                if (levelManager.getActive()) {
+                    long reward = levelManager.getWinnerRewardExp();
+                    if(reward != 0) {
+                        if (levelManager.canGain(arena.getWinner())) {
+                            levelManager.giveExpLegit(arena.getWinner(), reward);
+                            sender.sendMessage(message.getExpGain().replaceAll("%reward%", String.valueOf(reward)), arena.getWinner());
+                            sender.sendMessage(message.getExpNow()
+                                            .replaceAll("%experience%", String.valueOf(levelManager.getExpFromManager(arena.getWinner())))
+                                            .replaceAll("%level%", String.valueOf(levelManager.getLevel(arena.getWinner()))),
+                                    arena.getWinner());
+                            levelManager.saveExpData(arena.getWinner());
+                        }
+                    }
                 }
             }
         }
