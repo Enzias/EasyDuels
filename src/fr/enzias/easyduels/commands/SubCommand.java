@@ -5,9 +5,11 @@ import fr.enzias.easyduels.arena.Arena;
 import fr.enzias.easyduels.arena.Spectate;
 import fr.enzias.easyduels.filemanager.files.ArenaFile;
 import fr.enzias.easyduels.filemanager.files.MessageFile;
+import fr.enzias.easyduels.filemanager.files.RankFile;
 import fr.enzias.easyduels.filemanager.files.SettingsFile;
+import fr.enzias.easyduels.managers.LevelManager;
 import fr.enzias.easyduels.managers.RequestManager;
-import fr.enzias.easyduels.managers.SenderManager;
+import fr.enzias.easyduels.managers.versions.SenderManager;
 import fr.enzias.easyduels.queue.QueueManager;
 import fr.enzias.easyduels.utils.VaultHook;
 import org.bukkit.entity.Player;
@@ -19,11 +21,13 @@ public abstract class SubCommand {
     protected ArenaFile arenaFile;
     protected MessageFile messageFile;
     protected SettingsFile settingsFile;
+    protected RankFile rankFile;
     protected Arena arena;
     protected Spectate spectate;
     protected RequestManager request;
     protected QueueManager queue;
     protected SenderManager sender;
+    protected LevelManager levelManager;
     protected VaultHook vaultHook;
 
     public SubCommand(EasyDuels plugin){
@@ -31,11 +35,13 @@ public abstract class SubCommand {
         this.arenaFile = plugin.getArenaFile();
         this.messageFile = plugin.getMessageFile();
         this.settingsFile = plugin.getSettingsFile();
+        this.rankFile = plugin.getRankFile();
         this.arena = plugin.getArena();
         this.spectate = plugin.getSpectate();
         this.request = plugin.getRequest();
         this.queue = plugin.getQueue();
         this.sender = plugin.getSender();
+        this.levelManager = plugin.getLevelManager();
         this.vaultHook = plugin.getVaultHook();
     }
 
