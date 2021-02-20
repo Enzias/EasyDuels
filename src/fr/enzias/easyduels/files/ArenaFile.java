@@ -1,4 +1,4 @@
-package fr.enzias.easyduels.files;
+package fr.enzias.easyduels.filemanager.files;
 
 import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.utils.Syntax;
@@ -15,8 +15,8 @@ import java.io.IOException;
 public class ArenaFile {
 
     private final EasyDuels plugin;
-    private File arenaFile;
-    private FileConfiguration arenaConfig;
+    private File file;
+    private FileConfiguration config;
     Syntax syntax = new Syntax();
 
     public ArenaFile(EasyDuels plugin) {
@@ -24,15 +24,15 @@ public class ArenaFile {
     }
 
     public void setup(){
-        arenaFile = new File(plugin.getDataFolder(), "arena.yml");
+        file = new File(plugin.getDataFolder(), "arena.yml");
 
-        if(!arenaFile.exists()) {
+        if(!file.exists()) {
             plugin.saveResource("arena.yml", false);
         }
 
-        arenaConfig = new YamlConfiguration();
+        config = new YamlConfiguration();
         try {
-            arenaConfig.load(arenaFile);
+            config.load(file);
         }catch (IOException | InvalidConfigurationException e){
             e.printStackTrace();
         }
@@ -40,7 +40,7 @@ public class ArenaFile {
 
     public void save(){
         try{
-            arenaConfig.save(arenaFile);
+            config.save(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,11 +48,11 @@ public class ArenaFile {
 
     public void reload(){
         save();
-        arenaConfig = YamlConfiguration.loadConfiguration(arenaFile);
+        config = YamlConfiguration.loadConfiguration(file);
     }
 
     public FileConfiguration getConfig(){
-        return arenaConfig;
+        return config;
     }
 
 
