@@ -4,7 +4,7 @@ import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.arena.Arena;
 import fr.enzias.easyduels.arena.ArenaStatuts;
 import fr.enzias.easyduels.arena.Spectate;
-import fr.enzias.easyduels.files.ArenaFile;
+import fr.enzias.easyduels.filemanager.files.ArenaFile;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
