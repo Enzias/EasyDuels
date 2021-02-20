@@ -3,7 +3,7 @@ package fr.enzias.easyduels.arena;
 import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.filemanager.files.MessageFile;
 import fr.enzias.easyduels.filemanager.files.SettingsFile;
-import fr.enzias.easyduels.managers.SenderManager;
+import fr.enzias.easyduels.managers.versions.SenderManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
