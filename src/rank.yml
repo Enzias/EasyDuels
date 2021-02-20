@@ -1,0 +1,74 @@
+settings:
+  enable: true
+  rank-perms-inheritance: true
+  rank-perms-checker: true
+  no-rank-name: '&fNone'
+  progression:
+    level-formula: '30000*Math.pow(1.025, %level%)-30000'
+    rank-up-actions:
+      message-to-players: '%prefix% &aYou reached the rank: %rank%&a!'
+      title-to-players:
+        - '&6New Rank!'
+        - '&aRank: %rank%'
+      sound-to-players:
+        sound-id: 'ENTITY_PLAYER_LEVELUP'
+        volume: 1
+        pitch: 1
+      actionbar-to-players: '&aNew Rank!'
+      broadcast: '%prefix% &2%player% &areached the rank: %rank%&a!'
+    level-up-actions:
+      message-to-players: '%prefix% &aYou leveled up to level &2%level%&a!'
+      title-to-players:
+        - '&aLevel UP!'
+        - '&2Level %level%'
+      sound-to-players:
+        sound-id: 'ENTITY_PLAYER_LEVELUP'
+        volume: 1
+        pitch: 1
+      actionbar-to-players: '&aLevel UP!'
+      broadcast: '%prefix% &2%player% &aleveled up to level &2%level%&a!'
+    level-up-reward-commands:
+      - 'give %player% diamond %amount%'
+    maximum-level: 100
+    cooldown: 120
+    duel-reward:
+      winner-range: 800-1000
+      no-winner-range: 600
+      loser-range: 200-400
+ranks:
+  '10':
+    name: '&aCoal'
+    permissions:
+      - 'permission.duel.10'
+    reward-commands:
+      - 'give %player% coal_block 1'
+  '30':
+    name: '&eIron'
+    permission:
+      - 'permission.duel.30'
+    reward-commands:
+      - 'give %player% iron_block 1'
+  '50':
+    name: '&6Gold'
+    permission:
+      - 'permission.duel.50'
+    reward-commands:
+      - 'give %player% gold_block 1'
+  '70':
+    name: '&bDiamond'
+    permission:
+      - 'permission.duel.70'
+    reward-commands:
+      - 'give %player% diamond_block 1'
+  '90':
+    name: '&9Obsidian'
+    permission:
+      - 'permission.duel.90'
+    reward-commands:
+      - 'give %player% obsidian 1'
+  '100':
+    name: '&4Invincible'
+    permission:
+      - 'permission.duel.100'
+    reward-commands:
+      - 'give %player% bedrock 1'
