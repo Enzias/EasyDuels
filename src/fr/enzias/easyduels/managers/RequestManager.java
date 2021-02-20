@@ -1,7 +1,7 @@
 package fr.enzias.easyduels.managers;
 
 import fr.enzias.easyduels.EasyDuels;
-import fr.enzias.easyduels.files.SettingsFile;
+import fr.enzias.easyduels.filemanager.files.SettingsFile;
 import fr.enzias.easyduels.tasks.Cooldown;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
