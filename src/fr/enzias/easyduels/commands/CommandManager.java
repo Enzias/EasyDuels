@@ -3,17 +3,14 @@ package fr.enzias.easyduels.commands;
 import fr.enzias.easyduels.EasyDuels;
 import fr.enzias.easyduels.arena.Arena;
 import fr.enzias.easyduels.arena.ArenaStatuts;
-import fr.enzias.easyduels.commands.subcommands.acceptcommand.AcceptCommand;
+import fr.enzias.easyduels.commands.subcommands.*;
 import fr.enzias.easyduels.commands.subcommands.admincommand.AdminCommand;
-import fr.enzias.easyduels.commands.subcommands.denycommand.DenyCommand;
-import fr.enzias.easyduels.commands.subcommands.HelpCommand;
-import fr.enzias.easyduels.commands.subcommands.queuecommand.QueueCommand;
-import fr.enzias.easyduels.commands.subcommands.spectatecommand.SpectateCommand;
 import fr.enzias.easyduels.filemanager.files.ArenaFile;
 import fr.enzias.easyduels.filemanager.files.MessageFile;
 import fr.enzias.easyduels.filemanager.files.SettingsFile;
+import fr.enzias.easyduels.managers.LevelManager;
 import fr.enzias.easyduels.managers.RequestManager;
-import fr.enzias.easyduels.managers.SenderManager;
+import fr.enzias.easyduels.managers.versions.SenderManager;
 import fr.enzias.easyduels.utils.VaultHook;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -32,6 +29,7 @@ public class CommandManager implements CommandExecutor {
     private MessageFile messageFile;
     private SettingsFile settingsFile;
     private RequestManager request;
+    private LevelManager levelManager;
     private SenderManager sender;
     private VaultHook vaultHook;
 
@@ -42,6 +40,7 @@ public class CommandManager implements CommandExecutor {
         this.arenaFile = plugin.getArenaFile();
         this.messageFile = plugin.getMessageFile();
         this.settingsFile = plugin.getSettingsFile();
+        this.levelManager = plugin.getLevelManager();
         this.sender = plugin.getSender();
         this.vaultHook = plugin.getVaultHook();
     }
@@ -88,7 +87,7 @@ public class CommandManager implements CommandExecutor {
                                 }
 
                                 if(args.length == 2) {
-                                    if (vaultHook.isNotNull() && settingsFile.getMoneyBet()) {
+                                    if (vaultHook.isEconNotNull() && settingsFile.getMoneyBet()) {
                                         if(player.hasPermission("easyduels.money")) {
                                             if (vaultHook.isValidAmount(args[1])) {
                                                 int amount = vaultHook.getValidAmount(args[1]);
@@ -123,7 +122,7 @@ public class CommandManager implements CommandExecutor {
                                                     sender.sendMessage(messageFile.getBelowMinimum()
                                                             .replaceAll("%amount%", Integer.toString(settingsFile.getMinAmount())), player);
                                             } else
-                                                sender.sendMessage(messageFile.getInvalidAmount(), player);
+                                                sender.sendMessage(messageFile.getInvalidAmountBet(), player);
                                         } else
                                             sender.sendMessage(messageFile.getNoPermission(), player);
                                     } else
@@ -166,6 +165,8 @@ public class CommandManager implements CommandExecutor {
             this.commands.add(new QueueCommand(plugin));
         if(settingsFile.getSpectate())
             this.commands.add(new SpectateCommand(plugin));
+        if(levelManager.getActive())
+            this.commands.add(new ProfileCommand(plugin));
         this.commands.add(new AdminCommand(plugin));
     }
 
