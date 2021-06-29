@@ -22,3 +22,4 @@ Leave a review [here](https://www.spigotmc.org/resources/%E2%9A%94%EF%B8%8Feasyd
 * [Discord Server](https://discord.gg/pQyzSZv)
 * [Wiki](https://github.com/Enzias/EasyDuels/wiki)
 * [Report an Issue](https://github.com/Enzias/EasyDuels/issues)
+* [Donation](https://en.tipeee.com/easyduels)
